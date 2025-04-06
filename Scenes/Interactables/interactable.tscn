@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq38fm545ricm"]
+
+[ext_resource type="Texture2D" uid="uid://bvfddajfrgugy" path="res://Resources/Graphics/InteractionIndicator.png" id="1_8s6bd"]
+[ext_resource type="Script" uid="uid://o4jp38xousm2" path="res://Scenes/Interactables/interactable.gd" id="1_pmsje"]
+
+[node name="Interactable" type="StaticBody2D" groups=["combat_listener"]]
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_pmsje")
+dialog_file_name = "res://Resources/Dialog/desk.txt"
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+
+[node name="InteractionRange" type="Area2D" parent="."]
+collision_layer = 32
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="InteractionRange"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="Indicator" type="Sprite2D" parent="."]
+texture = ExtResource("1_8s6bd")
+
+[connection signal="body_entered" from="InteractionRange" to="." method="_on_interaction_range_body_entered"]
+[connection signal="body_exited" from="InteractionRange" to="." method="_on_interaction_range_body_exited"]

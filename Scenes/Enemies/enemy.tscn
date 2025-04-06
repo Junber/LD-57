@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg6748eqmpgng"]
+
+[ext_resource type="Script" uid="uid://d2muhbpvk17xg" path="res://Scenes/Enemies/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://dhe2v2xqt8ekx" path="res://Resources/Graphics/enemy.png" id="1_hghv2"]
+[ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/bullet_enemy.tscn" id="2_afpow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
+size = Vector2(97, 159)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_1f0kj")
+movement_speed = 100.0
+bullet_scene = ExtResource("2_afpow")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(3, -80)
+texture = ExtResource("1_hghv2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, -80.5)
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="Timer" type="Timer" parent="." groups=["enemy"]]
+autostart = true
+
+[node name="Health" type="ProgressBar" parent="."]
+offset_left = -28.0
+offset_top = -188.0
+offset_right = 32.0
+offset_bottom = -161.0
+max_value = 5.0
+value = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

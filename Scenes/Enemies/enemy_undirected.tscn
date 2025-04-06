@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://kn6uhgh3ffk7"]
+
+[ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_m8vih"]
+[ext_resource type="Texture2D" uid="uid://b8f8y8al7jcr" path="res://Resources/Graphics/enemy2.png" id="3_sybvu"]
+
+[node name="Enemy" instance=ExtResource("1_m8vih")]
+max_health = 5
+bullet_type = 2
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_sybvu")
+
+[node name="Health" parent="." index="3"]
+max_value = 5.0
+value = 5.0

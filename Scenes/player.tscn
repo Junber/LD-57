@@ -1,0 +1,131 @@
+[gd_scene load_steps=13 format=3 uid="uid://crn24gipuknsj"]
+
+[ext_resource type="Script" uid="uid://c3fjm54mwit0u" path="res://Scenes/player.gd" id="1_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/bullet_player.tscn" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://ihlr4rjnie4u" path="res://Scenes/indicator.tscn" id="3_fkybt"]
+[ext_resource type="Texture2D" uid="uid://d2f1i1a1uhmky" path="res://Resources/Graphics/Player/playerRun00.png" id="4_gymyn"]
+[ext_resource type="Texture2D" uid="uid://ddy2qxxhic8gr" path="res://Resources/Graphics/block.png" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://bcoif0dwwgecy" path="res://Resources/Graphics/Player/playerRun01.png" id="5_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://347a852viwrx" path="res://Resources/Graphics/Player/playerRun02.png" id="6_ukyrk"]
+[ext_resource type="Texture2D" uid="uid://c6xf7eckl58ts" path="res://Resources/Graphics/Player/playerRun03.png" id="7_7dp3o"]
+[ext_resource type="Texture2D" uid="uid://cy3smjawf6jun" path="res://Resources/Graphics/Player/playerRun04.png" id="8_h4iuc"]
+[ext_resource type="Texture2D" uid="uid://dv0rvt80y8oa6" path="res://Resources/Graphics/Player/playerRun05.png" id="9_fd4e3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqcod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gymyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pu2lt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ukyrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7dp3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h4iuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fd4e3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
+size = Vector2(85, 50)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 24
+motion_mode = 1
+script = ExtResource("1_cvnsp")
+bullet_scene = ExtResource("2_6t5aa")
+indicator_scene = ExtResource("3_fkybt")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -80)
+sprite_frames = SubResource("SpriteFrames_qqcod")
+autoplay = "default"
+frame = 2
+frame_progress = 0.267056
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_qxrlw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Dash1Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Dash2Cooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="IFrame" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="ShootCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Health" type="ProgressBar" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 100.0
+grow_vertical = 0
+step = 0.0
+value = 50.0
+
+[node name="Dash1" type="TextureProgressBar" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 126.0
+offset_top = -51.0
+offset_right = 626.0
+offset_bottom = 449.0
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+step = 0.0
+value = 75.0
+fill_mode = 5
+texture_progress = ExtResource("4_vgqql")
+
+[node name="Dash2" type="TextureProgressBar" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 195.0
+offset_top = -52.0
+offset_right = 695.0
+offset_bottom = 448.0
+grow_vertical = 0
+scale = Vector2(0.1, 0.1)
+step = 0.0
+value = 75.0
+fill_mode = 5
+texture_progress = ExtResource("4_vgqql")
+
+[node name="BulletSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(0, -94)
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Dash2Cooldown" to="." method="_on_dash_2_cooldown_timeout"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

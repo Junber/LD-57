@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvaqrb05y45fw"]
+
+[ext_resource type="Texture2D" uid="uid://ejx7fu8ywphh" path="res://Resources/Graphics/combat_lock.png" id="1_23w08"]
+[ext_resource type="Script" uid="uid://hoxx6iej4xew" path="res://Scenes/combat_lock.gd" id="1_x0xlr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0xlr"]
+size = Vector2(100, 74)
+
+[node name="CombatLock" type="StaticBody2D" groups=["combat_listener"]]
+collision_layer = 16
+script = ExtResource("1_x0xlr")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(3, -38)
+texture = ExtResource("1_23w08")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(2, -39)
+shape = SubResource("RectangleShape2D_x0xlr")

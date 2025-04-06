@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ihlr4rjnie4u"]
+
+[ext_resource type="Texture2D" uid="uid://cc8811mniplq4" path="res://Resources/Graphics/SlowIndicator.png" id="1_2k7kp"]
+[ext_resource type="Script" uid="uid://81us1h72klee" path="res://Scenes/indicator.gd" id="2_8ajkf"]
+
+[node name="Indicator" type="Sprite2D"]
+texture = ExtResource("1_2k7kp")
+script = ExtResource("2_8ajkf")

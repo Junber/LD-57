@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cg0nb2orlmi7s"]
+
+[ext_resource type="Script" uid="uid://bnf7alq7rnp60" path="res://Scenes/dialog_layer.gd" id="1_u50j4"]
+[ext_resource type="Texture2D" uid="uid://cm777gl7g6miu" path="res://Resources/Graphics/ornament_meek_top.png" id="2_27yjn"]
+[ext_resource type="Texture2D" uid="uid://bq1pmg42cjjne" path="res://Resources/Graphics/ornament_meek_bottom.png" id="3_402ir"]
+[ext_resource type="Texture2D" uid="uid://c1u63ijarn821" path="res://Resources/Graphics/ornament_irrational_top.png" id="3_vh2ph"]
+[ext_resource type="Texture2D" uid="uid://dnbwu0xwsucyf" path="res://Resources/Graphics/ornament_hopeless_top.png" id="4_lphyb"]
+[ext_resource type="Texture2D" uid="uid://boygjmbucamf0" path="res://Resources/Graphics/ornament_irrational_bottom.png" id="6_hkmc8"]
+[ext_resource type="Texture2D" uid="uid://d1sniprqwdf28" path="res://Resources/Graphics/ornament_hopeless_bottom.png" id="7_46cgw"]
+
+[node name="DialogLayer" type="CanvasLayer" groups=["dialog"]]
+process_mode = 2
+script = ExtResource("1_u50j4")
+top_ornaments = Dictionary[String, Texture2D]({
+"helpless": ExtResource("2_27yjn"),
+"hopeless": ExtResource("4_lphyb"),
+"reckless": ExtResource("3_vh2ph")
+})
+bottom_ornaments = Dictionary[String, Texture2D]({
+"helpless": ExtResource("3_402ir"),
+"hopeless": ExtResource("7_46cgw"),
+"reckless": ExtResource("6_hkmc8")
+})
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="Label" type="RichTextLabel" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 50
+text = "test
+etst
+test es sefsf "
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="DialogAppearTimer" type="Timer" parent="."]
+one_shot = true
