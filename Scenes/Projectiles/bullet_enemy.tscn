@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0jidmseuy5n0"]
+
+[ext_resource type="Script" uid="uid://bx068yc2unt4a" path="res://Scenes/Projectiles/bullet.gd" id="1_cg55a"]
+[ext_resource type="Texture2D" uid="uid://1f56yrbpxs2i" path="res://Resources/Graphics/bullet_enemy.png" id="2_cg55a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
+radius = 13.0
+
+[node name="Bullet" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 8
+collision_mask = 145
+motion_mode = 1
+script = ExtResource("1_cg55a")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("2_cg55a")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_oduel")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

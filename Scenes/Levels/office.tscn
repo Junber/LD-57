@@ -1,14 +1,19 @@
-[gd_scene load_steps=18 format=4 uid="uid://b1s0ht3kedi8f"]
+[gd_scene load_steps=23 format=4 uid="uid://b1s0ht3kedi8f"]
 
 [ext_resource type="PackedScene" uid="uid://cvm0txmun8vas" path="res://Scenes/Levels/level.tscn" id="1_a3lee"]
 [ext_resource type="Texture2D" uid="uid://wqy875i68mkt" path="res://Resources/Graphics/tileset.png" id="2_fjte1"]
 [ext_resource type="Texture2D" uid="uid://cjmwh7reb3kip" path="res://Resources/Graphics/tileset2.png" id="3_npqvw"]
 [ext_resource type="PackedScene" uid="uid://cjuuvrym6a2w7" path="res://Scenes/spawner.tscn" id="4_gba58"]
+[ext_resource type="PackedScene" uid="uid://6h2i3rsgya35" path="res://Scenes/Enemies/enemy_wavy.tscn" id="5_7mrfc"]
+[ext_resource type="PackedScene" uid="uid://yyg5c5mqsyks" path="res://Scenes/Enemies/enemy_mirror.tscn" id="5_p5ym0"]
+[ext_resource type="PackedScene" uid="uid://dp8fovi3xatvc" path="res://Scenes/Enemies/enemy_slow.tscn" id="6_7mrfc"]
+[ext_resource type="PackedScene" uid="uid://cq2coqvvmlxj2" path="res://Scenes/Enemies/enemy_directed.tscn" id="7_sc7wv"]
 [ext_resource type="Texture2D" uid="uid://ddy2qxxhic8gr" path="res://Resources/Graphics/block.png" id="11_xyow7"]
 [ext_resource type="PackedScene" uid="uid://c3xcklep4v8b0" path="res://Scenes/Interactables/desk.tscn" id="12_texqm"]
 [ext_resource type="Script" uid="uid://b26qdsi1g8n8g" path="res://Scenes/camera_trigger.gd" id="13_nyl8s"]
 [ext_resource type="PackedScene" uid="uid://dwku1ffxk7skm" path="res://Scenes/Interactables/lock.tscn" id="14_52wke"]
 [ext_resource type="PackedScene" uid="uid://buy0m6o6dcqmc" path="res://Scenes/Interactables/trigger.tscn" id="15_4tcdw"]
+[ext_resource type="PackedScene" uid="uid://dleyrku68blfi" path="res://Scenes/Interactables/pc.tscn" id="15_sc7wv"]
 [ext_resource type="PackedScene" uid="uid://dvaqrb05y45fw" path="res://Scenes/combat_lock.tscn" id="16_r7itg"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_85qyi"]
@@ -59,6 +64,8 @@ y_sort_origin = -31
 
 [node name="Spawner" parent="." index="2" instance=ExtResource("4_gba58")]
 position = Vector2(117, -1952)
+enemies_to_spawn = 1
+enemy_scenes = Array[PackedScene]([ExtResource("6_7mrfc"), ExtResource("5_7mrfc"), ExtResource("5_p5ym0"), ExtResource("7_sc7wv")])
 
 [node name="Wall" type="StaticBody2D" parent="." index="3"]
 position = Vector2(895, -11)
@@ -103,6 +110,8 @@ shape = SubResource("RectangleShape2D_8mt7v")
 
 [node name="CombatLock" parent="." index="9" instance=ExtResource("16_r7itg")]
 position = Vector2(-229, -1133)
+
+[node name="Interactable" parent="." index="10" instance=ExtResource("15_sc7wv")]
 
 [connection signal="body_entered" from="CameraTrigger" to="CameraTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraTrigger" to="CameraTrigger" method="_on_body_exited"]

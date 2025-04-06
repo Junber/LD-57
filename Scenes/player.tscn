@@ -1,31 +1,25 @@
-[gd_scene load_steps=37 format=3 uid="uid://crn24gipuknsj"]
+[gd_scene load_steps=31 format=3 uid="uid://crn24gipuknsj"]
 
 [ext_resource type="Script" uid="uid://c3fjm54mwit0u" path="res://Scenes/player.gd" id="1_cvnsp"]
-[ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/bullet_player.tscn" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/Projectiles/bullet_player.tscn" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://ihlr4rjnie4u" path="res://Scenes/indicator.tscn" id="3_fkybt"]
-[ext_resource type="Texture2D" uid="uid://d2f1i1a1uhmky" path="res://Resources/Graphics/Player/playerRun00.png" id="4_gymyn"]
-[ext_resource type="PackedScene" uid="uid://c3ese7immn4mo" path="res://Scenes/earbud.tscn" id="4_pu2lt"]
+[ext_resource type="PackedScene" uid="uid://c3ese7immn4mo" path="res://Scenes/Projectiles/earbud.tscn" id="4_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://ddy2qxxhic8gr" path="res://Resources/Graphics/block.png" id="4_vgqql"]
-[ext_resource type="PackedScene" uid="uid://dm66k0h2chtq2" path="res://Scenes/dog.tscn" id="5_p1odr"]
-[ext_resource type="Texture2D" uid="uid://bcoif0dwwgecy" path="res://Resources/Graphics/Player/playerRun01.png" id="5_pu2lt"]
-[ext_resource type="PackedScene" uid="uid://ddmle5r3rhycv" path="res://Scenes/notepad_drawing.tscn" id="5_vfarp"]
-[ext_resource type="Texture2D" uid="uid://347a852viwrx" path="res://Resources/Graphics/Player/playerRun02.png" id="6_ukyrk"]
-[ext_resource type="Texture2D" uid="uid://c6xf7eckl58ts" path="res://Resources/Graphics/Player/playerRun03.png" id="7_7dp3o"]
-[ext_resource type="Texture2D" uid="uid://cy3smjawf6jun" path="res://Resources/Graphics/Player/playerRun04.png" id="8_h4iuc"]
-[ext_resource type="Texture2D" uid="uid://dv0rvt80y8oa6" path="res://Resources/Graphics/Player/playerRun05.png" id="9_fd4e3"]
-[ext_resource type="Texture2D" uid="uid://rbk7gm1frxdd" path="res://Resources/Graphics/Player/playerRun/playerRunV20000.png" id="11_2ijsl"]
-[ext_resource type="Texture2D" uid="uid://px8krxgpq52k" path="res://Resources/Graphics/Player/playerRun/playerRunV20001.png" id="12_p1odr"]
-[ext_resource type="Texture2D" uid="uid://dxc3u5mf6qo4n" path="res://Resources/Graphics/Player/playerRun/playerRunV20002.png" id="13_0gysh"]
-[ext_resource type="Texture2D" uid="uid://b1j4rix4rewpc" path="res://Resources/Graphics/Player/playerRun/playerRunV20003.png" id="14_vfarp"]
-[ext_resource type="Texture2D" uid="uid://dx06shajdb4sr" path="res://Resources/Graphics/Player/playerRun/playerRunV20004.png" id="15_y6uwr"]
-[ext_resource type="Texture2D" uid="uid://behdsa7cac5t2" path="res://Resources/Graphics/Player/playerRun/playerRunV20005.png" id="16_83xs0"]
-[ext_resource type="Texture2D" uid="uid://cckxs8vrf77mb" path="res://Resources/Graphics/Player/playerRun/playerTorsoRun00.png" id="17_ypfnu"]
-[ext_resource type="Texture2D" uid="uid://eo2lnj2j5mhu" path="res://Resources/Graphics/Player/playerRun/playerTorsoRun01.png" id="18_xuaoq"]
-[ext_resource type="Texture2D" uid="uid://csic876xo0rb" path="res://Resources/Graphics/Player/playerRun/playerTorsoRun02.png" id="19_wohnl"]
-[ext_resource type="Texture2D" uid="uid://byy27ne78halg" path="res://Resources/Graphics/Player/playerRun/playerTorsoRun03.png" id="20_36dho"]
-[ext_resource type="Texture2D" uid="uid://mwumwapv61l1" path="res://Resources/Graphics/Player/playerRun/playerTorsoRun04.png" id="21_yh6i2"]
-[ext_resource type="Texture2D" uid="uid://b7c06nkitsvjr" path="res://Resources/Graphics/Player/playerRun/playerTorsoRun05.png" id="22_nv4vc"]
-[ext_resource type="Texture2D" uid="uid://dyt68poryqqie" path="res://Resources/Graphics/Player/playerRun/playerHead.png" id="23_8gxox"]
+[ext_resource type="PackedScene" uid="uid://dm66k0h2chtq2" path="res://Scenes/Projectiles/dog.tscn" id="5_p1odr"]
+[ext_resource type="PackedScene" uid="uid://ddmle5r3rhycv" path="res://Scenes/Projectiles/notepad_drawing.tscn" id="5_vfarp"]
+[ext_resource type="Texture2D" uid="uid://rbk7gm1frxdd" path="res://Resources/Graphics/Player/Office/playerRunV20000.png" id="11_2ijsl"]
+[ext_resource type="Texture2D" uid="uid://px8krxgpq52k" path="res://Resources/Graphics/Player/Office/playerRunV20001.png" id="12_p1odr"]
+[ext_resource type="Texture2D" uid="uid://dxc3u5mf6qo4n" path="res://Resources/Graphics/Player/Office/playerRunV20002.png" id="13_0gysh"]
+[ext_resource type="Texture2D" uid="uid://b1j4rix4rewpc" path="res://Resources/Graphics/Player/Office/playerRunV20003.png" id="14_vfarp"]
+[ext_resource type="Texture2D" uid="uid://dx06shajdb4sr" path="res://Resources/Graphics/Player/Office/playerRunV20004.png" id="15_y6uwr"]
+[ext_resource type="Texture2D" uid="uid://behdsa7cac5t2" path="res://Resources/Graphics/Player/Office/playerRunV20005.png" id="16_83xs0"]
+[ext_resource type="Texture2D" uid="uid://cckxs8vrf77mb" path="res://Resources/Graphics/Player/Office/playerTorsoRun00.png" id="17_ypfnu"]
+[ext_resource type="Texture2D" uid="uid://eo2lnj2j5mhu" path="res://Resources/Graphics/Player/Office/playerTorsoRun01.png" id="18_xuaoq"]
+[ext_resource type="Texture2D" uid="uid://csic876xo0rb" path="res://Resources/Graphics/Player/Office/playerTorsoRun02.png" id="19_wohnl"]
+[ext_resource type="Texture2D" uid="uid://byy27ne78halg" path="res://Resources/Graphics/Player/Office/playerTorsoRun03.png" id="20_36dho"]
+[ext_resource type="Texture2D" uid="uid://mwumwapv61l1" path="res://Resources/Graphics/Player/Office/playerTorsoRun04.png" id="21_yh6i2"]
+[ext_resource type="Texture2D" uid="uid://b7c06nkitsvjr" path="res://Resources/Graphics/Player/Office/playerTorsoRun05.png" id="22_nv4vc"]
+[ext_resource type="Texture2D" uid="uid://dyt68poryqqie" path="res://Resources/Graphics/Player/Office/playerHead.png" id="23_8gxox"]
 [ext_resource type="Script" uid="uid://d0lcwm6rfpiaw" path="res://Scenes/camera.gd" id="25_0gysh"]
 
 [sub_resource type="Animation" id="Animation_qpa8y"]
@@ -129,7 +123,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(13, -112), Vector2(13, -111), Vector2(16, -113), Vector2(17, -112), Vector2(16, -112), Vector2(16, -113)]
+"values": [Vector2(12, -111), Vector2(14, -111), Vector2(16, -113), Vector2(18, -112), Vector2(17, -112), Vector2(16, -113)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sbwqj"]
@@ -140,29 +134,6 @@ _data = {
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qqcod"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_gymyn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_pu2lt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_ukyrk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_7dp3o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_h4iuc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_fd4e3")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("11_2ijsl")
@@ -225,7 +196,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
-size = Vector2(85, 50)
+size = Vector2(85, 46)
 
 [sub_resource type="Gradient" id="Gradient_tx1dd"]
 interpolation_mode = 2
@@ -262,7 +233,6 @@ visible = false
 position = Vector2(1, -80)
 sprite_frames = SubResource("SpriteFrames_qqcod")
 animation = &"new_animation"
-autoplay = "default"
 frame = 1
 
 [node name="Body" type="AnimatedSprite2D" parent="Sprites"]
@@ -274,8 +244,11 @@ animation = &"running"
 position = Vector2(14, -113)
 sprite_frames = SubResource("SpriteFrames_sweqm")
 
+[node name="BulletSpawnPosition" type="Marker2D" parent="Sprites"]
+position = Vector2(34, -104)
+
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -23)
 shape = SubResource("RectangleShape2D_qxrlw")
 
 [node name="Camera" type="Camera2D" parent="." groups=["saveable"]]
@@ -355,9 +328,6 @@ grow_vertical = 0
 mouse_filter = 2
 step = 0.0
 value = 50.0
-
-[node name="BulletSpawnPosition" type="Marker2D" parent="."]
-position = Vector2(0, -94)
 
 [node name="Light" type="PointLight2D" parent="."]
 position = Vector2(0, -25)

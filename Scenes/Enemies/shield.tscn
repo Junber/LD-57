@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://byen5rma37bv"]
+
+[ext_resource type="Script" uid="uid://bms5h0j67kmba" path="res://Scenes/Enemies/shield.gd" id="1_i0ph7"]
+[ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/Projectiles/bullet_enemy.tscn" id="2_rn52j"]
+[ext_resource type="Texture2D" uid="uid://bq8f3324sdmeu" path="res://Resources/Graphics/Shield.png" id="3_p4dgj"]
+
+[node name="Shield" type="StaticBody2D"]
+script = ExtResource("1_i0ph7")
+bullet_scene = ExtResource("2_rn52j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("3_p4dgj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PackedVector2Array(32, -97.8, 10, -100, -14.1, -100, -35.1, -95, -38.6, -95, -56.5, -84, -58.8, -84, -66.8, -76, -69, -76, -86, -54, -87.3, -54, -96.4, -32, -97.6, -32, -100, -20.2, -100, 2, -88.2, 2, -86, -15.9, -86, -20.7, -81, -32.6, -81, -35.4, -72, -49.4, -72, -51.2, -60, -64.2, -60, -65, -34, -80.9, -34, -81.5, -8, -87.4, 20.9, -85, 24.5, -85, 43.6, -76, 45.3, -76, 58.3, -65, 60, -65, 72, -50, 72.8, -50, 80.8, -34, 81.5, -34, 86.4, -14, 87.1, -14, 88.1, 2, 100, 2, 100, -20.3, 95, -35.3, 95, -38.6, 84, -56.6, 84, -58.8, 69, -74.9, 69, -76.1, 49, -89.2, 49, -90.4, 32, -96.5)

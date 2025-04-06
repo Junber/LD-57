@@ -1,7 +1,6 @@
 extends Node2D
 
 var in_combat := false
-var force_combat := false
 var current_level: Node2D = null
 
 func _ready() -> void:
@@ -14,12 +13,11 @@ func load_level(path: String) -> void:
 	current_level = load(path).instantiate()
 	add_child.call_deferred(current_level)
 
-func set_force_combat(new_force_combat: bool) -> void:
-	force_combat = new_force_combat
-	if force_combat and !in_combat:
-		in_combat = true
+func set_in_combat(new_in_combat: bool) -> void:
+	in_combat = new_in_combat
+	if in_combat:
 		save_game("auto_save")
-		get_tree().call_group(&"combat_listener", &"set_combat", in_combat)
+	get_tree().call_group(&"combat_listener", &"set_combat", in_combat)
 
 func get_save_path(save_name: String) -> String:
 	return "user://" + save_name + ".save"
@@ -53,24 +51,20 @@ func load_node_data(data: Dictionary) -> void:
 	nodes.sort_custom(load_priotity_order)
 	for node in nodes:
 		if node != self and !node.find_parent("DELETING"):
-			node.load_save_data(data.get(node.get_path(), null))
-
-func _process(_delta: float) -> void:
-	if !force_combat and in_combat:
-		if get_tree().get_node_count_in_group(&"enemy") == 0 and\
-		get_tree().get_node_count_in_group(&"spawn_indicator") == 0:
-			in_combat = false
-			get_tree().call_group(&"combat_listener", &"set_combat", in_combat)
+			var entry = data.get(node.get_path(), null)
+			if entry == null:
+				node.queue_free()
+			else:
+				node.load_save_data(entry)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"reload"):
 		load_game("auto_save")
 
 func get_save_data() -> Array:
-	return [in_combat, force_combat, current_level.scene_file_path]
+	return [in_combat, current_level.scene_file_path]
 
 func load_save_data(data: Array) -> void:
-	load_level(data[2])
+	load_level(data[1])
 	in_combat = data[0]
-	force_combat = data[1]
 	get_tree().call_group(&"combat_listener", &"set_combat", in_combat)

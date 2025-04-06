@@ -4,14 +4,16 @@ extends CanvasLayer
 @export var bottom_ornaments: Dictionary[String, Texture2D]
 
 @onready var dialog_appear_timer := $DialogAppearTimer
-@onready var top_ornament: TextureRect = $VBoxContainer/TopOrnament
-@onready var bottom_ornament: TextureRect = $VBoxContainer/BottomOrnament
-@onready var label: RichTextLabel = $VBoxContainer/Label
+@onready var top_ornament: TextureRect = $Control/VBoxContainer/TopOrnament
+@onready var bottom_ornament: TextureRect = $Control/VBoxContainer/BottomOrnament
+@onready var label: RichTextLabel = $Control/VBoxContainer/Label
 
 var caller: Node
 var last_file_name: String
 var dialog_chunks: PackedStringArray = []
 var dialog_progress := 0
+var waiting := false
+var shaking_intensity := 0.0
 
 var dialog_variables: Dictionary[String, bool] = {}
 
@@ -132,7 +134,70 @@ func command_save(data: Array[String]) -> void:
 	get_tree().call_group(&"game", &"save_game", "auto_save")
 	show_next_line()
 
+func command_sfx(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"sfx\" command needs exactly 1 argument")
+
+	var path = "res://Resources/Sounds/" + data[0] + ".wav"
+	if !FileAccess.file_exists(path):
+		return show_error("Sound not found: " + data[0])
+
+	$AudioStreamPlayer.stream = load(path)
+	$AudioStreamPlayer.play()
+	show_next_line()
+
+func command_wait(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"wait\" command needs exactly 1 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+
+	waiting = true
+	var tween := create_tween()
+	tween.tween_interval(data[0].to_float())
+	tween.tween_callback(show_next_line)
+	tween.tween_property(self, ^"waiting", false, 0.0)
+
+func command_clear(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"clear\" command does not take any arguments")
+
+	top_ornament.texture = null
+	label.text = ""
+	bottom_ornament.texture = null
+	show_next_line()
+
+func command_background_opacity(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"background_opacity\" command needs exactly 1 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+
+	$ColorRect.color = Color(0.9, 0.9, 0.9, data[0].to_float())
+	show_next_line()
+
+func command_shaking_intensity(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"shaking_intensity\" command needs exactly 1 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+
+	shaking_intensity = data[0].to_float()
+	show_next_line()
+
+func command_drink(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"drink\" command does not take any arguments")
+
+	$DrunkEffect.increasing = true
+	show_next_line()
+
 func add_text(text: String) -> void:
+	label.visible_ratio = 0.0
+
 	top_ornament.texture = top_ornaments.get(ornament_name, null)
 	label.text = text
 	bottom_ornament.texture = bottom_ornaments.get(ornament_name, null)
@@ -172,6 +237,18 @@ func show_next_line() -> void:
 			command_level(data)
 		elif key == "save":
 			command_save(data)
+		elif key == "sfx":
+			command_sfx(data)
+		elif key == "wait":
+			command_wait(data)
+		elif key == "clear":
+			command_clear(data)
+		elif key == "background_opacity":
+			command_background_opacity(data)
+		elif key == "shaking_intensity":
+			command_shaking_intensity(data)
+		elif key == "drink":
+			command_drink(data)
 		else:
 			show_error("Unknown command " + key)
 	else:
@@ -183,9 +260,17 @@ func _process(_delta: float) -> void:
 	else:
 		label.visible_ratio = 1.0 - dialog_appear_timer.time_left / dialog_appear_timer.wait_time
 
+	if shaking_intensity > 0 and !dialog_appear_timer.is_stopped():
+		$Control.position = Vector2(randf(), randf()) * shaking_intensity
+	else:
+		$Control.position = Vector2.ZERO
+
 func _input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed("interact"):
 		get_viewport().set_input_as_handled()
+		if waiting:
+			return
+
 		if dialog_appear_timer.is_stopped():
 			show_next_line()
 		else:

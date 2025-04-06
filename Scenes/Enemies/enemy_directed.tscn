@@ -1,15 +1,64 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq2coqvvmlxj2"]
+[gd_scene load_steps=12 format=3 uid="uid://cq2coqvvmlxj2"]
 
 [ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_e8ll8"]
-[ext_resource type="Texture2D" uid="uid://c5gocnvf8law7" path="res://Resources/Graphics/enemy1.png" id="2_ccfrl"]
+[ext_resource type="Texture2D" uid="uid://6gdem0ffr0by" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessIdle.png" id="2_518g1"]
+[ext_resource type="Texture2D" uid="uid://ciiyf5un3prpt" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessWalk0000.png" id="3_ltr70"]
+[ext_resource type="Texture2D" uid="uid://codt6w7bsg30" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessWalk0001.png" id="4_3ey7l"]
+[ext_resource type="Texture2D" uid="uid://bbquftlmhx6p5" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessWalk0002.png" id="5_mmcu8"]
+[ext_resource type="Texture2D" uid="uid://bv5yxgcpynsbs" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessWalk0003.png" id="6_10uj2"]
+[ext_resource type="Texture2D" uid="uid://dr3krf8a2q2w7" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessWalk0004.png" id="7_gu4xl"]
+[ext_resource type="Texture2D" uid="uid://0m4tcdvd21rq" path="res://Resources/Graphics/Enemies/HelplessOffice/helplessWalk0005.png" id="8_gs2wb"]
+[ext_resource type="Script" uid="uid://drojgu1rmi0jo" path="res://Scenes/Enemies/animated_sprite.gd" id="9_ltr70"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mts0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_518g1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ltr70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3ey7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mmcu8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_10uj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gu4xl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gs2wb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqele"]
+size = Vector2(58, 118)
 
 [node name="Enemy" instance=ExtResource("1_e8ll8")]
-max_health = 5
+behavior = 4
 bullet_type = 1
 
-[node name="Sprite" parent="." index="0"]
-texture = ExtResource("2_ccfrl")
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -70)
+sprite_frames = SubResource("SpriteFrames_mts0w")
+animation = &"idle"
+script = ExtResource("9_ltr70")
 
-[node name="Health" parent="." index="3"]
-max_value = 5.0
-value = 5.0
+[node name="CollisionShape" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(3, -60)
+shape = SubResource("RectangleShape2D_tqele")
+
+[connection signal="walking" from="." to="AnimatedSprite" method="_on_enemy_walking"]

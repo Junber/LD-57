@@ -1,14 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg6748eqmpgng"]
+[gd_scene load_steps=4 format=3 uid="uid://bg6748eqmpgng"]
 
 [ext_resource type="Script" uid="uid://d2muhbpvk17xg" path="res://Scenes/Enemies/enemy.gd" id="1_1f0kj"]
-[ext_resource type="Texture2D" uid="uid://dhe2v2xqt8ekx" path="res://Resources/Graphics/enemy.png" id="1_hghv2"]
-[ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/bullet_enemy.tscn" id="2_afpow"]
+[ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/Projectiles/bullet_enemy.tscn" id="2_afpow"]
 [ext_resource type="PackedScene" uid="uid://bpxofqlolfn02" path="res://Scenes/in_world_text.tscn" id="2_ubio8"]
-[ext_resource type="Script" uid="uid://bms5h0j67kmba" path="res://Scenes/Enemies/shield.gd" id="5_l8da7"]
-[ext_resource type="Texture2D" uid="uid://bq8f3324sdmeu" path="res://Resources/Graphics/Shield.png" id="5_miwey"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
-size = Vector2(97, 159)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
@@ -19,42 +13,19 @@ death_text_scene = ExtResource("2_ubio8")
 movement_speed = 100.0
 bullet_scene = ExtResource("2_afpow")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(3, -80)
-texture = ExtResource("1_hghv2")
-
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(3.5, -80.5)
-shape = SubResource("RectangleShape2D_wrm1d")
-
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Shield" type="StaticBody2D" parent="."]
-position = Vector2(4, -78)
-collision_layer = 2
-collision_mask = 4
-script = ExtResource("5_l8da7")
-bullet_scene = ExtResource("2_afpow")
-
-[node name="Sprite" type="Sprite2D" parent="Shield"]
-rotation = 1.5708
-texture = ExtResource("5_miwey")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shield"]
-rotation = 1.5708
-polygon = PackedVector2Array(32, -97.8, 10, -100, -14.1, -100, -35.1, -95, -38.6, -95, -56.5, -84, -58.8, -84, -66.8, -76, -69, -76, -86, -54, -87.3, -54, -96.4, -32, -97.6, -32, -100, -20.2, -100, 2, -88.2, 2, -86, -15.9, -86, -20.7, -81, -32.6, -81, -35.4, -72, -49.4, -72, -51.2, -60, -64.2, -60, -65, -34, -80.9, -34, -81.5, -8, -87.4, 20.9, -85, 24.5, -85, 43.6, -76, 45.3, -76, 58.3, -65, 60, -65, 72, -50, 72.8, -50, 80.8, -34, 81.5, -34, 86.4, -14, 87.1, -14, 88.1, 2, 100, 2, 100, -20.3, 95, -35.3, 95, -38.6, 84, -56.6, 84, -58.8, 69, -74.9, 69, -76.1, 49, -89.2, 49, -90.4, 32, -96.5)
-
 [node name="Health" type="ProgressBar" parent="."]
-offset_left = -28.0
-offset_top = -188.0
-offset_right = 32.0
-offset_bottom = -161.0
+offset_left = -30.0
+offset_top = -164.0
+offset_right = 30.0
+offset_bottom = -137.0
 mouse_filter = 2
 max_value = 5.0
 value = 5.0
 
-[node name="TextPosition" type="Marker2D" parent="."]
-position = Vector2(0, -125)
+[node name="SpawnPosition" type="Marker2D" parent="."]
+position = Vector2(0, -88)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

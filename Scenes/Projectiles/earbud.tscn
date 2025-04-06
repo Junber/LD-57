@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3ese7immn4mo"]
+
+[ext_resource type="Script" uid="uid://baf0rmomtsu05" path="res://Scenes/Projectiles/earbud.gd" id="1_tljs1"]
+
+[sub_resource type="Gradient" id="Gradient_ysltm"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.888136, 1)
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0.313726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tljs1"]
+gradient = SubResource("Gradient_ysltm")
+width = 500
+height = 500
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bu2if"]
+radius = 243.074
+
+[node name="Earbud" type="Area2D"]
+z_index = 1
+collision_layer = 128
+collision_mask = 10
+input_pickable = false
+monitorable = false
+script = ExtResource("1_tljs1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_tljs1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bu2if")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

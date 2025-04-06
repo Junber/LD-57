@@ -35,6 +35,5 @@ func set_combat(_in_combat: bool) -> void:
 func get_save_data() -> Variant:
 	return true
 
-func load_save_data(data: Variant) -> void:
-	if !data:
-		queue_free()
+func load_save_data(_data: Variant) -> void:
+	pass

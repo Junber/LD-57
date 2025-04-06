@@ -1,8 +1,10 @@
 @tool
 extends CharacterBody2D
 
+signal walking(walking: bool, left: bool)
+
 enum Behavior {
-	None, Charge
+	None, Charge, Random, Distant, Close
 }
 
 enum BulletType {
@@ -10,7 +12,7 @@ enum BulletType {
 }
 
 enum Special {
-	None, Slows, Shield
+	None, Slows
 }
 
 @export_group("General")
@@ -38,9 +40,11 @@ enum Special {
 @export var special: Special
 
 @onready var health_bar := $Health
-@onready var text_position := $TextPosition
+@onready var spawn_position := $SpawnPosition
 
 var health: int
+var was_walking := false
+var was_left := false
 
 func _validate_property(property: Dictionary):
 	if property.name == "movement_speed" and behavior == Behavior.None:
@@ -61,13 +65,13 @@ func _ready() -> void:
 	health_bar.max_value = max_health
 	health_bar.value = health
 	if special == Special.Slows:
-		get_player().spawn_slow_indicator(self)
-	if special != Special.Shield:
-		$Shield.queue_free()
+		get_player().spawn_slow_indicator(spawn_position)
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+
+	var old_position := position
 
 	if behavior == Behavior.Charge:
 		var direction := (get_player().global_position - global_position)
@@ -78,6 +82,35 @@ func _physics_process(_delta: float) -> void:
 				var angle := i * TAU / 100
 				spawn_bullet(Vector2.UP.rotated(angle))
 			queue_free()
+	elif behavior == Behavior.Random:
+		if randf() < 0.05:
+			if randf() < 0.1:
+				velocity = Vector2.ZERO
+			else:
+				velocity = Vector2.UP.rotated(randf() * TAU) * movement_speed
+		move_and_slide()
+	elif behavior == Behavior.Distant:
+		var direction := (get_player().global_position - global_position)
+		if direction.length() < (800.0 if was_walking else 700.0):
+			velocity = -direction.normalized() * movement_speed
+			move_and_slide()
+		else:
+			velocity = Vector2.ZERO
+	elif behavior == Behavior.Close:
+		var direction := (get_player().global_position - global_position)
+		if direction.length() > (500.0 if was_walking else 600.0):
+			velocity = direction.normalized() * movement_speed
+			move_and_slide()
+		else:
+			velocity = Vector2.ZERO
+
+	var new_walking := (position - old_position).length() > 0.5
+	var new_left := velocity.x < 0 if new_walking else \
+		get_player().global_position.x < global_position.x
+	if new_walking != was_walking or new_left != was_left:
+		walking.emit(new_walking, new_left)
+		was_walking = new_walking
+		was_left = new_left
 
 func shoot() -> void:
 	if bullet_type == BulletType.Directed:
@@ -94,13 +127,13 @@ func shoot() -> void:
 
 func spawn_bullet(direction: Vector2) -> void:
 	var bullet: Bullet = bullet_scene.instantiate()
-	bullet.global_position = global_position
+	bullet.global_position = spawn_position.global_position
 	bullet.velocity = direction * bullet_speed
 	get_parent().add_child(bullet)
 
 func spawn_death_text() -> void:
 	var text := death_text_scene.instantiate()
-	text.global_position = text_position.global_position
+	text.global_position = spawn_position.global_position
 	text.set_text_from_file(death_text_file)
 	get_parent().add_child(text)
 

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dleyrku68blfi"]
+
+[ext_resource type="PackedScene" uid="uid://dq38fm545ricm" path="res://Scenes/Interactables/interactable.tscn" id="1_h8op8"]
+[ext_resource type="Script" uid="uid://dab5whr8nrrjo" path="res://Scenes/Interactables/pc.gd" id="2_7di4o"]
+[ext_resource type="Texture2D" uid="uid://bgt1i8wugrthk" path="res://Resources/Graphics/Objects/Office/computerFace.png" id="2_adrea"]
+[ext_resource type="Shader" uid="uid://dkacg2e2xs45s" path="res://Scenes/Interactables/pc.gdshader" id="3_7di4o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a853a"]
+shader = ExtResource("3_7di4o")
+
+[node name="Interactable" instance=ExtResource("1_h8op8")]
+script = ExtResource("2_7di4o")
+
+[node name="Sprite" parent="." index="2"]
+position = Vector2(6, -82)
+texture = ExtResource("2_adrea")
+
+[node name="Indicator" parent="." index="3"]
+position = Vector2(-7, -196)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
+layer = 3
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" index="0"]
+material = SubResource("ShaderMaterial_a853a")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

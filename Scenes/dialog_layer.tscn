@@ -1,25 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://cg0nb2orlmi7s"]
+[gd_scene load_steps=13 format=3 uid="uid://cg0nb2orlmi7s"]
 
 [ext_resource type="Script" uid="uid://bnf7alq7rnp60" path="res://Scenes/dialog_layer.gd" id="1_u50j4"]
-[ext_resource type="Texture2D" uid="uid://cm777gl7g6miu" path="res://Resources/Graphics/ornament_meek_top.png" id="2_27yjn"]
-[ext_resource type="Texture2D" uid="uid://bq1pmg42cjjne" path="res://Resources/Graphics/ornament_meek_bottom.png" id="3_402ir"]
-[ext_resource type="Texture2D" uid="uid://c1u63ijarn821" path="res://Resources/Graphics/ornament_irrational_top.png" id="3_vh2ph"]
-[ext_resource type="Texture2D" uid="uid://dnbwu0xwsucyf" path="res://Resources/Graphics/ornament_hopeless_top.png" id="4_lphyb"]
-[ext_resource type="Texture2D" uid="uid://boygjmbucamf0" path="res://Resources/Graphics/ornament_irrational_bottom.png" id="6_hkmc8"]
-[ext_resource type="Texture2D" uid="uid://d1sniprqwdf28" path="res://Resources/Graphics/ornament_hopeless_bottom.png" id="7_46cgw"]
+[ext_resource type="Texture2D" uid="uid://wtlsna5skw1a" path="res://Resources/Graphics/UI/Anxiety text top.png" id="2_vh2ph"]
+[ext_resource type="Texture2D" uid="uid://b7hwgraahhd2g" path="res://Resources/Graphics/UI/Sad text top.png" id="3_lphyb"]
+[ext_resource type="Texture2D" uid="uid://bj62f24dlb86x" path="res://Resources/Graphics/UI/Angry text top.png" id="4_hkmc8"]
+[ext_resource type="Texture2D" uid="uid://fqdl3qmo4u6u" path="res://Resources/Graphics/UI/Anxiety text bottom.png" id="5_46cgw"]
+[ext_resource type="Texture2D" uid="uid://dlxdkna0mpwn1" path="res://Resources/Graphics/UI/Sad text bottom.png" id="6_fiym4"]
+[ext_resource type="Texture2D" uid="uid://bssclq1lo6ocv" path="res://Resources/Graphics/UI/Angry text bottom.png" id="7_yo6l0"]
+[ext_resource type="Script" uid="uid://bhjxafaajh1ho" path="res://Scenes/drunk_effect.gd" id="8_hkmc8"]
+[ext_resource type="Shader" uid="uid://bwsekrww0h3lj" path="res://Scenes/Levels/drunk.gdshader" id="9_46cgw"]
+[ext_resource type="Shader" uid="uid://csdda3auf15yk" path="res://Scenes/vignette.gdshader" id="10_46cgw"]
 
-[node name="DialogLayer" type="CanvasLayer" groups=["dialog"]]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fiym4"]
+shader = ExtResource("9_46cgw")
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yo6l0"]
+shader = ExtResource("10_46cgw")
+
+[node name="DialogLayer" type="CanvasLayer" groups=["dialog", "saveable"]]
 process_mode = 2
+layer = 2
 script = ExtResource("1_u50j4")
 top_ornaments = Dictionary[String, Texture2D]({
-"helpless": ExtResource("2_27yjn"),
-"hopeless": ExtResource("4_lphyb"),
-"reckless": ExtResource("3_vh2ph")
+"helpless": ExtResource("2_vh2ph"),
+"hopeless": ExtResource("3_lphyb"),
+"reckless": ExtResource("4_hkmc8")
 })
 bottom_ornaments = Dictionary[String, Texture2D]({
-"helpless": ExtResource("3_402ir"),
-"hopeless": ExtResource("7_46cgw"),
-"reckless": ExtResource("6_hkmc8")
+"helpless": ExtResource("5_46cgw"),
+"hopeless": ExtResource("6_fiym4"),
+"reckless": ExtResource("7_yo6l0")
 })
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -29,12 +40,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.392157)
+color = Color(1, 1, 1, 0.4)
 
 [node name="DialogAppearTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,26 +62,65 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="TopOrnament" type="TextureRect" parent="VBoxContainer"]
+[node name="TopOrnament" type="TextureRect" parent="Control/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_27yjn")
+texture = ExtResource("4_hkmc8")
 stretch_mode = 3
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="Control/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/normal_font_size = 50
 text = "test
 etst
 test es sefsf "
 fit_content = true
+shortcut_keys_enabled = false
 horizontal_alignment = 1
 vertical_alignment = 1
+drag_and_drop_selection_enabled = false
 visible_characters_behavior = 1
 
-[node name="BottomOrnament" type="TextureRect" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-texture = ExtResource("3_402ir")
+
+[node name="BottomOrnament" type="TextureRect" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_yo6l0")
 stretch_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="DrunkEffect" type="CanvasLayer" parent="." groups=["saveable"]]
+process_mode = 3
+layer = 2
+visible = false
+script = ExtResource("8_hkmc8")
+
+[node name="ColorRect" type="ColorRect" parent="DrunkEffect"]
+material = SubResource("ShaderMaterial_fiym4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VignetteEffect" type="CanvasLayer" parent="." groups=["saveable"]]
+process_mode = 3
+layer = 2
+visible = false
+script = ExtResource("8_hkmc8")
+
+[node name="ColorRect" type="ColorRect" parent="VignetteEffect"]
+material = SubResource("ShaderMaterial_yo6l0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

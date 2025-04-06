@@ -32,7 +32,7 @@ enum SpecialAbility {
 @onready var ability_charge_bar: Range = $UI/AbilityCharge
 
 @onready var sprite: Node2D = $Sprites
-@onready var bullet_spawn_point: Node2D = $BulletSpawnPosition
+@onready var bullet_spawn_point: Node2D = $Sprites/BulletSpawnPosition
 
 var health: int
 var slowdown_indicators: Array[Node] = []
@@ -58,7 +58,7 @@ func current_slowdown() -> float:
 	for i in range(slowdown_indicators.size()):
 		var indicator = slowdown_indicators[i]
 		if indicator:
-			slowdown *= 1.0 / pow(1 + (time - indicator.spawn_time) * 0.0005, 0.7)
+			slowdown *= 1.0 / pow(1 + (time - indicator.spawn_time) * 0.0005, 0.4)
 		else:
 			index_to_remove = i
 	if index_to_remove >= 0:
@@ -157,7 +157,7 @@ func use_special_ability() -> void:
 func on_hit(_body: Node2D) -> void:
 	if !dash_timer.is_stopped() or !iframe_timer.is_stopped():
 		return
-	health -= 1
+	#health -= 1
 	iframe_timer.start()
 	health_bar.value = health
 	if health <= 0:
@@ -168,7 +168,7 @@ func spawn_slow_indicator(enemy: Node2D) -> void:
 	indicator.enemy = enemy
 	indicator.camera = get_viewport().get_camera_2d()
 	indicator.spawn_time = Time.get_ticks_msec()
-	add_child(indicator)
+	bullet_spawn_point.add_child(indicator)
 	slowdown_indicators.push_back(indicator)
 
 func set_ability(new_ability_name: String) -> void:

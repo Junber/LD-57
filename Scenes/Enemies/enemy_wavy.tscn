@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=3 uid="uid://6h2i3rsgya35"]
+
+[ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_u6vow"]
+[ext_resource type="Texture2D" uid="uid://cyvp6516jlp23" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessIdle.png" id="2_dvkra"]
+[ext_resource type="PackedScene" uid="uid://c51xo8jlhnv5b" path="res://Scenes/Projectiles/bullet_wavy.tscn" id="2_eqy50"]
+[ext_resource type="Texture2D" uid="uid://cqe2xbc17jsxt" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessWalk0000.png" id="3_eqy50"]
+[ext_resource type="Texture2D" uid="uid://cox3whspybj3h" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessWalk0001.png" id="4_4u3av"]
+[ext_resource type="Texture2D" uid="uid://ccfiuvfmkfoc1" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessWalk0002.png" id="5_p3yve"]
+[ext_resource type="Texture2D" uid="uid://b7v25i12ivkxm" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessWalk0003.png" id="6_cjb7s"]
+[ext_resource type="Texture2D" uid="uid://bl1sjxw6pj1d7" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessWalk0004.png" id="7_pwoua"]
+[ext_resource type="Texture2D" uid="uid://bnq3ktl7oes0b" path="res://Resources/Graphics/Enemies/RecklessOffice/recklessWalk0005.png" id="8_ckh5y"]
+[ext_resource type="Script" uid="uid://drojgu1rmi0jo" path="res://Scenes/Enemies/animated_sprite.gd" id="10_4u3av"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sfmkx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dvkra")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eqy50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4u3av")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_p3yve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cjb7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pwoua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ckh5y")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqy50"]
+size = Vector2(68, 148)
+
+[node name="Enemy" instance=ExtResource("1_u6vow")]
+behavior = 2
+bullet_type = 2
+bullet_scene = ExtResource("2_eqy50")
+bullet_amount = 3
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -81)
+sprite_frames = SubResource("SpriteFrames_sfmkx")
+animation = &"idle"
+script = ExtResource("10_4u3av")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(5, -75)
+shape = SubResource("RectangleShape2D_eqy50")
+
+[connection signal="walking" from="." to="AnimatedSprite" method="_on_enemy_walking"]

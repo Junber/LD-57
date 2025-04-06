@@ -10,5 +10,5 @@ script = ExtResource("1_h4fw4")
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
 
-[node name="DialogLayer" parent="." groups=["saveable"] instance=ExtResource("11_o5yvi")]
+[node name="DialogLayer" parent="." instance=ExtResource("11_o5yvi")]
 visible = false

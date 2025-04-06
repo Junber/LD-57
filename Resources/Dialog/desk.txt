@@ -2,26 +2,33 @@
 
 !ability:notepad
 
-!ornament:helpless
-
 !shot_upgrade
 
 !dash_upgrade
 
 !save
 
-#This is a desk.
+!ornament:helpless
+
+This is a desk.
 Its studious legs dutifully hold up the resilient plate.
+
+!shaking_intensity:10.0
 
 !ornament:reckless
 
-#I hate this desk.
+I hate this desk.
 It sucks.
 RAHHHHH!
 
+!shaking_intensity:0.0
+
+!drink
+
 !ornament:hopeless
 
-#This is a desk, apparently.
+This is a desk, apparently.
 Like me it will fade into nothingness in due time.
 Why was it ever made?
-:(
+
+!background_opacity:0.4

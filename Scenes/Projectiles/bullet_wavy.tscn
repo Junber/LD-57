@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c51xo8jlhnv5b"]
+
+[ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/Projectiles/bullet_enemy.tscn" id="1_q01dv"]
+[ext_resource type="Script" uid="uid://bfb1faweg03qx" path="res://Scenes/Projectiles/bullet_wavy.gd" id="2_ylkv3"]
+
+[node name="Bullet" instance=ExtResource("1_q01dv")]
+script = ExtResource("2_ylkv3")

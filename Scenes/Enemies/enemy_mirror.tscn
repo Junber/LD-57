@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://yyg5c5mqsyks"]
+
+[ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_03jes"]
+[ext_resource type="PackedScene" uid="uid://br7errtqn2s6p" path="res://Scenes/Enemies/mirror_monster_sprite.tscn" id="2_a3qoq"]
+[ext_resource type="Script" uid="uid://cwhmy1tka0g65" path="res://Scenes/Enemies/mirror_monster_sprite.gd" id="3_843ao"]
+[ext_resource type="PackedScene" uid="uid://byen5rma37bv" path="res://Scenes/Enemies/shield.tscn" id="3_a3qoq"]
+
+[node name="Enemy" instance=ExtResource("1_03jes")]
+behavior = 3
+movement_speed = 50.0
+bullet_type = 1
+special = 2
+
+[node name="MirrorMonster" parent="." index="0" instance=ExtResource("2_a3qoq")]
+position = Vector2(-1, -127)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("3_843ao")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-50, -90, -53, -153, -1, -208, 54, -151, 52, -91, -2, -57)
+
+[node name="Shield" parent="." index="2" instance=ExtResource("3_a3qoq")]
+position = Vector2(0, -129)
+collision_layer = 2
+collision_mask = 4
+
+[node name="Health" parent="." index="4"]
+offset_left = -27.0
+offset_top = -234.0
+offset_right = 33.0
+offset_bottom = -207.0
+
+[node name="SpawnPosition" parent="." index="5"]
+position = Vector2(1, -128)
+
+[connection signal="walking" from="." to="MirrorMonster" method="_on_enemy_walking"]
