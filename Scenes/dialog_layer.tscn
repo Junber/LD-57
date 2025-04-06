@@ -31,13 +31,24 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.392157)
 
-[node name="Label" type="RichTextLabel" parent="."]
-anchors_preset = 14
-anchor_top = 0.5
+[node name="DialogAppearTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="TopOrnament" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_27yjn")
+stretch_mode = 3
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 20
@@ -50,5 +61,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
-[node name="DialogAppearTimer" type="Timer" parent="."]
-one_shot = true
+[node name="BottomOrnament" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_402ir")
+stretch_mode = 3

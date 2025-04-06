@@ -19,6 +19,9 @@ func _on_body_entered(_body: Node2D) -> void:
 
 func _on_body_exited(_body: Node2D) -> void:
 	var camera := get_viewport().get_camera_2d()
+	if !camera:
+		push_warning("Camera not found")
+		return
 	var large_number := 10000000
 	camera.limit_left = -large_number
 	camera.limit_right = large_number

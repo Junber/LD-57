@@ -25,5 +25,5 @@ func _on_life_timer_timeout() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method(&"on_hit"):
-		body.on_hit()
+		body.on_hit(self)
 	queue_free()

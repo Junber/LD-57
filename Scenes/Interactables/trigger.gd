@@ -23,3 +23,10 @@ func _on_body_entered(_body: Node2D) -> void:
 
 func _on_body_exited(_body: Node2D) -> void:
 	player_nearby = false
+
+func get_save_data() -> Variant:
+	return true
+
+func load_save_data(data: Variant) -> void:
+	if !data:
+		queue_free()

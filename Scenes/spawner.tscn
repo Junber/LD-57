@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjuuvrym6a2w7"]
+
+[ext_resource type="Script" uid="uid://b7t1jhpc658wd" path="res://Scenes/spawner.gd" id="1_gjq3i"]
+[ext_resource type="PackedScene" uid="uid://cla4c02yxoci7" path="res://Scenes/Enemies/enemy_aoe.tscn" id="2_yocef"]
+[ext_resource type="PackedScene" uid="uid://dp8fovi3xatvc" path="res://Scenes/Enemies/enemy_slow.tscn" id="3_kh5ph"]
+[ext_resource type="PackedScene" uid="uid://cq2coqvvmlxj2" path="res://Scenes/Enemies/enemy_directed.tscn" id="4_xbrvg"]
+[ext_resource type="PackedScene" uid="uid://kn6uhgh3ffk7" path="res://Scenes/Enemies/enemy_undirected.tscn" id="5_b6o4h"]
+[ext_resource type="PackedScene" uid="uid://c0h3hrivs0db1" path="res://Scenes/Enemies/enemy_charge.tscn" id="6_istys"]
+[ext_resource type="PackedScene" uid="uid://bwf727b5is6qn" path="res://Scenes/spawn_indicator.tscn" id="7_8i5kq"]
+
+[node name="Spawner" type="Node2D" groups=["saveable", "spawner"]]
+script = ExtResource("1_gjq3i")
+spawner_name = "test_room"
+enemies_to_spawn = 5
+enemy_scenes = Array[PackedScene]([ExtResource("2_yocef"), ExtResource("3_kh5ph"), ExtResource("4_xbrvg"), ExtResource("5_b6o4h"), ExtResource("6_istys")])
+spawn_indicator_scene = ExtResource("7_8i5kq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -31,3 +31,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func set_combat(_in_combat: bool) -> void:
 	update_indicator()
+
+func get_save_data() -> Variant:
+	return true
+
+func load_save_data(data: Variant) -> void:
+	if !data:
+		queue_free()

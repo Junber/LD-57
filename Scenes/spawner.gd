@@ -7,12 +7,15 @@ extends Node2D
 @export var spawn_indicator_scene: PackedScene
 
 var next_spawn := 0
+var starting := false
 
 func initiate_combat(combat_name: String) -> void:
 	if spawner_name == combat_name:
+		starting = true
 		get_tree().get_first_node_in_group(&"game").set_force_combat(true)
 		spawn()
 		$Timer.start()
+		starting = false
 
 
 func spawn() -> void:
@@ -31,3 +34,10 @@ func spawn() -> void:
 
 func _on_timer_timeout() -> void:
 	spawn()
+
+func get_save_data() -> bool:
+	return starting
+
+func load_save_data(data: bool) -> void:
+	if data:
+		initiate_combat(spawner_name)

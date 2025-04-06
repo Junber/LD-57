@@ -25,6 +25,7 @@ offset_left = -210.0
 offset_top = -168.0
 offset_right = 210.0
 offset_bottom = 165.0
+mouse_filter = 2
 text = "Lately, I’ve been working through a sustained bandwidth imbalance due to compounded legacy tasks and ongoing ambiguity around project scope.
 
 There’s been minimal clarity from upstream, and the continued lack of decisioning has made it hard to maintain momentum or even define what “paradigm-shifting success” looks like.

@@ -4,7 +4,9 @@ extends CanvasLayer
 @export var bottom_ornaments: Dictionary[String, Texture2D]
 
 @onready var dialog_appear_timer := $DialogAppearTimer
-@onready var label: RichTextLabel = $Label
+@onready var top_ornament: TextureRect = $VBoxContainer/TopOrnament
+@onready var bottom_ornament: TextureRect = $VBoxContainer/BottomOrnament
+@onready var label: RichTextLabel = $VBoxContainer/Label
 
 var caller: Node
 var last_file_name: String
@@ -86,19 +88,56 @@ func command_combat(data: Array[String]) -> void:
 	get_tree().call_group(&"spawner", &"initiate_combat", data[0])
 	show_next_line()
 
+func command_ability(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"ability\" command needs exactly 1 argument")
+
+	var ability_name := data[0].capitalize()
+
+	if !get_tree().get_first_node_in_group(&"player").SpecialAbility.has(ability_name):
+		return show_error("Ability not found: " + ability_name)
+
+	get_tree().call_group(&"player", &"set_ability", ability_name)
+	show_next_line()
+
+func command_shot_upgrade(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"shot_upgrade\" command does not take any arguments")
+
+	get_tree().call_group(&"player", &"get_shot_upgrade")
+	show_next_line()
+
+func command_dash_upgrade(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"dash_upgrade\" command does not take any arguments")
+
+	get_tree().call_group(&"player", &"get_dash_upgrade")
+	show_next_line()
+
+func command_level(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"level\" command needs exactly 1 argument")
+
+	var path = "res://Scenes/Levels/" + data[0] + ".tscn"
+	if !FileAccess.file_exists(path):
+		return show_error("Level not found: " + data[0])
+
+	get_tree().call_group(&"game", &"load_level", path)
+	show_next_line()
+
+func command_save(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"save\" command does not take any arguments")
+
+	get_tree().call_group(&"game", &"save_game", "auto_save")
+	show_next_line()
+
 func add_text(text: String) -> void:
-	label.clear()
-	if !ornament_name.is_empty():
-		label.add_image(top_ornaments[ornament_name])
-		label.add_text("\n")
+	top_ornament.texture = top_ornaments.get(ornament_name, null)
+	label.text = text
+	bottom_ornament.texture = bottom_ornaments.get(ornament_name, null)
 
-	label.add_text(text)
-
-	if !ornament_name.is_empty():
-		label.add_text("\n")
-		label.add_image(bottom_ornaments[ornament_name])
-
-	#dialog_appear_timer.start(1.0)
+	dialog_appear_timer.start(1.0)
 
 func show_next_line() -> void:
 	if dialog_progress >= dialog_chunks.size():
@@ -107,7 +146,9 @@ func show_next_line() -> void:
 	var next_line := dialog_chunks[dialog_progress]
 	dialog_progress += 1
 
-	if next_line[0] == '!':
+	if next_line[0] == '#':
+		show_next_line()
+	elif next_line[0] == '!':
 		var colonIndex := next_line.find(":")
 		var key := next_line.substr(1, colonIndex - 1 if colonIndex >= 0 else -1)
 		var data := next_line.substr(colonIndex + 1).split(";") if colonIndex >= 0 else PackedStringArray()
@@ -121,6 +162,16 @@ func show_next_line() -> void:
 			command_remove(data)
 		elif key == "combat":
 			command_combat(data)
+		elif key == "ability":
+			command_ability(data)
+		elif key == "shot_upgrade":
+			command_shot_upgrade(data)
+		elif key == "dash_upgrade":
+			command_dash_upgrade(data)
+		elif key == "level":
+			command_level(data)
+		elif key == "save":
+			command_save(data)
 		else:
 			show_error("Unknown command " + key)
 	else:
@@ -128,9 +179,9 @@ func show_next_line() -> void:
 
 func _process(_delta: float) -> void:
 	if dialog_appear_timer.is_stopped():
-		label.modulate.a = 1.0
+		label.visible_ratio = 1.0
 	else:
-		label.modulate.a = 1.0 - dialog_appear_timer.time_left / dialog_appear_timer.wait_time
+		label.visible_ratio = 1.0 - dialog_appear_timer.time_left / dialog_appear_timer.wait_time
 
 func _input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed("interact"):
@@ -139,3 +190,10 @@ func _input(event: InputEvent) -> void:
 			show_next_line()
 		else:
 			dialog_appear_timer.stop()
+
+
+func get_save_data() -> Dictionary[String, bool]:
+	return dialog_variables
+
+func load_save_data(data: Dictionary[String, bool]) -> void:
+	dialog_variables = data

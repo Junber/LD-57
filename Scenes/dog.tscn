@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm66k0h2chtq2"]
+
+[ext_resource type="Texture2D" uid="uid://dl4gd8nrps43u" path="res://Resources/Graphics/dog.png" id="1_nvlu8"]
+[ext_resource type="Script" uid="uid://dqd3d4mauuork" path="res://Scenes/dog.gd" id="1_y1yv2"]
+[ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/bullet_player.tscn" id="2_bno1h"]
+
+[node name="Dog" type="Node2D"]
+script = ExtResource("1_y1yv2")
+bullet_scene = ExtResource("2_bno1h")
+bullet_speed = 1000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nvlu8")
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

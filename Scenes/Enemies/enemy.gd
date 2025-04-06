@@ -10,11 +10,13 @@ enum BulletType {
 }
 
 enum Special {
-	None, Slows
+	None, Slows, Shield
 }
 
 @export_group("General")
 @export var max_health := 5
+@export_file("*.txt") var death_text_file: String
+@export var death_text_scene: PackedScene
 
 @export_group("Movement")
 @export var behavior: Behavior
@@ -36,6 +38,7 @@ enum Special {
 @export var special: Special
 
 @onready var health_bar := $Health
+@onready var text_position := $TextPosition
 
 var health: int
 
@@ -59,6 +62,8 @@ func _ready() -> void:
 	health_bar.value = health
 	if special == Special.Slows:
 		get_player().spawn_slow_indicator(self)
+	if special != Special.Shield:
+		$Shield.queue_free()
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -73,8 +78,6 @@ func _physics_process(_delta: float) -> void:
 				var angle := i * TAU / 100
 				spawn_bullet(Vector2.UP.rotated(angle))
 			queue_free()
-
-
 
 func shoot() -> void:
 	if bullet_type == BulletType.Directed:
@@ -95,10 +98,20 @@ func spawn_bullet(direction: Vector2) -> void:
 	bullet.velocity = direction * bullet_speed
 	get_parent().add_child(bullet)
 
-func on_hit() -> void:
+func spawn_death_text() -> void:
+	var text := death_text_scene.instantiate()
+	text.global_position = text_position.global_position
+	text.set_text_from_file(death_text_file)
+	get_parent().add_child(text)
+
+func on_hit(_body: Node2D) -> void:
+	if is_queued_for_deletion():
+		return
 	health -= 1
 	health_bar.value = health
+	get_player().on_hit_enemy()
 	if health <= 0:
+		spawn_death_text()
 		queue_free()
 
 
