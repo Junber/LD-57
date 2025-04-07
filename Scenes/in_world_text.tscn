@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpxofqlolfn02"]
+[gd_scene load_steps=3 format=3 uid="uid://bpxofqlolfn02"]
 
+[ext_resource type="LabelSettings" uid="uid://dns2v3t54hyl8" path="res://Scenes/overworld_label_settings.tres" id="1_18esj"]
 [ext_resource type="Script" uid="uid://bci6depgo6c7f" path="res://Scenes/in_world_text.gd" id="1_dnyor"]
 
 [node name="InWorldText" type="Label"]
@@ -15,8 +16,7 @@ offset_right = -959.0
 offset_bottom = -498.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+label_settings = ExtResource("1_18esj")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_dnyor")

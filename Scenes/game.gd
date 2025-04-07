@@ -5,6 +5,7 @@ var current_level: Node2D = null
 
 func _ready() -> void:
 	load_level("res://Scenes/Levels/office.tscn")
+	$BattleMusicPlayer.volume_linear = 0.0
 
 func load_level(path: String) -> void:
 	if current_level:
@@ -15,6 +16,12 @@ func load_level(path: String) -> void:
 
 func set_in_combat(new_in_combat: bool) -> void:
 	in_combat = new_in_combat
+
+	var fade_time := 1.0
+	var tween := create_tween().set_parallel()
+	tween.tween_property($CalmMusicPlayer, ^"volume_linear", 0.0 if in_combat else 1.0, fade_time)
+	tween.tween_property($BattleMusicPlayer, ^"volume_linear", 1.0 if in_combat else 0.0, fade_time)
+
 	if in_combat:
 		save_game("auto_save")
 	get_tree().call_group(&"combat_listener", &"set_combat", in_combat)

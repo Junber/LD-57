@@ -4,9 +4,8 @@ var intensity := 0.0
 var increasing := false
 
 func _process(delta: float) -> void:
-	return
 	if intensity <= 0 and !increasing:
-		$ColorRect.visible = false
+		visible = false
 	else:
 		if increasing:
 			intensity += delta / 5.0
@@ -14,7 +13,7 @@ func _process(delta: float) -> void:
 				increasing = false
 		else:
 			intensity -= delta / 60.0
-		$ColorRect.visible = true
+		visible = true
 		$ColorRect.material.set_shader_parameter(&"intensity", intensity)
 
 func get_save_data() -> Array:

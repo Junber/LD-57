@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var diff := get_target_angle() - rotation
-	if abs(diff) > PI:
-		diff = TAU - diff
+	if absf(diff) > PI:
+		diff = TAU * signf(diff) - diff
 
 	rotation += clamp(diff, -delta * rotation_speed, delta * rotation_speed)

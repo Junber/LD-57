@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwp27b6dl5pth"]
+
+[ext_resource type="PackedScene" uid="uid://bkoyod56wafm0" path="res://Scenes/Enemies/classmate1.tscn" id="1_kvtgo"]
+[ext_resource type="Texture2D" uid="uid://cisfx37airop4" path="res://Resources/Graphics/Enemies/Classmates/Classmatecreepy-3.png" id="2_3lphi"]
+
+[node name="Enemy" instance=ExtResource("1_kvtgo")]
+
+[node name="Sprite" parent="." index="3"]
+scale = Vector2(-1, 1)
+texture = ExtResource("2_3lphi")

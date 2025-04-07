@@ -21,6 +21,7 @@ polygon = PackedVector2Array(-50, -90, -53, -153, -1, -208, 54, -151, 52, -91, -
 
 [node name="Shield" parent="." index="2" instance=ExtResource("3_a3qoq")]
 position = Vector2(0, -129)
+scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 4
 

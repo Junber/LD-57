@@ -2,6 +2,8 @@ extends CanvasLayer
 
 @export var top_ornaments: Dictionary[String, Texture2D]
 @export var bottom_ornaments: Dictionary[String, Texture2D]
+@export var default_label_setting: LabelSettings
+@export var special_label_setting: Dictionary[String, LabelSettings]
 
 @onready var dialog_appear_timer := $DialogAppearTimer
 @onready var top_ornament: TextureRect = $Control/VBoxContainer/TopOrnament
@@ -18,6 +20,9 @@ var shaking_intensity := 0.0
 var dialog_variables: Dictionary[String, bool] = {}
 
 var ornament_name := ""
+
+func _ready() -> void:
+	apply_label_setting(default_label_setting)
 
 func start(new_caller: Node) -> void:
 	caller = new_caller
@@ -38,6 +43,16 @@ func load_file(dialog_file_name: String) -> void:
 	file.close()
 	last_file_name = dialog_file_name
 
+func apply_label_setting(setting: LabelSettings) -> void:
+	if setting.font:
+		label.add_theme_font_override(&"normal_font", setting.font)
+	else:
+		label.remove_theme_font_override(&"normal_font")
+	label.add_theme_color_override(&"default_color", setting.font_color)
+	label.add_theme_color_override(&"font_outline_color", setting.outline_color)
+	label.add_theme_font_size_override(&"normal_font_size", setting.font_size)
+	label.add_theme_constant_override(&"outline_size", setting.outline_size)
+
 func show_error(error: String) -> void:
 	var dialog := AcceptDialog.new()
 	dialog.dialog_text = "{0} (file: {1}, chunk: {2})\n\"{3}\"".format(
@@ -50,10 +65,9 @@ func show_error(error: String) -> void:
 func command_ornament(data: Array[String]) -> void:
 	if data.size() != 1:
 		return show_error("\"ornament\" command needs exactly 1 argument")
-	if data[0] not in top_ornaments:
-		return show_error("Ornament " + data[0] + " not found")
 
 	ornament_name = data[0]
+	apply_label_setting(special_label_setting.get(data[0], default_label_setting))
 	show_next_line()
 
 func command_if(data: Array[String]) -> void:
@@ -195,6 +209,17 @@ func command_drink(data: Array[String]) -> void:
 	$DrunkEffect.increasing = true
 	show_next_line()
 
+
+func command_vignette_opacity(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"vignette_opacity\" command needs exactly 1 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+
+	$VignetteEffect.set_opacity(data[0].to_float())
+	show_next_line()
+
 func add_text(text: String) -> void:
 	label.visible_ratio = 0.0
 
@@ -249,6 +274,8 @@ func show_next_line() -> void:
 			command_shaking_intensity(data)
 		elif key == "drink":
 			command_drink(data)
+		elif key == "vignette_opacity":
+			command_vignette_opacity(data)
 		else:
 			show_error("Unknown command " + key)
 	else:

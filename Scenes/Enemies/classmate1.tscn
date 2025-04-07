@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkoyod56wafm0"]
+
+[ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_aodmt"]
+[ext_resource type="PackedScene" uid="uid://c530pepkxjr2g" path="res://Scenes/Projectiles/bullet_text.tscn" id="2_v24gb"]
+[ext_resource type="Texture2D" uid="uid://cwavx4e77y8kv" path="res://Resources/Graphics/Enemies/Classmates/Classmate-1.png" id="3_3cgfq"]
+
+[node name="Enemy" instance=ExtResource("1_aodmt")]
+bullet_type = 1
+bullet_scene = ExtResource("2_v24gb")
+
+[node name="Health" parent="." index="1"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="." index="3"]
+texture = ExtResource("3_3cgfq")

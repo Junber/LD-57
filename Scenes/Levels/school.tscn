@@ -1,0 +1,107 @@
+[gd_scene load_steps=25 format=4 uid="uid://cqn36whifsq1i"]
+
+[ext_resource type="PackedScene" uid="uid://cvm0txmun8vas" path="res://Scenes/Levels/level.tscn" id="1_nwtqw"]
+[ext_resource type="Texture2D" uid="uid://br0yd7itow28" path="res://Resources/Graphics/Objects/School/Hallway_Floor_Tile.png" id="2_hbfxq"]
+[ext_resource type="Texture2D" uid="uid://7e1nwanjjno0" path="res://Resources/Graphics/Objects/School/Normal_Floor_Tile.png" id="3_wjahk"]
+[ext_resource type="Texture2D" uid="uid://dlxhuuaab7heq" path="res://Resources/Graphics/Objects/School/walls.png" id="4_wjahk"]
+[ext_resource type="PackedScene" uid="uid://bkoyod56wafm0" path="res://Scenes/Enemies/classmate1.tscn" id="5_5kqlj"]
+[ext_resource type="PackedScene" uid="uid://coj7tcnnpghfs" path="res://Scenes/Enemies/classmate2.tscn" id="6_7axru"]
+[ext_resource type="PackedScene" uid="uid://c4hkwyrgesbnn" path="res://Scenes/Enemies/classmate3.tscn" id="7_6yure"]
+[ext_resource type="PackedScene" uid="uid://djb2enid777ue" path="res://Scenes/Enemies/classmate4.tscn" id="8_0m6ng"]
+[ext_resource type="PackedScene" uid="uid://chb8wo2kvgk3o" path="res://Scenes/Enemies/classmate5.tscn" id="9_d1xsq"]
+[ext_resource type="PackedScene" uid="uid://coyll80k4lbit" path="res://Scenes/Enemies/classmate6.tscn" id="10_ejm5u"]
+[ext_resource type="PackedScene" uid="uid://dwp27b6dl5pth" path="res://Scenes/Enemies/classmate7.tscn" id="11_ifmfg"]
+[ext_resource type="PackedScene" uid="uid://c0xojjifnii02" path="res://Scenes/Enemies/classmate8.tscn" id="12_rvmig"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_giaxi"]
+texture = ExtResource("2_hbfxq")
+texture_region_size = Vector2i(140, 140)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ppf76"]
+texture = ExtResource("3_wjahk")
+texture_region_size = Vector2i(140, 140)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wauei"]
+tile_size = Vector2i(140, 140)
+sources/0 = SubResource("TileSetAtlasSource_giaxi")
+sources/1 = SubResource("TileSetAtlasSource_ppf76")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5kqlj"]
+polygon = PackedVector2Array(-140, -175, -140, -140, 140, -140, 140, -175)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7axru"]
+polygon = PackedVector2Array(-140, -175, -140, -140, 140, -140, 140, -175)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6yure"]
+polygon = PackedVector2Array(-140, -175, -140, 175, -95, 175, -95, -175)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0m6ng"]
+polygon = PackedVector2Array(95, -175, 95, 175, 140, 175, 140, -175)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d1xsq"]
+polygon = PackedVector2Array(-140, 130, -140, 175, 140, 175, 140, 130)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wjahk"]
+texture = ExtResource("4_wjahk")
+texture_region_size = Vector2i(280, 350)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5kqlj")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-140, -175, -140, 175, 140, 175, 140, -175)
+1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7axru")
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-140, -175, -140, 175, 140, 175, 140, -175)
+2:0/next_alternative_id = 2
+2:0/0 = 0
+2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6yure")
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-140, -175, -140, 175, -96.8, 175, -95.59, -175)
+2:0/1 = 1
+2:0/1/flip_h = true
+2:0/1/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0m6ng")
+2:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(94.2149, -175, 96.6942, 175, 140, 175, 140, -175)
+3:0/0 = 0
+3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d1xsq")
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-140, 129.773, -140, 175, 140, 175, 140, 130.456)
+
+[sub_resource type="TileSet" id="TileSet_hbfxq"]
+tile_size = Vector2i(280, 350)
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 0
+sources/19 = SubResource("TileSetAtlasSource_wjahk")
+tile_proxies/coords_level = [[3, Vector2i(0, 0)], [7, Vector2i(0, 0)], [4, Vector2i(0, 0)], [7, Vector2i(1, 0)], [5, Vector2i(0, 0)], [7, Vector2i(2, 0)], [6, Vector2i(0, 0)], [7, Vector2i(3, 0)], [15, Vector2i(0, 0)], [19, Vector2i(0, 0)], [16, Vector2i(0, 0)], [19, Vector2i(1, 0)], [17, Vector2i(0, 0)], [19, Vector2i(2, 0)], [18, Vector2i(0, 0)], [19, Vector2i(3, 0)]]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_sl3ax"]
+scenes/1/scene = ExtResource("5_5kqlj")
+scenes/2/scene = ExtResource("6_7axru")
+scenes/3/scene = ExtResource("7_6yure")
+scenes/4/scene = ExtResource("8_0m6ng")
+scenes/5/scene = ExtResource("9_d1xsq")
+scenes/6/scene = ExtResource("10_ejm5u")
+scenes/7/scene = ExtResource("11_ifmfg")
+scenes/8/scene = ExtResource("12_rvmig")
+
+[sub_resource type="TileSet" id="TileSet_xy7y2"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_sl3ax")
+
+[node name="school" instance=ExtResource("1_nwtqw")]
+
+[node name="SpawnPoint" type="Marker2D" parent="." index="0"]
+position = Vector2(394, 200)
+
+[node name="Floor" type="TileMapLayer" parent="." index="1"]
+z_index = -20
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAQAAAAAAAAABAAEAAQAAAAAAAAAAAAEAAQAAAAAAAAD//wEAAQAAAAAAAAD+/wAAAQAAAAAAAAAAAP//AAAAAAAAAAD+/wEAAQAAAAAAAAACAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAACAAEAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAAAAPz/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPr/AAAAAAAAAAABAPr/AAAAAAAAAAACAPr/AAAAAAAAAAADAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAAFAPr/AAAAAAAAAAAGAPr/AAAAAAAAAAAHAPr/AAAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAAAAQAAAAAAAAAGAAEAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAEAAQAAAAAAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAADAAQAAQAAAAAAAAACAAQAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAQAAQAAAAAAAAD//wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD+/wMAAQAAAAAAAAD+/wIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAADAAMAAQAAAAAAAAD8//b/AAAAAAAAAAD9//b/AAAAAAAAAAD+//b/AAAAAAAAAAD8//f/AAAAAAAAAAD9//j/AAAAAAAAAAD+//j/AAAAAAAAAAD+//f/AAAAAAAAAAD9//f/AAAAAAAAAAD8//j/AAAAAAAAAAD9//n/AAAAAAAAAAD8//n/AAAAAAAAAAD8//r/AAAAAAAAAAD9//r/AAAAAAAAAAD+//r/AAAAAAAAAAD///n/AAAAAAAAAAD+//n/AAAAAAAAAAAAAPn/AAAAAAAAAAD///r/AAAAAAAAAAAAAPj/AAAAAAAAAAABAPf/AAAAAAAAAAAAAPb/AAAAAAAAAAD///b/AAAAAAAAAAD///f/AAAAAAAAAAD///j/AAAAAAAAAAABAPj/AAAAAAAAAAACAPf/AAAAAAAAAAACAPb/AAAAAAAAAAABAPb/AAAAAAAAAAAAAPf/AAAAAAAAAAABAPn/AAAAAAAAAAAEAPn/AAAAAAAAAAAEAPj/AAAAAAAAAAADAPj/AAAAAAAAAAACAPn/AAAAAAAAAAAFAPn/AAAAAAAAAAAFAPj/AAAAAAAAAAACAPj/AAAAAAAAAAADAPn/AAAAAAAAAAADAPf/AAAAAAAAAAADAPb/AAAAAAAAAAAEAPb/AAAAAAAAAAAFAPf/AAAAAAAAAAAEAPf/AAAAAAAAAAAFAPb/AAAAAAAAAAAGAPb/AAAAAAAAAAAGAPf/AAAAAAAAAAAGAPj/AAAAAAAAAAAGAPn/AAAAAAAAAAAHAPb/AAAAAAAAAAAHAPf/AAAAAAAAAAAHAPj/AAAAAAAAAAAHAPn/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_wauei")
+
+[node name="Walls" type="TileMapLayer" parent="." index="2"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD/////EwABAAAAAAABAP//EwABAAAAAAACAP//EwABAAAAAAADAP//EwABAAAAAAABAAEAEwADAAAAAAACAAEAEwADAAAAAAADAAEAEwADAAAAAAD///7/EwACAAAAAQABAP7/EwACAAAAAAABAP3/EwADAAAAAAACAP3/EwADAAAAAAADAP3/EwADAAAAAAD///3/EwADAAAAAAD+//3/EwADAAAAAAD+//v/EwAAAAAAAAD///v/EwAAAAAAAAAAAPv/EwAAAAAAAAABAPv/EwAAAAAAAAACAPv/EwAAAAAAAAADAPv/EwAAAAAAAAD+/wAAEwACAAAAAQD+////EwACAAAAAQD+/wEAEwACAAAAAQD//wEAEwADAAAAAAAAAAEAEwADAAAAAAAEAAEAEwACAAAAAAAEAAAAEwACAAAAAAAEAP//EwACAAAAAAA=")
+tile_set = SubResource("TileSet_hbfxq")
+y_sort_origin = 175
+
+[node name="Classmates" type="TileMapLayer" parent="." index="3"]
+tile_map_data = PackedByteArray("AAD9/wIAAAAAAAAAAQAQAAIAAAAAAAAAAgAPAAcAAAAAAAAAAgAPAAEAAAAAAAAABAAOAAIAAAAAAAAAAwA=")
+tile_set = SubResource("TileSet_xy7y2")

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj7ecgqxbk386"]
+
+[ext_resource type="Texture2D" uid="uid://dnrfxuu3w5gc8" path="res://Resources/Graphics/aoe_textbox.png" id="1_ia5ye"]
+[ext_resource type="Script" uid="uid://dvee3i0q62eds" path="res://Scenes/Projectiles/aoe_text_box.gd" id="1_sketh"]
+[ext_resource type="LabelSettings" uid="uid://dns2v3t54hyl8" path="res://Scenes/overworld_label_settings.tres" id="3_m0unv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sketh"]
+size = Vector2(451, 357)
+
+[node name="AoeTextBox" type="Area2D"]
+z_index = -5
+collision_layer = 8
+monitorable = false
+script = ExtResource("1_sketh")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_sketh")
+disabled = true
+
+[node name="TextBox" type="Sprite2D" parent="."]
+texture = ExtResource("1_ia5ye")
+
+[node name="Text" type="Label" parent="."]
+offset_left = -210.0
+offset_top = -168.0
+offset_right = 219.0
+offset_bottom = 167.0
+text = "Lately, I’ve been working through a sustained bandwidth imbalance due to compounded legacy tasks and ongoing ambiguity around project scope."
+label_settings = ExtResource("3_m0unv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

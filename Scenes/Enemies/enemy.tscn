@@ -6,7 +6,8 @@
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
-collision_mask = 20
+collision_mask = 16
+motion_mode = 1
 script = ExtResource("1_1f0kj")
 death_text_file = "res://Resources/Dialog/hopeless_lines.txt"
 death_text_scene = ExtResource("2_ubio8")

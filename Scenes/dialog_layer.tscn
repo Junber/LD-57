@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cg0nb2orlmi7s"]
+[gd_scene load_steps=16 format=3 uid="uid://cg0nb2orlmi7s"]
 
 [ext_resource type="Script" uid="uid://bnf7alq7rnp60" path="res://Scenes/dialog_layer.gd" id="1_u50j4"]
 [ext_resource type="Texture2D" uid="uid://wtlsna5skw1a" path="res://Resources/Graphics/UI/Anxiety text top.png" id="2_vh2ph"]
@@ -8,8 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://dlxdkna0mpwn1" path="res://Resources/Graphics/UI/Sad text bottom.png" id="6_fiym4"]
 [ext_resource type="Texture2D" uid="uid://bssclq1lo6ocv" path="res://Resources/Graphics/UI/Angry text bottom.png" id="7_yo6l0"]
 [ext_resource type="Script" uid="uid://bhjxafaajh1ho" path="res://Scenes/drunk_effect.gd" id="8_hkmc8"]
+[ext_resource type="LabelSettings" uid="uid://clak16mb2pmw0" path="res://Scenes/default_label_settings.tres" id="8_yo6l0"]
 [ext_resource type="Shader" uid="uid://bwsekrww0h3lj" path="res://Scenes/Levels/drunk.gdshader" id="9_46cgw"]
 [ext_resource type="Shader" uid="uid://csdda3auf15yk" path="res://Scenes/vignette.gdshader" id="10_46cgw"]
+[ext_resource type="Script" uid="uid://djyk5ex5du00o" path="res://Scenes/vignette_effect.gd" id="10_fiym4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yo6l0"]
+font_size = 50
+font_color = Color(0.309804, 0.988235, 0.0705882, 1)
+outline_size = 5
+outline_color = Color(0.207843, 0.607843, 0.14902, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fiym4"]
 shader = ExtResource("9_46cgw")
@@ -17,6 +25,7 @@ shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yo6l0"]
 shader = ExtResource("10_46cgw")
+shader_parameter/opacity = 1.0
 
 [node name="DialogLayer" type="CanvasLayer" groups=["dialog", "saveable"]]
 process_mode = 2
@@ -31,6 +40,10 @@ bottom_ornaments = Dictionary[String, Texture2D]({
 "helpless": ExtResource("5_46cgw"),
 "hopeless": ExtResource("6_fiym4"),
 "reckless": ExtResource("7_yo6l0")
+})
+default_label_setting = ExtResource("8_yo6l0")
+special_label_setting = Dictionary[String, LabelSettings]({
+"mission_control": SubResource("LabelSettings_yo6l0")
 })
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -110,11 +123,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="VignetteEffect" type="CanvasLayer" parent="." groups=["saveable"]]
+[node name="VignetteEffect" type="CanvasLayer" parent="."]
 process_mode = 3
-layer = 2
+layer = 5
 visible = false
-script = ExtResource("8_hkmc8")
+script = ExtResource("10_fiym4")
 
 [node name="ColorRect" type="ColorRect" parent="VignetteEffect"]
 material = SubResource("ShaderMaterial_yo6l0")

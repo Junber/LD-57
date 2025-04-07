@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://crn24gipuknsj"]
+[gd_scene load_steps=47 format=3 uid="uid://crn24gipuknsj"]
 
 [ext_resource type="Script" uid="uid://c3fjm54mwit0u" path="res://Scenes/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/Projectiles/bullet_player.tscn" id="2_6t5aa"]
@@ -10,17 +10,30 @@
 [ext_resource type="Texture2D" uid="uid://rbk7gm1frxdd" path="res://Resources/Graphics/Player/Office/playerRunV20000.png" id="11_2ijsl"]
 [ext_resource type="Texture2D" uid="uid://px8krxgpq52k" path="res://Resources/Graphics/Player/Office/playerRunV20001.png" id="12_p1odr"]
 [ext_resource type="Texture2D" uid="uid://dxc3u5mf6qo4n" path="res://Resources/Graphics/Player/Office/playerRunV20002.png" id="13_0gysh"]
+[ext_resource type="Texture2D" uid="uid://d3iqdgh88jwdu" path="res://Resources/Graphics/Player/Office/playerTorsoIdle.png" id="13_vfarp"]
 [ext_resource type="Texture2D" uid="uid://b1j4rix4rewpc" path="res://Resources/Graphics/Player/Office/playerRunV20003.png" id="14_vfarp"]
 [ext_resource type="Texture2D" uid="uid://dx06shajdb4sr" path="res://Resources/Graphics/Player/Office/playerRunV20004.png" id="15_y6uwr"]
 [ext_resource type="Texture2D" uid="uid://behdsa7cac5t2" path="res://Resources/Graphics/Player/Office/playerRunV20005.png" id="16_83xs0"]
 [ext_resource type="Texture2D" uid="uid://cckxs8vrf77mb" path="res://Resources/Graphics/Player/Office/playerTorsoRun00.png" id="17_ypfnu"]
 [ext_resource type="Texture2D" uid="uid://eo2lnj2j5mhu" path="res://Resources/Graphics/Player/Office/playerTorsoRun01.png" id="18_xuaoq"]
+[ext_resource type="Texture2D" uid="uid://cl001u5k85tia" path="res://Resources/Graphics/Player/Office/playerAttackV20000.png" id="19_0gysh"]
 [ext_resource type="Texture2D" uid="uid://csic876xo0rb" path="res://Resources/Graphics/Player/Office/playerTorsoRun02.png" id="19_wohnl"]
 [ext_resource type="Texture2D" uid="uid://byy27ne78halg" path="res://Resources/Graphics/Player/Office/playerTorsoRun03.png" id="20_36dho"]
+[ext_resource type="Texture2D" uid="uid://bl5dfp3qwqnki" path="res://Resources/Graphics/Player/Office/playerAttackV20001.png" id="20_vfarp"]
+[ext_resource type="Texture2D" uid="uid://bm1ac4ag6t6nu" path="res://Resources/Graphics/Player/Office/playerAttackV20002.png" id="21_y6uwr"]
 [ext_resource type="Texture2D" uid="uid://mwumwapv61l1" path="res://Resources/Graphics/Player/Office/playerTorsoRun04.png" id="21_yh6i2"]
+[ext_resource type="Texture2D" uid="uid://bovr672ela4cq" path="res://Resources/Graphics/Player/Office/playerAttackV20003.png" id="22_83xs0"]
 [ext_resource type="Texture2D" uid="uid://b7c06nkitsvjr" path="res://Resources/Graphics/Player/Office/playerTorsoRun05.png" id="22_nv4vc"]
 [ext_resource type="Texture2D" uid="uid://dyt68poryqqie" path="res://Resources/Graphics/Player/Office/playerHead.png" id="23_8gxox"]
+[ext_resource type="Texture2D" uid="uid://dwovc51gr0mrg" path="res://Resources/Graphics/Player/Office/playerAttackV20004.png" id="23_ypfnu"]
 [ext_resource type="Script" uid="uid://d0lcwm6rfpiaw" path="res://Scenes/camera.gd" id="25_0gysh"]
+[ext_resource type="AudioStream" uid="uid://beyc243vc0yex" path="res://Resources/Sounds/sound_dash.ogg" id="28_yh6i2"]
+[ext_resource type="AudioStream" uid="uid://baeuyfc5sevft" path="res://Resources/Sounds/sound_earbudPickup.ogg" id="29_nv4vc"]
+[ext_resource type="AudioStream" uid="uid://xja0j87683sx" path="res://Resources/Sounds/sound_laser1.ogg" id="30_8gxox"]
+[ext_resource type="AudioStream" uid="uid://8umqird070a6" path="res://Resources/Sounds/sound_laser2.ogg" id="31_11gg7"]
+[ext_resource type="AudioStream" uid="uid://brav1xmb7ifku" path="res://Resources/Sounds/sound_steps1.ogg" id="32_qpa8y"]
+[ext_resource type="AudioStream" uid="uid://bqbuuhwjh4lu3" path="res://Resources/Sounds/sound_steps2.ogg" id="33_sbwqj"]
+[ext_resource type="AudioStream" uid="uid://chhpmeog8k0ms" path="res://Resources/Sounds/sound_steps3.ogg" id="34_xwi16"]
 
 [sub_resource type="Animation" id="Animation_qpa8y"]
 length = 0.001
@@ -71,6 +84,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(14, -113)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Body:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"running"]
 }
 
 [sub_resource type="Animation" id="Animation_11gg7"]
@@ -125,10 +150,62 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(12, -111), Vector2(14, -111), Vector2(16, -113), Vector2(18, -112), Vector2(17, -112), Vector2(16, -113)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Body:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"running"]
+}
+
+[sub_resource type="Animation" id="Animation_y6uwr"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -47)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -113)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sbwqj"]
 _data = {
 &"RESET": SubResource("Animation_qpa8y"),
+&"idle": SubResource("Animation_y6uwr"),
 &"running": SubResource("Animation_11gg7")
 }
 
@@ -162,6 +239,14 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("13_vfarp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("17_ypfnu")
 }, {
 "duration": 1.0,
@@ -188,10 +273,30 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("19_0gysh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_vfarp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_y6uwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_83xs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ypfnu")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 25.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("23_8gxox")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -210,8 +315,22 @@ fill = 1
 fill_from = Vector2(0.504274, 0.508547)
 fill_to = Vector2(1, 0.521368)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sweqm"]
+playback_mode = 2
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("30_8gxox")
+stream_1/stream = ExtResource("31_11gg7")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ph33w"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("32_qpa8y")
+stream_1/stream = ExtResource("33_sbwqj")
+stream_2/stream = ExtResource("34_xwi16")
+
 [node name="Player" type="CharacterBody2D" groups=["combat_listener", "player", "saveable"]]
-collision_mask = 24
+collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_cvnsp")
 bullet_scene = ExtResource("2_6t5aa")
@@ -220,13 +339,15 @@ earbud_scene = ExtResource("4_pu2lt")
 notepad_drawing_scene = ExtResource("5_vfarp")
 dog_scene = ExtResource("5_p1odr")
 
-[node name="Running" type="AnimationPlayer" parent="."]
+[node name="Movement" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_sbwqj")
 }
-autoplay = "running"
+autoplay = "idle"
+speed_scale = 2.0
 
 [node name="Sprites" type="Node2D" parent="."]
+position = Vector2(-10, 1)
 
 [node name="Reference" type="AnimatedSprite2D" parent="Sprites"]
 visible = false
@@ -243,9 +364,12 @@ animation = &"running"
 [node name="Head" type="AnimatedSprite2D" parent="Sprites"]
 position = Vector2(14, -113)
 sprite_frames = SubResource("SpriteFrames_sweqm")
+animation = &"idle"
+frame_progress = 0.821447
+offset = Vector2(0, -2)
 
-[node name="BulletSpawnPosition" type="Marker2D" parent="Sprites"]
-position = Vector2(34, -104)
+[node name="BulletSpawnPosition" type="Marker2D" parent="Sprites/Head"]
+position = Vector2(22, 7)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -23)
@@ -268,10 +392,6 @@ one_shot = true
 
 [node name="IFrame" type="Timer" parent="."]
 wait_time = 0.1
-one_shot = true
-
-[node name="ShootCooldown" type="Timer" parent="."]
-wait_time = 0.2
 one_shot = true
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -338,6 +458,26 @@ texture = SubResource("GradientTexture2D_gymyn")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
+[node name="DashPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_yh6i2")
+bus = &"Sfx"
+
+[node name="PowerUpPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("29_nv4vc")
+bus = &"Sfx"
+
+[node name="ShotPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_sweqm")
+bus = &"Sfx"
+
+[node name="StepPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ph33w")
+bus = &"Sfx"
+
+[node name="StepTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="animation_looped" from="Sprites/Head" to="." method="_on_head_animation_looped"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Dash2Cooldown" to="." method="_on_dash_2_cooldown_timeout"]
-[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="timeout" from="StepTimer" to="." method="_on_step_timer_timeout"]

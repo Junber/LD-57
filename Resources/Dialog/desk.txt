@@ -8,12 +8,14 @@
 
 !save
 
-!ornament:helpless
+!ornament:mission_control
 
 This is a desk.
 Its studious legs dutifully hold up the resilient plate.
 
 !shaking_intensity:10.0
+
+!vignette_opacity:1.0
 
 !ornament:reckless
 
@@ -23,7 +25,7 @@ RAHHHHH!
 
 !shaking_intensity:0.0
 
-!drink
+!vignette_opacity:0.0
 
 !ornament:hopeless
 

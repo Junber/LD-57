@@ -21,7 +21,6 @@ enum SpecialAbility {
 @export var dash2_cooldown_time := 2.0
 @export var notepad_draw_length := 200
 
-@onready var shoot_timer: Timer = $ShootCooldown
 @onready var iframe_timer: Timer = $IFrame
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash1_cooldown: Timer = $Dash1Cooldown
@@ -32,7 +31,8 @@ enum SpecialAbility {
 @onready var ability_charge_bar: Range = $UI/AbilityCharge
 
 @onready var sprite: Node2D = $Sprites
-@onready var bullet_spawn_point: Node2D = $Sprites/BulletSpawnPosition
+@onready var bullet_spawn_point: Node2D = $Sprites/Head/BulletSpawnPosition
+@onready var head: AnimatedSprite2D = $Sprites/Head
 
 var health: int
 var slowdown_indicators: Array[Node] = []
@@ -43,6 +43,8 @@ var notepad_drawing := false
 var ability := SpecialAbility.None
 var has_shot_upgrade := false
 var has_dash_upgrade := false
+
+var moving := false
 
 func _ready() -> void:
 	health = max_health
@@ -71,6 +73,8 @@ func _physics_process(delta: float) -> void:
 	if dash_timer.is_stopped():
 		var target_velocity := input_vector * move_speed
 		var acc := maxf((target_velocity - velocity).length(), 100.0) * acceleration * delta
+		if input_vector.is_zero_approx():
+			acc *= 2.0
 		velocity = velocity.move_toward(target_velocity, acc)
 	elif !input_vector.is_zero_approx():
 		velocity = input_vector * dash_speed
@@ -82,7 +86,19 @@ func _physics_process(delta: float) -> void:
 
 
 	velocity *= current_slowdown()
+
+	var last_position := position
 	move_and_slide()
+
+	if (position - last_position).length() > 1.0 and !input_vector.is_zero_approx():
+		if !moving:
+			$Movement.play(&"running")
+			moving = true
+			step()
+	else:
+		if moving:
+			$Movement.play(&"idle")
+			moving = false
 
 func _process(delta: float) -> void:
 	dash1_bar.value = dash1_cooldown.time_left
@@ -108,8 +124,7 @@ func on_hit_enemy() -> void:
 	ability_charge += ability_charge_per_hit
 
 func shoot() -> void:
-	if !shoot_timer.is_stopped():
-		return
+	$ShotPlayer.play()
 	var direction := to_local(get_global_mouse_position() + Vector2(0, 108)).normalized()
 	spawn_bullet(direction)
 	if has_shot_upgrade:
@@ -121,7 +136,6 @@ func spawn_bullet(direction: Vector2) -> void:
 	bullet.global_position = bullet_spawn_point.global_position
 	bullet.velocity = direction * bullet_speed
 	get_parent().add_child(bullet)
-	shoot_timer.start()
 
 func get_dash_time_mult() -> float:
 	return 0.5 if has_dash_upgrade else 1.0
@@ -135,6 +149,7 @@ func dash() -> void:
 	else:
 		return
 
+	$DashPlayer.play()
 	dash_timer.start()
 
 func use_special_ability() -> void:
@@ -157,7 +172,8 @@ func use_special_ability() -> void:
 func on_hit(_body: Node2D) -> void:
 	if !dash_timer.is_stopped() or !iframe_timer.is_stopped():
 		return
-	#health -= 1
+	#health -= 1a
+	print("OW!")
 	iframe_timer.start()
 	health_bar.value = health
 	if health <= 0:
@@ -175,6 +191,7 @@ func set_ability(new_ability_name: String) -> void:
 	ability = SpecialAbility.get(new_ability_name, SpecialAbility.None)
 	ability_charge = 0
 	ability_charge_bar.visible = ability != SpecialAbility.None
+	$PowerUpPlayer.play()
 
 func get_shot_upgrade() -> void:
 	has_shot_upgrade = true
@@ -185,7 +202,7 @@ func get_dash_upgrade() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot"):
-		shoot()
+		head.play(&"attacking")
 
 	if event.is_action_pressed(&"dash"):
 		dash()
@@ -197,6 +214,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			notepad_drawing = false
 			ability_charge = ability_charge_time
 
+	var mouseMotionEvent := event as InputEventMouseMotion
+	if mouseMotionEvent and !moving:
+		var pos = get_local_mouse_position()
+		if pos.x < -10:
+			sprite.scale.x = -1
+		elif pos.x > 10:
+			sprite.scale.x = 1
+
 
 func _on_dash_timer_timeout() -> void:
 	velocity = velocity.limit_length(1.5 * move_speed)
@@ -204,11 +229,6 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_dash_2_cooldown_timeout() -> void:
 	dash1_cooldown.paused = false
-
-
-func _on_shoot_cooldown_timeout() -> void:
-	if Input.is_action_pressed(&"shoot"):
-		shoot()
 
 func set_combat(_in_combat: bool) -> void:
 	health = max_health
@@ -228,3 +248,18 @@ func load_save_data(data: Array) -> void:
 
 	ability_charge_bar.visible = ability != SpecialAbility.None
 	health_bar.value = health
+
+func _on_head_animation_looped() -> void:
+	if head.animation == &"attacking":
+		shoot()
+		if !Input.is_action_pressed(&"shoot"):
+			head.play(&"idle")
+
+func step() -> void:
+	$StepPlayer.play()
+	$StepTimer.start(randf_range(0.18, 0.23))
+
+
+func _on_step_timer_timeout() -> void:
+	if moving:
+		step()

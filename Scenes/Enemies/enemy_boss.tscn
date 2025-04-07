@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0bjh1ppmimuw"]
+
+[ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_bwuae"]
+[ext_resource type="Texture2D" uid="uid://bd64x6k268nyt" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0000.png" id="2_66mfj"]
+[ext_resource type="PackedScene" uid="uid://cj7ecgqxbk386" path="res://Scenes/Projectiles/aoe_text_box.tscn" id="2_ehi8f"]
+[ext_resource type="Texture2D" uid="uid://k2aecwd8xjdo" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0001.png" id="3_ehi8f"]
+[ext_resource type="Texture2D" uid="uid://bkaabc56jqfog" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0002.png" id="4_fqsnq"]
+[ext_resource type="Texture2D" uid="uid://bu1huyk5f2g77" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0003.png" id="5_8h687"]
+[ext_resource type="Texture2D" uid="uid://eytqfa4nsoeu" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0004.png" id="6_05yjm"]
+[ext_resource type="Texture2D" uid="uid://bqocojqcf0f70" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0005.png" id="7_mvp8r"]
+[ext_resource type="Script" uid="uid://b0b03bcqquuds" path="res://Scenes/Enemies/hurt_box.gd" id="9_ehi8f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_agm62"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("2_66mfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ehi8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fqsnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8h687")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_05yjm")
+}, {
+"duration": 2.0,
+"texture": ExtResource("7_mvp8r")
+}, {
+"duration": 2.0,
+"texture": ExtResource("6_05yjm")
+}, {
+"duration": 2.0,
+"texture": ExtResource("7_mvp8r")
+}, {
+"duration": 2.0,
+"texture": ExtResource("6_05yjm")
+}, {
+"duration": 2.0,
+"texture": ExtResource("7_mvp8r")
+}, {
+"duration": 3.0,
+"texture": ExtResource("6_05yjm")
+}, {
+"duration": 3.0,
+"texture": ExtResource("7_mvp8r")
+}, {
+"duration": 3.0,
+"texture": ExtResource("6_05yjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8h687")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fqsnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ehi8f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_bwuae")]
+behavior = 5
+movement_speed = 500.0
+bullet_type = 3
+bullet_scene = ExtResource("2_ehi8f")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_agm62")
+frame = 10
+frame_progress = 0.444018
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="." index="1"]
+scale = Vector2(0.980151, 0.98314)
+polygon = PackedVector2Array(-123.45, -197.327, 4.08101, -243.099, 135.693, -186.138, 163.24, 24.4116, 54.0733, 216.653, -45.9113, 216.653, -158.139, 30.5145)
+
+[node name="HurtBox" type="Area2D" parent="." index="5"]
+collision_layer = 8
+monitorable = false
+script = ExtResource("9_ehi8f")
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="HurtBox" index="0"]
+position = Vector2(-3, -3)
+scale = Vector2(0.774443, 0.776804)
+polygon = PackedVector2Array(-123.45, -197.327, 4.08101, -243.099, 135.693, -186.138, 163.24, 24.4116, 54.0733, 216.653, -45.9113, 216.653, -158.139, 30.5145)
+
+[connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

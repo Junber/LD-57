@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7xk0syjr5cpp"
+path="res://.godot/imported/theme_elevator samba.wav-4ca83b7da43d336f23166998afd80314.sample"
+
+[deps]
+
+source_file="res://Resources/Music/theme_elevator samba.wav"
+dest_files=["res://.godot/imported/theme_elevator samba.wav-4ca83b7da43d336f23166998afd80314.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

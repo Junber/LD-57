@@ -1,6 +1,11 @@
 extends CharacterBody2D
 class_name Bullet
 
+func _ready() -> void:
+	rotation = velocity.angle()
+	if abs(rotation) > PI / 2:
+		rotation = -PI * sign(rotation) + rotation
+
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(velocity*delta)
 	if collision:

@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" uid="uid://bms5h0j67kmba" path="res://Scenes/Enemies/shield.gd" id="1_i0ph7"]
 [ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/Projectiles/bullet_enemy.tscn" id="2_rn52j"]
-[ext_resource type="Texture2D" uid="uid://bq8f3324sdmeu" path="res://Resources/Graphics/Shield.png" id="3_p4dgj"]
+[ext_resource type="Texture2D" uid="uid://bmnxo0652habi" path="res://Resources/Graphics/Enemies/HopelessSchool/Mirror_spider_shield.png" id="3_i0ph7"]
 
 [node name="Shield" type="StaticBody2D"]
 script = ExtResource("1_i0ph7")
 bullet_scene = ExtResource("2_rn52j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
-texture = ExtResource("3_p4dgj")
+rotation = -1.5708
+texture = ExtResource("3_i0ph7")
+offset = Vector2(22, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-rotation = 1.5708
-polygon = PackedVector2Array(32, -97.8, 10, -100, -14.1, -100, -35.1, -95, -38.6, -95, -56.5, -84, -58.8, -84, -66.8, -76, -69, -76, -86, -54, -87.3, -54, -96.4, -32, -97.6, -32, -100, -20.2, -100, 2, -88.2, 2, -86, -15.9, -86, -20.7, -81, -32.6, -81, -35.4, -72, -49.4, -72, -51.2, -60, -64.2, -60, -65, -34, -80.9, -34, -81.5, -8, -87.4, 20.9, -85, 24.5, -85, 43.6, -76, 45.3, -76, 58.3, -65, 60, -65, 72, -50, 72.8, -50, 80.8, -34, 81.5, -34, 86.4, -14, 87.1, -14, 88.1, 2, 100, 2, 100, -20.3, 95, -35.3, 95, -38.6, 84, -56.6, 84, -58.8, 69, -74.9, 69, -76.1, 49, -89.2, 49, -90.4, 32, -96.5)
+rotation = -1.5708
+polygon = PackedVector2Array(166, 239.3, 147.8, 242.1, 150, 175.2, 150, 165.8, 134, 162.6, 104.7, 231.2, 85.4, 245, -90.5, 245, -110.2, 229.7, -136.2, 164, -154.3, 164, -152, 235.3, -152, 241.5, -156.3, 241, -166.8, 241, -171.8, 253.7, -160, 264.7, -160.5, 265.1, -233.4, 204, -234, 204, -315.3, 94.2, -329, 98.8, -329, 109.5, -273, 215.4, -273, 218.5, -222.7, 282.2, -228, 282.6, -228, 308.3, -181, 302.4, -181, 316.9, -17, 356.8, -17, 362.6, 161, 321, 172.3, 321, 175.3, 304.7, 167.8, 301.8, 208.4, 307, 222.9, 307, 225, 289.3, 213.9, 286.7, 262.8, 225, 265.1, 225, 323.9, 112.6, 316, 108.5, 308.1, 101.9, 225, 208.6, 166, 256.4)

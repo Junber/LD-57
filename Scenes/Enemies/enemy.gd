@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal walking(walking: bool, left: bool)
 
 enum Behavior {
-	None, Charge, Random, Distant, Close
+	None, Charge, Random, Distant, Close, Circling
 }
 
 enum BulletType {
@@ -18,6 +18,7 @@ enum Special {
 @export_group("General")
 @export var max_health := 5
 @export_file("*.txt") var death_text_file: String
+@export_file("*.txt") var bullet_text_file: String
 @export var death_text_scene: PackedScene
 
 @export_group("Movement")
@@ -45,6 +46,7 @@ enum Special {
 var health: int
 var was_walking := false
 var was_left := false
+var was_circling := false
 
 func _validate_property(property: Dictionary):
 	if property.name == "movement_speed" and behavior == Behavior.None:
@@ -61,18 +63,14 @@ func get_player() -> Node2D:
 	return get_tree().get_first_node_in_group(&"player")
 
 func _ready() -> void:
+	$Timer.wait_time *= randf_range(0.8, 1.2)
 	health = max_health
 	health_bar.max_value = max_health
 	health_bar.value = health
 	if special == Special.Slows:
 		get_player().spawn_slow_indicator(spawn_position)
 
-func _physics_process(_delta: float) -> void:
-	if Engine.is_editor_hint():
-		return
-
-	var old_position := position
-
+func move() -> void:
 	if behavior == Behavior.Charge:
 		var direction := (get_player().global_position - global_position)
 		velocity = direction.normalized() * movement_speed
@@ -103,6 +101,24 @@ func _physics_process(_delta: float) -> void:
 			move_and_slide()
 		else:
 			velocity = Vector2.ZERO
+	elif behavior == Behavior.Circling:
+		var direction := (get_player().global_position - global_position)
+		if direction.length() > (700.0 if !was_circling else 1200.0):
+			was_circling = false
+			velocity = direction.normalized() * movement_speed
+		else:
+			was_circling = true
+			velocity = direction.normalized().rotated(PI / 2.0 - 0.03) * movement_speed
+		if move_and_slide():
+			velocity = direction.normalized() * movement_speed
+			move_and_slide()
+
+func _physics_process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	var old_position := position
+	move()
 
 	var new_walking := (position - old_position).length() > 0.5
 	var new_left := velocity.x < 0 if new_walking else \
@@ -130,6 +146,8 @@ func spawn_bullet(direction: Vector2) -> void:
 	bullet.global_position = spawn_position.global_position
 	bullet.velocity = direction * bullet_speed
 	get_parent().add_child(bullet)
+	if !bullet_text_file.is_empty():
+		bullet.set_text_from_file(bullet_text_file)
 
 func spawn_death_text() -> void:
 	var text := death_text_scene.instantiate()

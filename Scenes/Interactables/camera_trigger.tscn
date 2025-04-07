@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg7r77btg50ny"]
+
+[ext_resource type="Script" uid="uid://b26qdsi1g8n8g" path="res://Scenes/camera_trigger.gd" id="1_jqpld"]
+
+[node name="CameraTrigger" type="Area2D"]
+collision_layer = 64
+monitorable = false
+script = ExtResource("1_jqpld")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3xcklep4v8b0"]
 
 [ext_resource type="PackedScene" uid="uid://dq38fm545ricm" path="res://Scenes/Interactables/interactable.tscn" id="1_ii4wa"]
-[ext_resource type="Texture2D" uid="uid://cuc5gyakxwumh" path="res://Resources/Graphics/Objects/Adolescence/Desk1.png" id="2_p3ia7"]
+[ext_resource type="Texture2D" uid="uid://cuc5gyakxwumh" path="res://Resources/Graphics/Objects/School/Desk1.png" id="2_p3ia7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ii4wa"]
 size = Vector2(168, 148)

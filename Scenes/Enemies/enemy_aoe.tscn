@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cla4c02yxoci7"]
 
 [ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_irc6n"]
-[ext_resource type="PackedScene" uid="uid://cj7ecgqxbk386" path="res://Scenes/aoe_text_box.tscn" id="2_c77qs"]
+[ext_resource type="PackedScene" uid="uid://cj7ecgqxbk386" path="res://Scenes/Projectiles/aoe_text_box.tscn" id="2_c77qs"]
 [ext_resource type="Texture2D" uid="uid://c4061t3tu1li" path="res://Resources/Graphics/enemy5.png" id="3_vawxi"]
 
 [node name="Enemy" instance=ExtResource("1_irc6n")]
