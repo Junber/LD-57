@@ -4,7 +4,7 @@ var in_combat := false
 var current_level: Node2D = null
 
 func _ready() -> void:
-	load_level("res://Scenes/Levels/office.tscn")
+	load_level("res://Scenes/Levels/school.tscn")
 	$BattleMusicPlayer.volume_linear = 0.0
 
 func load_level(path: String) -> void:
