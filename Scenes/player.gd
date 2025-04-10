@@ -43,10 +43,12 @@ var notepad_drawing := false
 var ability := SpecialAbility.None
 var has_shot_upgrade := false
 var has_dash_upgrade := false
+var school := false
 
 var moving := false
 
 func _ready() -> void:
+	$Movement.play("idle")
 	health = max_health
 	health_bar.max_value = max_health
 	health_bar.value = health
@@ -66,6 +68,9 @@ func current_slowdown() -> float:
 	if index_to_remove >= 0:
 		slowdown_indicators.remove_at(index_to_remove)
 	return slowdown
+
+func animation_suffix() -> String:
+	return "2" if school else ""
 
 func _physics_process(delta: float) -> void:
 	var input_vector := Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
@@ -93,11 +98,15 @@ func _physics_process(delta: float) -> void:
 	if (position - last_position).length() > 1.0 and !input_vector.is_zero_approx():
 		if !moving:
 			$Movement.play(&"running")
+			$Sprites/Body.animation = "running" + animation_suffix()
+			$Sprites/BackArm.animation = "running" + animation_suffix()
 			moving = true
 			step()
 	else:
 		if moving:
 			$Movement.play(&"idle")
+			$Sprites/Body.animation = "idle" + animation_suffix()
+			$Sprites/BackArm.animation = "idle" + animation_suffix()
 			moving = false
 
 func _process(delta: float) -> void:
@@ -202,7 +211,7 @@ func get_dash_upgrade() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot"):
-		head.play(&"attacking")
+		head.play(&"attacking" + animation_suffix())
 
 	if event.is_action_pressed(&"dash"):
 		dash()
@@ -234,9 +243,16 @@ func set_combat(_in_combat: bool) -> void:
 	health = max_health
 	health_bar.value = health
 
+func start_school() -> void:
+	school = true
+	$Sprites/Body.animation += animation_suffix()
+	$Sprites/FrontArm.animation += animation_suffix()
+	$Sprites/BackArm.animation += animation_suffix()
+	head.animation += animation_suffix()
+
 
 func get_save_data() -> Array:
-	return [has_shot_upgrade, has_dash_upgrade, ability, ability_charge, global_position]
+	return [has_shot_upgrade, has_dash_upgrade, ability, ability_charge, global_position, school]
 
 func load_save_data(data: Array) -> void:
 	has_shot_upgrade = data[0]
@@ -244,16 +260,18 @@ func load_save_data(data: Array) -> void:
 	ability = data[2]
 	ability_charge = data[3]
 	global_position = data[4]
+	if data[5] and !school:
+		start_school()
 	health = max_health
 
 	ability_charge_bar.visible = ability != SpecialAbility.None
 	health_bar.value = health
 
 func _on_head_animation_looped() -> void:
-	if head.animation == &"attacking":
+	if head.animation.begins_with("attacking"):
 		shoot()
 		if !Input.is_action_pressed(&"shoot"):
-			head.play(&"idle")
+			head.play("idle" + animation_suffix())
 
 func step() -> void:
 	$StepPlayer.play()

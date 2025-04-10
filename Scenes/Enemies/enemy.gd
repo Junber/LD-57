@@ -66,7 +66,7 @@ func _ready() -> void:
 	$Timer.wait_time *= randf_range(0.8, 1.2)
 	health = max_health
 	health_bar.max_value = max_health
-	health_bar.value = health
+	health_bar.set_value(health)
 	if special == Special.Slows:
 		get_player().spawn_slow_indicator(spawn_position)
 
@@ -159,7 +159,7 @@ func on_hit(_body: Node2D) -> void:
 	if is_queued_for_deletion():
 		return
 	health -= 1
-	health_bar.value = health
+	health_bar.set_value(health)
 	get_player().on_hit_enemy()
 	if health <= 0:
 		spawn_death_text()

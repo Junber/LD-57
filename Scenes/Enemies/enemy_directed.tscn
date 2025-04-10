@@ -48,6 +48,7 @@ animations = [{
 size = Vector2(58, 118)
 
 [node name="Enemy" instance=ExtResource("1_e8ll8")]
+max_health = 9
 behavior = 4
 bullet_type = 1
 
@@ -60,5 +61,8 @@ script = ExtResource("9_ltr70")
 [node name="CollisionShape" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(3, -60)
 shape = SubResource("RectangleShape2D_tqele")
+
+[node name="Timer" parent="." index="2"]
+wait_time = 1.18624
 
 [connection signal="walking" from="." to="AnimatedSprite" method="_on_enemy_walking"]

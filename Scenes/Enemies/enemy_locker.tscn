@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://wy25smi1h4jr"]
+
+[ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_j18t8"]
+[ext_resource type="Texture2D" uid="uid://dsvs83dq6ule5" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-1.png" id="2_5wfiv"]
+[ext_resource type="Texture2D" uid="uid://c1ttf2mw6e5ud" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-2.png" id="3_ssnkw"]
+[ext_resource type="Texture2D" uid="uid://bk1etbqslw5g1" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-3.png" id="4_vjhj6"]
+[ext_resource type="Texture2D" uid="uid://droa2pxhsxvo5" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-4.png" id="5_k76l8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ui0xs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5wfiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ssnkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vjhj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k76l8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_j18t8")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ui0xs")
+frame = 3
+frame_progress = 0.637803
+
+[node name="Timer" parent="." index="1"]
+wait_time = 1.14099

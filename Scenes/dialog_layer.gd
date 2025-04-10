@@ -220,6 +220,13 @@ func command_vignette_opacity(data: Array[String]) -> void:
 	$VignetteEffect.set_opacity(data[0].to_float())
 	show_next_line()
 
+func command_school(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"school\" command does not take any arguments")
+
+	get_tree().call_group(&"player", &"start_school")
+	show_next_line()
+
 func add_text(text: String) -> void:
 	label.visible_ratio = 0.0
 
@@ -276,6 +283,8 @@ func show_next_line() -> void:
 			command_drink(data)
 		elif key == "vignette_opacity":
 			command_vignette_opacity(data)
+		elif key == "school":
+			command_school(data)
 		else:
 			show_error("Unknown command " + key)
 	else:

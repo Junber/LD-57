@@ -1,15 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://cg0nb2orlmi7s"]
+[gd_scene load_steps=18 format=3 uid="uid://cg0nb2orlmi7s"]
 
 [ext_resource type="Script" uid="uid://bnf7alq7rnp60" path="res://Scenes/dialog_layer.gd" id="1_u50j4"]
 [ext_resource type="Texture2D" uid="uid://wtlsna5skw1a" path="res://Resources/Graphics/UI/Anxiety text top.png" id="2_vh2ph"]
 [ext_resource type="Texture2D" uid="uid://b7hwgraahhd2g" path="res://Resources/Graphics/UI/Sad text top.png" id="3_lphyb"]
 [ext_resource type="Texture2D" uid="uid://bj62f24dlb86x" path="res://Resources/Graphics/UI/Angry text top.png" id="4_hkmc8"]
 [ext_resource type="Texture2D" uid="uid://fqdl3qmo4u6u" path="res://Resources/Graphics/UI/Anxiety text bottom.png" id="5_46cgw"]
+[ext_resource type="Texture2D" uid="uid://dcydtvnnegi1c" path="res://Resources/Graphics/UI/Demon_NPC_text_top.png" id="5_swatm"]
 [ext_resource type="Texture2D" uid="uid://dlxdkna0mpwn1" path="res://Resources/Graphics/UI/Sad text bottom.png" id="6_fiym4"]
 [ext_resource type="Texture2D" uid="uid://bssclq1lo6ocv" path="res://Resources/Graphics/UI/Angry text bottom.png" id="7_yo6l0"]
 [ext_resource type="Script" uid="uid://bhjxafaajh1ho" path="res://Scenes/drunk_effect.gd" id="8_hkmc8"]
 [ext_resource type="LabelSettings" uid="uid://clak16mb2pmw0" path="res://Scenes/default_label_settings.tres" id="8_yo6l0"]
 [ext_resource type="Shader" uid="uid://bwsekrww0h3lj" path="res://Scenes/Levels/drunk.gdshader" id="9_46cgw"]
+[ext_resource type="Texture2D" uid="uid://btd4nift7phwt" path="res://Resources/Graphics/UI/Demon_NPC_text_bottom.png" id="9_mo1wr"]
 [ext_resource type="Shader" uid="uid://csdda3auf15yk" path="res://Scenes/vignette.gdshader" id="10_46cgw"]
 [ext_resource type="Script" uid="uid://djyk5ex5du00o" path="res://Scenes/vignette_effect.gd" id="10_fiym4"]
 
@@ -32,11 +34,13 @@ process_mode = 2
 layer = 2
 script = ExtResource("1_u50j4")
 top_ornaments = Dictionary[String, Texture2D]({
+"demon": ExtResource("5_swatm"),
 "helpless": ExtResource("2_vh2ph"),
 "hopeless": ExtResource("3_lphyb"),
 "reckless": ExtResource("4_hkmc8")
 })
 bottom_ornaments = Dictionary[String, Texture2D]({
+"demon": ExtResource("9_mo1wr"),
 "helpless": ExtResource("5_46cgw"),
 "hopeless": ExtResource("6_fiym4"),
 "reckless": ExtResource("7_yo6l0")
