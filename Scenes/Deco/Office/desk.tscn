@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://q6vl5jtrx0ss"]
+
+[ext_resource type="PackedScene" uid="uid://diqhdrkstdx1w" path="res://Scenes/Deco/Office/cupboard.tscn" id="1_4rg8x"]
+[ext_resource type="Texture2D" uid="uid://b023yqdgqx0qv" path="res://Resources/Graphics/Objects/Office/Normal/desk.png" id="2_1ivpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3xh0"]
+size = Vector2(121, 167)
+
+[node name="Desk" instance=ExtResource("1_4rg8x")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -134)
+texture = ExtResource("2_1ivpe")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, -84.5)
+shape = SubResource("RectangleShape2D_d3xh0")

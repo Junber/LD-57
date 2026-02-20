@@ -1,0 +1,20 @@
+!ornament:demon
+
+Plainfield (dying):
+You will never find work. Not you.
+
+Plainfield:
+Your “art” is meaningless. No one will seek it out.
+You may as well be screaming into the void.
+
+Plainfield:
+And no amount of therapy will fix that.
+
+!ornament:player
+
+You:
+*tsk-tsk* Wrong and wrong again.
+This ain’t no normal therapy either, bossman.
+
+You:
+This is Violence Therapy.

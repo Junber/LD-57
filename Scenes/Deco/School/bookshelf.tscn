@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://xdyjxanuijux"]
+
+[ext_resource type="Texture2D" uid="uid://mdvlijvt2bxt" path="res://Resources/Graphics/Objects/School/neat version/Bookshelf.png" id="1_7tqja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qpicn"]
+size = Vector2(307, 149)
+
+[node name="Bookshelf" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, -216)
+texture = ExtResource("1_7tqja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, -76.5)
+shape = SubResource("RectangleShape2D_qpicn")

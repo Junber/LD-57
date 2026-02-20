@@ -5,10 +5,11 @@ extends CanvasLayer
 @export var default_label_setting: LabelSettings
 @export var special_label_setting: Dictionary[String, LabelSettings]
 
-@onready var dialog_appear_timer := $DialogAppearTimer
+@onready var text_parent: Control = $Control
+@onready var dialog_appear_timer: Timer = $DialogAppearTimer
 @onready var top_ornament: TextureRect = $Control/VBoxContainer/TopOrnament
 @onready var bottom_ornament: TextureRect = $Control/VBoxContainer/BottomOrnament
-@onready var label: RichTextLabel = $Control/VBoxContainer/Label
+@onready var label: RichTextLabel = $Control/VBoxContainer/MarginContainer/Label
 
 var caller: Node
 var last_file_name: String
@@ -16,6 +17,8 @@ var dialog_chunks: PackedStringArray = []
 var dialog_progress := 0
 var waiting := false
 var shaking_intensity := 0.0
+var text_speed := 1.0
+var fade_text_time := 0.0
 
 var dialog_variables: Dictionary[String, bool] = {}
 
@@ -31,14 +34,16 @@ func start(new_caller: Node) -> void:
 	show_next_line()
 
 func finish() -> void:
+	$AudioStreamPlayer.stop()
 	visible = false
 	get_tree().paused = false
 	dialog_progress = 0
 
 func load_file(dialog_file_name: String) -> void:
 	dialog_chunks.clear()
+	dialog_progress = 0
 	var file := FileAccess.open(dialog_file_name, FileAccess.READ)
-	for chunk in file.get_as_text(true).split("\n\n"):
+	for chunk in file.get_as_text(true).strip_edges().split("\n\n"):
 		dialog_chunks.append(chunk.dedent())
 	file.close()
 	last_file_name = dialog_file_name
@@ -61,6 +66,8 @@ func show_error(error: String) -> void:
 	dialog.popup_centered()
 	dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	finish()
+
+
 
 func command_ornament(data: Array[String]) -> void:
 	if data.size() != 1:
@@ -101,7 +108,7 @@ func command_combat(data: Array[String]) -> void:
 	if data.size() != 1:
 		return show_error("\"combat\" command needs exactly 1 argument")
 
-	get_tree().call_group(&"spawner", &"initiate_combat", data[0])
+	get_tree().call_group(&"spawner", &"initiate_combat", data[0], true)
 	show_next_line()
 
 func command_ability(data: Array[String]) -> void:
@@ -135,7 +142,7 @@ func command_level(data: Array[String]) -> void:
 		return show_error("\"level\" command needs exactly 1 argument")
 
 	var path = "res://Scenes/Levels/" + data[0] + ".tscn"
-	if !FileAccess.file_exists(path):
+	if !ResourceLoader.exists(path):
 		return show_error("Level not found: " + data[0])
 
 	get_tree().call_group(&"game", &"load_level", path)
@@ -145,18 +152,19 @@ func command_save(data: Array[String]) -> void:
 	if data.size() != 0:
 		return show_error("\"save\" command does not take any arguments")
 
-	get_tree().call_group(&"game", &"save_game", "auto_save")
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFERRED, &"game", &"save_game", "auto_save")
 	show_next_line()
 
 func command_sfx(data: Array[String]) -> void:
-	if data.size() != 1:
-		return show_error("\"sfx\" command needs exactly 1 argument")
+	if data.size() != 2:
+		return show_error("\"sfx\" command needs exactly 2 argument")
 
-	var path = "res://Resources/Sounds/" + data[0] + ".wav"
-	if !FileAccess.file_exists(path):
+	var path = "res://Resources/Sounds/" + data[0] + ".ogg"
+	if !ResourceLoader.exists(path):
 		return show_error("Sound not found: " + data[0])
 
 	$AudioStreamPlayer.stream = load(path)
+	$AudioStreamPlayer.volume_db = data[1].to_float()
 	$AudioStreamPlayer.play()
 	show_next_line()
 
@@ -189,7 +197,19 @@ func command_background_opacity(data: Array[String]) -> void:
 	if !data[0].is_valid_float():
 		return show_error("Not a valid float: " + data[0])
 
-	$ColorRect.color = Color(0.9, 0.9, 0.9, data[0].to_float())
+	$ColorRect.color.a = data[0].to_float()
+	show_next_line()
+
+func command_background_color(data: Array[String]) -> void:
+	if data.size() != 2:
+		return show_error("\"background_color\" command needs exactly 2 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+	if !data[1].is_valid_float():
+		return show_error("Not a valid float: " + data[1])
+	var x := data[0].to_float()
+	create_tween().tween_property($ColorRect, ^"color", Color(x, x, x, $ColorRect.color.a), data[1].to_float())
 	show_next_line()
 
 func command_shaking_intensity(data: Array[String]) -> void:
@@ -209,7 +229,6 @@ func command_drink(data: Array[String]) -> void:
 	$DrunkEffect.increasing = true
 	show_next_line()
 
-
 func command_vignette_opacity(data: Array[String]) -> void:
 	if data.size() != 1:
 		return show_error("\"vignette_opacity\" command needs exactly 1 argument")
@@ -227,14 +246,107 @@ func command_school(data: Array[String]) -> void:
 	get_tree().call_group(&"player", &"start_school")
 	show_next_line()
 
-func add_text(text: String) -> void:
-	label.visible_ratio = 0.0
+func command_music(data: Array[String]) -> void:
+	if data.size() != 2:
+		return show_error("\"music\" command needs exactly 2 argument")
 
+	var path = "res://Resources/Music/" + data[0] + ".wav"
+	if !ResourceLoader.exists(path):
+		return show_error("Sound not found: " + data[0])
+
+	var calm := load(path)
+	var battle: AudioStream
+
+	var path_battle = "res://Resources/Music/" + data[0] + "_battle.wav"
+	if ResourceLoader.exists(path_battle):
+		battle = load(path_battle)
+
+	if !data[1].is_valid_float():
+		return show_error("Not a valid float: " + data[1])
+
+	get_tree().call_group(&"game", &"set_music", calm, battle, data[1].to_float())
+	show_next_line()
+
+func command_text_speed(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"text_speed\" command needs exactly 1 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+
+	text_speed = data[0].to_float()
+	show_next_line()
+
+func command_fade_text(data: Array[String]) -> void:
+	if data.size() != 1:
+		return show_error("\"fade_text\" command needs exactly 1 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+
+	fade_text_time = data[0].to_float()
+	show_next_line()
+
+func command_iris_in(data: Array[String]) -> void:
+	if data.size() != 0:
+		return show_error("\"iris_in\" command needs exactly 0 arguments")
+	$IrisInEffect.start()
+	show_next_line()
+
+var zoom_tween: Tween
+func command_zoom(data: Array[String]) -> void:
+	if data.size() != 2:
+		return show_error("\"zoom\" command needs exactly 2 argument")
+
+	if !data[0].is_valid_float():
+		return show_error("Not a valid float: " + data[0])
+	if !data[1].is_valid_float():
+		return show_error("Not a valid float: " + data[1])
+
+	if zoom_tween:
+		zoom_tween.kill()
+	zoom_tween = create_tween()
+
+	var x := data[0].to_float()
+	zoom_tween.tween_property(text_parent, ^"scale", Vector2(x,x), data[1].to_float())
+	show_next_line()
+
+func command_text_sound(data: Array[String]) -> void:
+	if data.size() != 3:
+		return show_error("\"text_sound\" command needs exactly 3 argument")
+
+	var path := "res://Resources/Sounds/" + data[0] + ".ogg"
+	if !ResourceLoader.exists(path):
+		return show_error("Sound not found: " + data[0])
+	if !data[1].is_valid_float():
+		return show_error("Not a valid float: " + data[1])
+	if !data[2].is_valid_float():
+		return show_error("Not a valid float: " + data[2])
+
+	var stream := AudioStreamRandomizer.new()
+	stream.add_stream(0, load(path))
+	stream.random_pitch = data[1].to_float()
+	stream.random_volume_offset_db = data[2].to_float()
+	$DialogAppearPlayer.stream = stream
+	show_next_line()
+
+var start_progress := 0.0
+func add_text(text: String) -> void:
+	set_progress(0.0)
 	top_ornament.texture = top_ornaments.get(ornament_name, null)
 	label.text = text
 	bottom_ornament.texture = bottom_ornaments.get(ornament_name, null)
 
-	dialog_appear_timer.start(1.0)
+	var first_line := text.split("\n")[0]
+	if first_line.ends_with(":") or first_line.contains(":") and first_line.ends_with("*"):
+		start_progress = float(first_line.length()) / text.length()
+		set_progress(start_progress)
+	else:
+		start_progress = 0.0
+
+	dialog_appear_timer.start(fade_text_time if fade_text_time != 0.0 else
+								text.length() * 0.01 / text_speed)
+	play_appear_sound()
 
 func show_next_line() -> void:
 	if dialog_progress >= dialog_chunks.size():
@@ -243,63 +355,37 @@ func show_next_line() -> void:
 	var next_line := dialog_chunks[dialog_progress]
 	dialog_progress += 1
 
-	if next_line[0] == '#':
+	if next_line.is_empty() or next_line[0] == '#':
 		show_next_line()
 	elif next_line[0] == '!':
 		var colonIndex := next_line.find(":")
 		var key := next_line.substr(1, colonIndex - 1 if colonIndex >= 0 else -1)
 		var data := next_line.substr(colonIndex + 1).split(";") if colonIndex >= 0 else PackedStringArray()
-		if key == "ornament":
-			command_ornament(data)
-		elif key == "if":
-			command_if(data)
-		elif key == "set":
-			command_set(data)
-		elif key == "remove":
-			command_remove(data)
-		elif key == "combat":
-			command_combat(data)
-		elif key == "ability":
-			command_ability(data)
-		elif key == "shot_upgrade":
-			command_shot_upgrade(data)
-		elif key == "dash_upgrade":
-			command_dash_upgrade(data)
-		elif key == "level":
-			command_level(data)
-		elif key == "save":
-			command_save(data)
-		elif key == "sfx":
-			command_sfx(data)
-		elif key == "wait":
-			command_wait(data)
-		elif key == "clear":
-			command_clear(data)
-		elif key == "background_opacity":
-			command_background_opacity(data)
-		elif key == "shaking_intensity":
-			command_shaking_intensity(data)
-		elif key == "drink":
-			command_drink(data)
-		elif key == "vignette_opacity":
-			command_vignette_opacity(data)
-		elif key == "school":
-			command_school(data)
+		if has_method("command_" + key):
+			call("command_" + key, data)
 		else:
 			show_error("Unknown command " + key)
 	else:
 		add_text(next_line)
 
-func _process(_delta: float) -> void:
-	if dialog_appear_timer.is_stopped():
+func set_progress(x: float) -> void:
+	if fade_text_time != 0.0:
+		label.modulate.a = x
 		label.visible_ratio = 1.0
 	else:
-		label.visible_ratio = 1.0 - dialog_appear_timer.time_left / dialog_appear_timer.wait_time
+		label.modulate.a = 1.0
+		label.visible_ratio = x
+
+func _process(_delta: float) -> void:
+	if dialog_appear_timer.is_stopped():
+		set_progress(1.0)
+	else:
+		set_progress(1.0 - (1.0 - start_progress) * dialog_appear_timer.time_left / dialog_appear_timer.wait_time)
 
 	if shaking_intensity > 0 and !dialog_appear_timer.is_stopped():
-		$Control.position = Vector2(randf(), randf()) * shaking_intensity
+		text_parent.position = Vector2(randf(), randf()) * shaking_intensity
 	else:
-		$Control.position = Vector2.ZERO
+		text_parent.position = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed("interact"):
@@ -307,14 +393,23 @@ func _input(event: InputEvent) -> void:
 		if waiting:
 			return
 
-		if dialog_appear_timer.is_stopped():
+		if dialog_appear_timer.is_stopped() || fade_text_time != 0.0:
 			show_next_line()
 		else:
 			dialog_appear_timer.stop()
 
+func play_appear_sound() -> void:
+	$DialogAppearPlayer.play()
+	$DialogAppearPlayer/Timer.start(randf_range(0.1, 0.2))
 
-func get_save_data() -> Dictionary[String, bool]:
-	return dialog_variables
+func _on_timer_timeout() -> void:
+	if !dialog_appear_timer.is_stopped():
+		play_appear_sound()
 
-func load_save_data(data: Dictionary[String, bool]) -> void:
-	dialog_variables = data
+
+func get_save_data() -> Array:
+	return [dialog_variables, text_speed]
+
+func load_save_data(data: Array) -> void:
+	dialog_variables = data[0]
+	text_speed = data[1]

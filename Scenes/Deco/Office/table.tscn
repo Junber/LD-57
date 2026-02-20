@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://4fng7g06iymh"]
+
+[ext_resource type="PackedScene" uid="uid://diqhdrkstdx1w" path="res://Scenes/Deco/Office/cupboard.tscn" id="1_pups1"]
+[ext_resource type="Texture2D" uid="uid://dcoeil7d6fnh2" path="res://Resources/Graphics/Objects/Office/Normal/kitchenTable.png" id="2_e2fiy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xd31k"]
+size = Vector2(290, 324)
+
+[node name="Table" instance=ExtResource("1_pups1")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -162)
+texture = ExtResource("2_e2fiy")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -163)
+shape = SubResource("RectangleShape2D_xd31k")

@@ -1,0 +1,4 @@
+!ornament:demon
+
+Coworker:
+The lack of clarity in the decision-making matrix is impacting my ability to maintain agile velocity on key touchpoints.

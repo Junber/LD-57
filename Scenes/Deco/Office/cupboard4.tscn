@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://behl1xusr1b4v"]
+
+[ext_resource type="PackedScene" uid="uid://bbn5oobfen6v1" path="res://Scenes/Deco/Office/cupboard3.tscn" id="1_ujr7l"]
+[ext_resource type="Texture2D" uid="uid://cdpnet0n1fl37" path="res://Resources/Graphics/Objects/Office/Weird/cupboard2creepy01.png" id="2_seg71"]
+
+[node name="Cupboard" instance=ExtResource("1_ujr7l")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_seg71")

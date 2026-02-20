@@ -1,0 +1,6 @@
+!if:office_open;remove.txt
+
+!ornament:helpless
+
+Helpless:
+I should take care of this work first before taking a break.

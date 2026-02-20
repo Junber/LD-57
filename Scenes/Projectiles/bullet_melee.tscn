@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://db5ew0d68bvku"]
+
+[ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/Projectiles/bullet_enemy.tscn" id="1_wxaed"]
+[ext_resource type="Texture2D" uid="uid://cpnq8ks18gj8d" path="res://Resources/Graphics/bullet_melee.png" id="2_o42lf"]
+
+[node name="Bullet" instance=ExtResource("1_wxaed")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_o42lf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+position = Vector2(0, -13)
+polygon = PackedVector2Array(79, -58.9, 3.9, -100, -16, -100, -16, -87.7, 48.5, -43.3, 58.9, 1.9, 38, 57.4, -10, 83, -10, 100, 4.6, 100, 50.6, 85, 57.4, 85, 85.4, 24, 91.8, 24, 79, -52.2)
+
+[node name="CollisionShape" parent="." index="2"]
+shape = null

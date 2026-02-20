@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7fji3cgok7oa"]
+
+[ext_resource type="PackedScene" uid="uid://177hlt3gcbsi" path="res://Scenes/Deco/Office/chair_front.tscn" id="1_a2lco"]
+[ext_resource type="Texture2D" uid="uid://ci787o0uufhhj" path="res://Resources/Graphics/Objects/Office/Normal/wheelChairFrontPurple.png" id="2_u8w5y"]
+
+[node name="ChairFront" instance=ExtResource("1_a2lco")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_u8w5y")

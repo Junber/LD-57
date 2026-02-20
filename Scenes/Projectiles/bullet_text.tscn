@@ -10,6 +10,7 @@ z_index = 10
 collision_layer = 8
 collision_mask = 17
 script = ExtResource("1_sa5gr")
+flip = false
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

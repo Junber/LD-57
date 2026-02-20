@@ -1,0 +1,22 @@
+!ornament:none
+
+SPEAKER: *crackling*
+Your reorientation is complete.
+
+SPEAKER: *crackling*
+Please return to your station immediately and remember:
+It’s crucial that we all remain strategically engaged and maintain forward momentum on high-impact initiatives, especially as we navigate this critical phase of cross-functional integration. 
+
+SPEAKER: *crackling*
+I encourage you to circle back, reassess your productive bandwidth, and ensure that we’re driving value in a way that reflects our shared KPIs and stakeholder expectations.
+Long live Plainfield Consulting.
+
+SPEAKER: *crackling*
+Reorientation time has been deducted from your paycheck.
+Goodbye.
+
+!level:Office/office3
+
+!set:reorientation_done
+
+!save

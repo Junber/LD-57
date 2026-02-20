@@ -1,6 +1,0 @@
-!if:office_key;unlock.txt
-
-!ornament:hopeless
-
-This door will never open...
-The key is lost forever...

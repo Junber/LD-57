@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://de6hpabh74bqq"]
+
+[ext_resource type="PackedScene" uid="uid://dq38fm545ricm" path="res://Scenes/Interactables/interactable.tscn" id="1_aip75"]
+[ext_resource type="Texture2D" uid="uid://dy8f7stec5kbt" path="res://Resources/Graphics/Enemies/BossOffice/bossIdle0000.png" id="2_yih8y"]
+[ext_resource type="Texture2D" uid="uid://cf7lcjch87lqq" path="res://Resources/Graphics/Enemies/BossOffice/bossIdle0001.png" id="3_3epg1"]
+[ext_resource type="Texture2D" uid="uid://vv2868peg0g3" path="res://Resources/Graphics/Enemies/BossOffice/bossIdle0002.png" id="4_hxu3i"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nx3ds"]
+radius = 149.0
+height = 452.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yih8y"]
+radius = 501.009
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kw8j"]
+animations = [{
+"frames": [{
+"duration": 12.0,
+"texture": ExtResource("2_yih8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3epg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hxu3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3epg1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Boss" instance=ExtResource("1_aip75")]
+
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(-1, -224)
+shape = SubResource("CapsuleShape2D_nx3ds")
+
+[node name="CollisionShape" parent="InteractionRange" index="0"]
+position = Vector2(0, -27)
+shape = SubResource("CircleShape2D_yih8y")
+
+[node name="Sprite" parent="." index="2"]
+position = Vector2(0, -219)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+position = Vector2(0, -222)
+sprite_frames = SubResource("SpriteFrames_6kw8j")
+autoplay = "default"
+frame_progress = 0.622004
+
+[node name="Indicator" parent="." index="4"]
+position = Vector2(0, -484)

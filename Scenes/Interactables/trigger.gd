@@ -1,6 +1,7 @@
 extends Area2D
 
 @export_file("*.txt") var dialog_file_name: String
+@export var once := false
 
 var player_nearby := false
 
@@ -12,12 +13,17 @@ func interact() -> void:
 func try_trigger() -> void:
 	if player_nearby and !get_tree().get_first_node_in_group(&"game").in_combat:
 		interact()
-		queue_free()
+		if once:
+			queue_free()
 
 func set_combat(_in_combat: bool) -> void:
 	try_trigger()
 
-func _on_body_entered(_body: Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	if !overlaps_body(body):
+		return
 	player_nearby = true
 	try_trigger()
 

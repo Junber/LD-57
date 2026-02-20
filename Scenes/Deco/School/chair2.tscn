@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://nvrjswu4rntp"]
+
+[ext_resource type="Texture2D" uid="uid://b6ntunjya0vdu" path="res://Resources/Graphics/Objects/School/neat version/Chair_ForwardUPDATED.png" id="1_0srk6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yih5l"]
+size = Vector2(109, 132)
+
+[node name="Chair" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -103)
+texture = ExtResource("1_0srk6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, -68)
+shape = SubResource("RectangleShape2D_yih5l")

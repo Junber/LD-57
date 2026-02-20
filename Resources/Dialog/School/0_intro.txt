@@ -1,0 +1,37 @@
+!background_opacity:1.0
+
+!ornament:player
+
+You:
+Deep breaths, Makoto.
+Your boss will be taken care of.
+For now, focus on yourself.
+
+You:
+You entered the company already being existentially upset.
+Why was this piss-job your “only option”?
+
+!ornament:hopeless
+
+Makoto:
+Because I can’t erase my past. I can’t undo what I have done... I am just like my father.
+
+!ornament:player
+
+You:
+What makes you say that?
+
+!ornament:helpless
+
+Makoto:
+It was during my first year at highschool...
+
+!level:school/school
+
+!music:theme_guitar thing;1.5
+
+!iris_in
+
+!background_opacity:0.5
+
+!save

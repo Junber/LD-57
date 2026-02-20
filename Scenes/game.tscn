@@ -2,15 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://crn24gipuknsj" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://dqque4okhatwy" path="res://Scenes/game.gd" id="1_h4fw4"]
-[ext_resource type="AudioStream" uid="uid://co86fmgwvr6l2" path="res://Resources/Music/theme_guitar thing_neutral.wav" id="4_wowpa"]
+[ext_resource type="AudioStream" uid="uid://co86fmgwvr6l2" path="res://Resources/Music/theme_guitar thing.wav" id="4_wowpa"]
 [ext_resource type="AudioStream" uid="uid://chjc57vyba4w0" path="res://Resources/Music/theme_guitar thing_battle.wav" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://cg0nb2orlmi7s" path="res://Scenes/dialog_layer.tscn" id="11_o5yvi"]
 
 [node name="Game" type="Node2D" groups=["game", "saveable"]]
 y_sort_enabled = true
 script = ExtResource("1_h4fw4")
+start_dialog = "res://Resources/Dialog/intro.txt"
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
+max_health = 5
 
 [node name="DialogLayer" parent="." instance=ExtResource("11_o5yvi")]
 visible = false
@@ -18,11 +20,9 @@ visible = false
 [node name="CalmMusicPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("4_wowpa")
-autoplay = true
 bus = &"MuteableMusic"
 
 [node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("5_i6g32")
-autoplay = true
 bus = &"MuteableMusic"

@@ -1,0 +1,58 @@
+!if:coffee_2;Office/9_boss.txt
+
+!sfx:sound_bossLaugh1;0.0
+
+!ornament:demon
+
+Plainfield:
+Haha, you are drunk again, huh?
+You know, I could fire you right now, you low-life fuck-up.
+
+Plainfield:
+But, as you know, I am forever merciful.
+I am the only CEO who would employ a worthless alcoholic like you, you know that, right?
+And not to talk about your history of violence...
+
+Plainfield:
+Anyway, thanks for the coffee.
+
+Plainfield:
+*sips then spits at you*
+Ugh.
+
+Plainfield:
+This is 2 degrees below my preferred - and mind you, optimal - consumption temperature.
+
+Plainfield:
+A low net-worth individual like you probably doesn’t understand the importance of this, but I need my coffee just right in order to manage this humongous business successfully.
+
+Plainfield:
+So let's circle back and recalibrate this offering to ensure it aligns with my high-value beverage standards.
+Please expedite the process next time so as to not lose valuable momentum.
+
+Plainfield:
+So kindly deliver an improved beverage at your earliest convenience.
+
+Plainfield:
+That is to say:
+Hot. Fucking. Coffee. Now!
+
+!ornament:helpless
+
+Helpless:
+He’s right. I can’t even make a stupid coffee.
+What chance do I have on the job-market?
+
+Helpless:
+If I fuck this up, Plainfield will tell all of his Elite-Rich-People Club people and influential friends of me.
+I will never find work again.
+
+!ornament:hopeless
+
+Hopeless:
+But maybe that would be for the best.
+At least then I won’t be a detriment to others anymore.
+
+!set:coffee_2
+
+!save

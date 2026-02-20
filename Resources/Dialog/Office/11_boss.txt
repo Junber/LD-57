@@ -1,0 +1,95 @@
+!ornament:demon
+
+!sfx:sound_bossLaugh1;0.0
+
+Plainfield:
+Great, and it only took you like an hour.
+
+Plainfield:
+*sips*
+It is satisfactory.
+
+Plainfield:
+Alright, Makoto, let’s drop the pleasantries and the business speak. I want to be frank with you.
+I could easily replace 80% of my workforce with generative AI. Your job included.
+
+Plainfield:
+It would save me a fortune.
+
+Plainfield:
+Do you know why I don’t?
+Because I like to see people’s vapid faces as they complete tasks that are bigger than life.
+Their life that is.
+
+Plainfield:
+The forced smiles on their faces, as they are living the “Plainfield culture”...
+
+Plainfield:
+The way they work in unison.
+The way they lose any and all sense of individuality and become like a well-oiled machine.
+Cogs interlinked within cogs interlinked.
+
+Plainfield:
+Do you hear it *click-clack-click*.
+
+Plainfield:
+Truth be told, I have long forgotten what we do as a company.
+The mechanism is beyond my comprehension.
+
+Plainfield:
+But I see a number go up. Each and every day.
+And it’s fucking beautiful, Makoto.
+
+Plainfield:
+You know that you are my favourite worker?
+Not because of your performance or your social skills, nono.
+
+Plainfield:
+I like you, because you are the ideal drone.
+Small and pathetic, utterly lacking in vision and motivation.
+
+Plainfield:
+Does that upset you?
+So what are YOU gonna do, huh? Shoot me?
+
+Plainfield:
+You pathetic beta-losers should know your place.
+But I will gladly remind you.
+
+!background_color:0.0;1.0
+
+!ornament:mission_control
+
+Mission Control:
+This is mission control.
+There are readings indicating... This is it.
+The nexus of the distortion.
+
+Mission Control:
+Archdemon located!
+And it is a big one.
+
+Mission Control:
+You sure you can handle this?
+
+!ornament:player
+
+You:
+Who do you think you are talking to?
+
+!ornament:mission_control
+
+Mission Control:
+Copy that.
+Your new orders are: Kill the Archdemon and dispel the fear.
+
+!ornament:player
+
+You:
+I know. We will show him who’s boss.
+
+!remove
+
+!combat:boss
+
+!background_color:0.1;1.0

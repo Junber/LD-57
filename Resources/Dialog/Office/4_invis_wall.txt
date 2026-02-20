@@ -1,0 +1,7 @@
+!ornament:helpless
+
+Helpless:
+I've only heard rumors about what happens to those who leave reorientation early.
+
+Helpless:
+And I'd like to keep it that way.

@@ -1,10 +1,10 @@
-[gd_scene load_steps=70 format=3 uid="uid://crn24gipuknsj"]
+[gd_scene load_steps=85 format=3 uid="uid://crn24gipuknsj"]
 
 [ext_resource type="Script" uid="uid://c3fjm54mwit0u" path="res://Scenes/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/Projectiles/bullet_player.tscn" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://dw0y0rvkmd62w" path="res://Scenes/Projectiles/bullet_player2.tscn" id="3_c8b32"]
 [ext_resource type="PackedScene" uid="uid://ihlr4rjnie4u" path="res://Scenes/indicator.tscn" id="3_fkybt"]
 [ext_resource type="PackedScene" uid="uid://c3ese7immn4mo" path="res://Scenes/Projectiles/earbud.tscn" id="4_pu2lt"]
-[ext_resource type="Texture2D" uid="uid://ddy2qxxhic8gr" path="res://Resources/Graphics/block.png" id="4_vgqql"]
 [ext_resource type="PackedScene" uid="uid://dm66k0h2chtq2" path="res://Scenes/Projectiles/dog.tscn" id="5_p1odr"]
 [ext_resource type="PackedScene" uid="uid://ddmle5r3rhycv" path="res://Scenes/Projectiles/notepad_drawing.tscn" id="5_vfarp"]
 [ext_resource type="Texture2D" uid="uid://bqykej0algg5v" path="res://Resources/Graphics/Player/School/playerArmBackNoteAbilityLvl02.png" id="8_pukcj"]
@@ -55,6 +55,16 @@
 [ext_resource type="Texture2D" uid="uid://dvp2x7hiqhp3t" path="res://Resources/Graphics/Player/Office/playerArmBackNoteAbility.png" id="40_57lvd"]
 [ext_resource type="Texture2D" uid="uid://cvnp7uc7mj6hb" path="res://Resources/Graphics/Player/Office/playerArmBackIdle.png" id="41_ie7r7"]
 [ext_resource type="Texture2D" uid="uid://d2pgvbq2wlcqs" path="res://Resources/Graphics/Player/Office/playerArmBack.png" id="42_vq3lt"]
+[ext_resource type="Texture2D" uid="uid://lgt2353hadc4" path="res://Resources/Graphics/UI/dashCooldown.png" id="48_pukcj"]
+[ext_resource type="Script" uid="uid://bkf4rwgbx8hy4" path="res://Scenes/textures_bar.gd" id="49_1htnp"]
+[ext_resource type="Texture2D" uid="uid://tm2l30tgr5v5" path="res://Resources/Graphics/UI/playerHealthbarOver.png" id="49_dtg1u"]
+[ext_resource type="Texture2D" uid="uid://i54qj6jc625g" path="res://Resources/Graphics/UI/playerHealthbar.png" id="49_nj1g2"]
+[ext_resource type="Texture2D" uid="uid://wfhe7tdtg8ld" path="res://Resources/Graphics/UI/writeAbilityGauge0000.png" id="50_n1x1j"]
+[ext_resource type="Texture2D" uid="uid://dlpemsfxv0btb" path="res://Resources/Graphics/UI/writeAbilityGauge0001.png" id="51_c8b32"]
+[ext_resource type="Texture2D" uid="uid://bgpgwwvypxi0s" path="res://Resources/Graphics/UI/writeAbilityGauge0002.png" id="52_nj1g2"]
+[ext_resource type="Texture2D" uid="uid://ch2e542f2pvhj" path="res://Resources/Graphics/UI/writeAbilityGauge0003.png" id="53_usbl8"]
+[ext_resource type="Texture2D" uid="uid://camyf1lfv6qs0" path="res://Resources/Graphics/particle.png" id="63_usbl8"]
+[ext_resource type="AudioStream" uid="uid://d17d1sjujfokp" path="res://Resources/Sounds/sound_takingNotes.ogg" id="64_nuaet"]
 
 [sub_resource type="Animation" id="Animation_qpa8y"]
 length = 0.001
@@ -587,23 +597,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
-size = Vector2(85, 46)
-
-[sub_resource type="Gradient" id="Gradient_tx1dd"]
-interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gymyn"]
-gradient = SubResource("Gradient_tx1dd")
-width = 2000
-height = 2000
-fill = 1
-fill_from = Vector2(0.504274, 0.508547)
-fill_to = Vector2(1, 0.521368)
+size = Vector2(120, 51)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sweqm"]
-playback_mode = 2
-random_pitch = 1.1
+playback_mode = 1
+random_pitch = 1.2
+random_volume_offset_db = 0.1
 streams_count = 2
 stream_0/stream = ExtResource("30_8gxox")
 stream_1/stream = ExtResource("31_11gg7")
@@ -615,15 +614,52 @@ stream_0/stream = ExtResource("32_qpa8y")
 stream_1/stream = ExtResource("33_sbwqj")
 stream_2/stream = ExtResource("34_xwi16")
 
+[sub_resource type="Curve" id="Curve_dtg1u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.496774, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nuaet"]
+curve = SubResource("Curve_dtg1u")
+
+[sub_resource type="Gradient" id="Gradient_nj1g2"]
+colors = PackedColorArray(0.78, 0.78, 0.78, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_usbl8"]
+gradient = SubResource("Gradient_nj1g2")
+
+[sub_resource type="Curve" id="Curve_usbl8"]
+_limits = [0.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 100), 0.0, -161.54, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dtg1u"]
+curve = SubResource("Curve_usbl8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c8b32"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 180.0
+initial_velocity_max = 100.0
+velocity_limit_curve = SubResource("CurveTexture_dtg1u")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+color_initial_ramp = SubResource("GradientTexture1D_usbl8")
+alpha_curve = SubResource("CurveTexture_nuaet")
+
 [node name="Player" type="CharacterBody2D" groups=["combat_listener", "player", "saveable"]]
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_cvnsp")
-bullet_scene = ExtResource("2_6t5aa")
+bullet1_scene = ExtResource("2_6t5aa")
+bullet2_scene = ExtResource("3_c8b32")
 indicator_scene = ExtResource("3_fkybt")
 earbud_scene = ExtResource("4_pu2lt")
 notepad_drawing_scene = ExtResource("5_vfarp")
 dog_scene = ExtResource("5_p1odr")
+max_health = 3
+ability_charge_per_hit = 0.5
 
 [node name="Movement" type="AnimationPlayer" parent="."]
 libraries = {
@@ -632,8 +668,11 @@ libraries = {
 autoplay = "idle"
 speed_scale = 2.0
 
+[node name="IndicatorParent" type="Marker2D" parent="."]
+position = Vector2(36, -105)
+
 [node name="Sprites" type="Node2D" parent="."]
-position = Vector2(-10, 1)
+position = Vector2(0, 1)
 
 [node name="BackArm" type="AnimatedSprite2D" parent="Sprites"]
 position = Vector2(36, -59)
@@ -668,11 +707,11 @@ animation = &"new_animation"
 frame = 1
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -23)
+position = Vector2(0, -25.5)
 shape = SubResource("RectangleShape2D_qxrlw")
 
-[node name="Camera" type="Camera2D" parent="." groups=["saveable"]]
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("25_0gysh")
@@ -691,9 +730,11 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="Red" type="CanvasModulate" parent="."]
+
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Health" type="ProgressBar" parent="UI"]
+[node name="Health" type="TextureProgressBar" parent="UI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -703,78 +744,83 @@ grow_vertical = 0
 mouse_filter = 2
 step = 0.0
 value = 50.0
+fill_mode = 5
+texture_over = ExtResource("49_dtg1u")
+texture_progress = ExtResource("49_nj1g2")
 
 [node name="Dash1" type="TextureProgressBar" parent="UI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 126.0
-offset_top = -51.0
-offset_right = 626.0
-offset_bottom = 449.0
+offset_left = 112.0
+offset_top = -82.0
+offset_right = 192.0
+offset_bottom = -2.0
 grow_vertical = 0
-scale = Vector2(0.1, 0.1)
 step = 0.0
-value = 75.0
+value = 80.0
 fill_mode = 5
-texture_progress = ExtResource("4_vgqql")
+texture_progress = ExtResource("48_pukcj")
 
 [node name="Dash2" type="TextureProgressBar" parent="UI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 195.0
-offset_top = -52.0
-offset_right = 695.0
-offset_bottom = 448.0
+offset_left = 140.0
+offset_top = -82.0
+offset_right = 220.0
+offset_bottom = -2.0
 grow_vertical = 0
-scale = Vector2(0.1, 0.1)
 step = 0.0
-value = 75.0
+value = 80.0
 fill_mode = 5
-texture_progress = ExtResource("4_vgqql")
+texture_progress = ExtResource("48_pukcj")
 
-[node name="AbilityCharge" type="ProgressBar" parent="UI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 279.0
-offset_top = -27.0
-offset_right = 379.0
-grow_vertical = 0
-mouse_filter = 2
-step = 0.0
-value = 50.0
+[node name="AbilityCharge" type="Sprite2D" parent="UI"]
+position = Vector2(267, 1037)
+scale = Vector2(2, 2)
+texture = ExtResource("50_n1x1j")
+script = ExtResource("49_1htnp")
+textures = Array[Texture2D]([ExtResource("50_n1x1j"), ExtResource("51_c8b32"), ExtResource("52_nj1g2"), ExtResource("53_usbl8")])
 
-[node name="Light" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(0, -25)
-energy = 0.5
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_gymyn")
+[node name="Audio" type="Node2D" parent="."]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.498039, 0.498039, 0.498039, 1)
-
-[node name="DashPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DashPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("28_yh6i2")
+volume_db = -5.0
 bus = &"Sfx"
 
-[node name="PowerUpPlayer" type="AudioStreamPlayer" parent="."]
+[node name="PowerUpPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("29_nv4vc")
 bus = &"Sfx"
 
-[node name="ShotPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ShotPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_sweqm")
+volume_db = -5.0
 bus = &"Sfx"
 
-[node name="StepPlayer" type="AudioStreamPlayer" parent="."]
+[node name="StepPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_ph33w")
 bus = &"Sfx"
 
+[node name="SpecialReadyPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("64_nuaet")
+
 [node name="StepTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+z_index = -1
+emitting = false
+amount = 30
+texture = ExtResource("63_usbl8")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.6
+process_material = SubResource("ParticleProcessMaterial_c8b32")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
 
 [connection signal="animation_looped" from="Sprites/Head" to="." method="_on_head_animation_looped"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

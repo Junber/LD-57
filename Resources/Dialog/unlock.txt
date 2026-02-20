@@ -1,6 +1,0 @@
-!ornament:hopeless
-
-It's open.
-But to what end?
-
-!remove

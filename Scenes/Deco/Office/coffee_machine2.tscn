@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg8234l2h1iqo"]
+
+[ext_resource type="PackedScene" uid="uid://ddmu7dfdske5m" path="res://Scenes/Deco/Office/coffee_machine.tscn" id="1_uv8qb"]
+[ext_resource type="Texture2D" uid="uid://c7xr6daav25ro" path="res://Resources/Graphics/Objects/Office/Weird/coffeeMachineCreepy.png" id="2_3uwe2"]
+
+[node name="CoffeeMachine" instance=ExtResource("1_uv8qb")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_3uwe2")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-0.5, -233.5)

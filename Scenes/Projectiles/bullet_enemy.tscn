@@ -1,10 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0jidmseuy5n0"]
+[gd_scene load_steps=6 format=3 uid="uid://c0jidmseuy5n0"]
 
 [ext_resource type="Script" uid="uid://bx068yc2unt4a" path="res://Scenes/Projectiles/bullet.gd" id="1_cg55a"]
-[ext_resource type="Texture2D" uid="uid://1f56yrbpxs2i" path="res://Resources/Graphics/bullet_enemy.png" id="2_cg55a"]
+[ext_resource type="Texture2D" uid="uid://bxlnkaw5gqct0" path="res://Resources/Graphics/Enemies/enemyBullet01.png" id="2_c40wq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
-radius = 13.0
+[sub_resource type="Gradient" id="Gradient_m6623"]
+colors = PackedColorArray(1, 0.45, 0.45, 0.196078, 1, 0.45, 0.45, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c40wq"]
+gradient = SubResource("Gradient_m6623")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c40wq"]
 
 [node name="Bullet" type="CharacterBody2D"]
 z_index = 1
@@ -13,13 +23,17 @@ collision_mask = 145
 motion_mode = 1
 script = ExtResource("1_cg55a")
 
+[node name="PointLight2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = SubResource("GradientTexture2D_c40wq")
+
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
-texture = ExtResource("2_cg55a")
+texture = ExtResource("2_c40wq")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)
-shape = SubResource("CircleShape2D_oduel")
+shape = SubResource("CircleShape2D_c40wq")
 
 [node name="LifeTimer" type="Timer" parent="."]
 wait_time = 5.0

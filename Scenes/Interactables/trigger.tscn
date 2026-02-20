@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clddk8dky5w7q" path="res://Scenes/Interactables/trigger.gd" id="1_bie78"]
 
-[node name="Trigger" type="Area2D"]
+[node name="Trigger" type="Area2D" groups=["saveable"]]
 collision_layer = 64
 monitorable = false
 script = ExtResource("1_bie78")

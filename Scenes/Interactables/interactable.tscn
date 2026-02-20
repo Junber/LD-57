@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq38fm545ricm"]
 
-[ext_resource type="Texture2D" uid="uid://bvfddajfrgugy" path="res://Resources/Graphics/InteractionIndicator.png" id="1_8s6bd"]
 [ext_resource type="Script" uid="uid://o4jp38xousm2" path="res://Scenes/Interactables/interactable.gd" id="1_pmsje"]
+[ext_resource type="Texture2D" uid="uid://h8px0jsiai0u" path="res://Resources/Graphics/UI/E_Interact-1.png" id="2_2q1rg"]
 
 [node name="Interactable" type="StaticBody2D" groups=["combat_listener", "saveable"]]
 collision_layer = 16
@@ -20,7 +20,9 @@ monitorable = false
 [node name="Sprite" type="Sprite2D" parent="."]
 
 [node name="Indicator" type="Sprite2D" parent="."]
-texture = ExtResource("1_8s6bd")
+z_index = 100
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_2q1rg")
 
 [connection signal="body_entered" from="InteractionRange" to="." method="_on_interaction_range_body_entered"]
 [connection signal="body_exited" from="InteractionRange" to="." method="_on_interaction_range_body_exited"]

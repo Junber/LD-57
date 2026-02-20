@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://druwrr45pkeev"]
+
+[ext_resource type="Texture2D" uid="uid://b53dsqo42pgan" path="res://Resources/Graphics/Objects/School/neat version/Stool.png" id="1_7mjmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fiv1d"]
+size = Vector2(101, 109)
+
+[node name="Stool" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -104)
+texture = ExtResource("1_7mjmh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -56.5)
+shape = SubResource("RectangleShape2D_fiv1d")

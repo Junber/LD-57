@@ -1,0 +1,68 @@
+[gd_scene load_steps=19 format=3 uid="uid://c6ynlqsyydpsr"]
+
+[ext_resource type="PackedScene" uid="uid://dq38fm545ricm" path="res://Scenes/Interactables/interactable.tscn" id="1_uctaa"]
+[ext_resource type="Texture2D" uid="uid://c3pq08g7t2ede" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker00Idle0000.png" id="2_3333k"]
+[ext_resource type="Script" uid="uid://bd0xpnfdtp6r6" path="res://Scenes/Interactables/office/coworker.gd" id="2_ug4wn"]
+[ext_resource type="Texture2D" uid="uid://c5t37ujake8q2" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker00Idle0001.png" id="4_ug4wn"]
+[ext_resource type="Texture2D" uid="uid://cos6ajc4v7put" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker01Idle0000.png" id="5_t0bf6"]
+[ext_resource type="Texture2D" uid="uid://bmexi412pe10n" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker01Idle0001.png" id="6_6isnq"]
+[ext_resource type="Texture2D" uid="uid://wd51j3mpx54f" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker02Idle0000.png" id="7_cgr4b"]
+[ext_resource type="Texture2D" uid="uid://cdjrkdieuskq4" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker02Idle0001.png" id="8_e7ysj"]
+[ext_resource type="Texture2D" uid="uid://bjb7fhlbabmg7" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker00Idle0000.png" id="9_lm3gw"]
+[ext_resource type="Texture2D" uid="uid://bo4ppfnko2myn" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker00Idle0001.png" id="10_gq4wv"]
+[ext_resource type="Texture2D" uid="uid://bt3m1rki8hcsx" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker01Idle0000.png" id="11_rxybk"]
+[ext_resource type="Texture2D" uid="uid://dfkfefheglohq" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker01Idle0001.png" id="12_r1hyh"]
+[ext_resource type="Texture2D" uid="uid://bmgq6vey3sf53" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker02Idle0000.png" id="13_4mxqw"]
+[ext_resource type="Texture2D" uid="uid://c8vmoby7s5g2b" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker02Idle0001.png" id="14_qh5n0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ug4wn"]
+size = Vector2(71, 91)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4fuj1"]
+radius = 224.181
+
+[sub_resource type="Gradient" id="Gradient_t0bf6"]
+colors = PackedColorArray(1, 1, 1, 0.588235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6isnq"]
+gradient = SubResource("Gradient_t0bf6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[node name="Coworker" instance=ExtResource("1_uctaa")]
+script = ExtResource("2_ug4wn")
+textures = Array[Texture2D]([ExtResource("2_3333k"), ExtResource("4_ug4wn"), ExtResource("5_t0bf6"), ExtResource("6_6isnq"), ExtResource("7_cgr4b"), ExtResource("8_e7ysj"), ExtResource("9_lm3gw"), ExtResource("10_gq4wv"), ExtResource("11_rxybk"), ExtResource("12_r1hyh"), ExtResource("13_4mxqw"), ExtResource("14_qh5n0")])
+
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(4.5, -45.5)
+shape = SubResource("RectangleShape2D_ug4wn")
+
+[node name="InteractionRange" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape" parent="InteractionRange" index="0"]
+position = Vector2(0, -55)
+shape = SubResource("CircleShape2D_4fuj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+position = Vector2(8.00001, -61)
+scale = Vector2(5, 5)
+texture = SubResource("GradientTexture2D_6isnq")
+
+[node name="Sprite" parent="." index="3"]
+position = Vector2(0, -79)
+texture = ExtResource("2_3333k")
+
+[node name="Sprite2" type="Sprite2D" parent="." index="4"]
+visible = false
+position = Vector2(0, -79)
+texture = ExtResource("4_ug4wn")
+
+[node name="Indicator" parent="." index="5"]
+position = Vector2(0, -172)
+
+[node name="AnimTimer" type="Timer" parent="." index="6"]
+autostart = true
+
+[connection signal="timeout" from="AnimTimer" to="." method="_on_anim_timer_timeout"]

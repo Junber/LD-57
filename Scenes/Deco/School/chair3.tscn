@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ybvotg3sl087"]
+
+[ext_resource type="Texture2D" uid="uid://cd833p1ci1737" path="res://Resources/Graphics/Objects/School/neat version/Rolle_Chair_Facing_Camera.png" id="1_yf2kb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_madgu"]
+size = Vector2(116, 83)
+
+[node name="Chair" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, -112)
+texture = ExtResource("1_yf2kb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -43.5)
+shape = SubResource("RectangleShape2D_madgu")

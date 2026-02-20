@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bowunokuw5g68"]
+
+[ext_resource type="PackedScene" uid="uid://dq38fm545ricm" path="res://Scenes/Interactables/interactable.tscn" id="1_8ncug"]
+[ext_resource type="Texture2D" uid="uid://irbinrw8h8gf" path="res://Resources/Graphics/Objects/Office/Normal/desk2.png" id="2_hwrmx"]
+[ext_resource type="Texture2D" uid="uid://c5u85a5fv270m" path="res://Resources/Graphics/Objects/Office/Normal/papers_blank.png" id="3_uor58"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4htbb"]
+size = Vector2(198, 192)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qupq2"]
+radius = 195.01
+
+[node name="Portrait" instance=ExtResource("1_8ncug")]
+
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(-1, -99)
+shape = SubResource("RectangleShape2D_4htbb")
+
+[node name="CollisionShape" parent="InteractionRange" index="0"]
+position = Vector2(4, -97)
+shape = SubResource("CircleShape2D_qupq2")
+
+[node name="Sprite" parent="." index="2"]
+position = Vector2(1, -111)
+texture = ExtResource("2_hwrmx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" index="0"]
+position = Vector2(3, -50)
+texture = ExtResource("3_uor58")
+
+[node name="Indicator" parent="." index="3"]
+position = Vector2(-1, -263)

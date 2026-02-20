@@ -1,0 +1,4 @@
+!ornament:demon
+
+Coworker:
+There’s a recurring feedback loop of reactive firefighting in my department, and without a clear escalation matrix or unified messaging strategy, it's becoming increasingly difficult to preserve the client relationship while also maintaining internal sanity. You feel me?

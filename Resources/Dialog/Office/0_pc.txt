@@ -1,0 +1,23 @@
+!if:reorientation_done;office/5_pc.txt
+
+!sfx:sound_textKeyboard;0.0
+
+!ornament:hopeless
+
+Hopeless:
+I hate my job... so much.
+I don’t even know what I’m doing most of the time or for what purpose.
+The same inputs over and over again. Day after day after day. I’m sick of it.
+
+!if:office_open;empty.txt
+
+!ornament:mission_control
+
+Mission Control:
+This is mission control. We are reading demonic energy near your current position.
+
+Mission Control:
+Use [Left Click] to eliminate any intruding elements and stabilize the patients mental state.
+You can also Psyche[Space] to help avoid any pockets of negative energy.
+
+!combat:office1

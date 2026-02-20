@@ -1,0 +1,18 @@
+!ornament:demon
+
+!sfx:sound_bossLaugh1;0.0
+
+Plainfield:
+Did I not make myself clear?
+
+Plainfield:
+Hot.
+
+Plainfield:
+Fucking.
+
+Plainfield:
+Coffee.
+
+Plainfield:
+Now!

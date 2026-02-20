@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://db8u7gsxhcjgh"]
+
+[ext_resource type="Texture2D" uid="uid://dpte4an7mcxoi" path="res://Resources/Graphics/Objects/School/neat version/Plant.png" id="1_hub5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_waht5"]
+size = Vector2(55, 72)
+
+[node name="Plant" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -84)
+texture = ExtResource("1_hub5i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -38)
+shape = SubResource("RectangleShape2D_waht5")

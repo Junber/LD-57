@@ -1,0 +1,8 @@
+!ornament:none
+
+SPEAKER: *crackling*
+Makoto, report to HR immediately for your performance review.
+
+!set:office_open
+
+!save

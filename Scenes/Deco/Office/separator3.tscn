@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgi57r78rp1ho"]
+
+[ext_resource type="PackedScene" uid="uid://bcrlbfrtjeflq" path="res://Scenes/Deco/Office/separator.tscn" id="1_6ik7c"]
+[ext_resource type="Texture2D" uid="uid://ckhb7rbgae2mk" path="res://Resources/Graphics/Objects/Office/Weird/cubicleSeparator1Creepy.png" id="2_nvxmd"]
+
+[node name="Separator" instance=ExtResource("1_6ik7c")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_nvxmd")

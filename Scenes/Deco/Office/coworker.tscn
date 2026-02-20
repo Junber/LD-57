@@ -1,0 +1,74 @@
+[gd_scene load_steps=19 format=3 uid="uid://candb6kptt8rl"]
+
+[ext_resource type="PackedScene" uid="uid://buy0m6o6dcqmc" path="res://Scenes/Interactables/trigger.tscn" id="1_t8dfu"]
+[ext_resource type="Texture2D" uid="uid://c3pq08g7t2ede" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker00Idle0000.png" id="2_58o0s"]
+[ext_resource type="Script" uid="uid://rvlilswlasp2" path="res://Scenes/Deco/Office/coworker.gd" id="2_m2w4d"]
+[ext_resource type="Texture2D" uid="uid://c5t37ujake8q2" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker00Idle0001.png" id="3_m2w4d"]
+[ext_resource type="PackedScene" uid="uid://bpxofqlolfn02" path="res://Scenes/in_world_text.tscn" id="3_t7yjm"]
+[ext_resource type="Texture2D" uid="uid://cos6ajc4v7put" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker01Idle0000.png" id="6_ouncn"]
+[ext_resource type="Texture2D" uid="uid://bmexi412pe10n" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker01Idle0001.png" id="7_m4wai"]
+[ext_resource type="Texture2D" uid="uid://wd51j3mpx54f" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker02Idle0000.png" id="8_ufx3u"]
+[ext_resource type="Texture2D" uid="uid://cdjrkdieuskq4" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/maleCoworker02Idle0001.png" id="9_elsci"]
+[ext_resource type="Texture2D" uid="uid://bjb7fhlbabmg7" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker00Idle0000.png" id="10_fb6ul"]
+[ext_resource type="Texture2D" uid="uid://bo4ppfnko2myn" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker00Idle0001.png" id="11_wtmv3"]
+[ext_resource type="Texture2D" uid="uid://bt3m1rki8hcsx" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker01Idle0000.png" id="12_y1x42"]
+[ext_resource type="Texture2D" uid="uid://dfkfefheglohq" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker01Idle0001.png" id="13_1j4ek"]
+[ext_resource type="Texture2D" uid="uid://bmgq6vey3sf53" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker02Idle0000.png" id="14_tc704"]
+[ext_resource type="Texture2D" uid="uid://c8vmoby7s5g2b" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker02Idle0001.png" id="15_eimi4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ouncn"]
+radius = 356.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7yjm"]
+size = Vector2(71, 91)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_keq0f"]
+radius = 224.181
+
+[node name="Coworker" instance=ExtResource("1_t8dfu")]
+script = ExtResource("2_m2w4d")
+text_scene = ExtResource("3_t7yjm")
+textures = Array[Texture2D]([ExtResource("2_58o0s"), ExtResource("3_m2w4d"), ExtResource("6_ouncn"), ExtResource("7_m4wai"), ExtResource("8_ufx3u"), ExtResource("9_elsci"), ExtResource("10_fb6ul"), ExtResource("11_wtmv3"), ExtResource("12_y1x42"), ExtResource("13_1j4ek"), ExtResource("14_tc704"), ExtResource("15_eimi4")])
+dialog_file_name = "res://Resources/Dialog/Office/Lines/coworker_short.txt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(6, -41)
+shape = SubResource("CircleShape2D_ouncn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
+collision_layer = 16
+collision_mask = 15
+
+[node name="CollisionShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+position = Vector2(4.5, -45.5)
+shape = SubResource("RectangleShape2D_t7yjm")
+
+[node name="InteractionRange" type="Area2D" parent="." index="2"]
+visible = false
+collision_layer = 32
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="InteractionRange" index="0"]
+position = Vector2(0, -55)
+shape = SubResource("CircleShape2D_keq0f")
+
+[node name="Sprite" type="Sprite2D" parent="." index="3"]
+position = Vector2(0, -79)
+texture = ExtResource("2_58o0s")
+
+[node name="Sprite2" type="Sprite2D" parent="." index="4"]
+visible = false
+position = Vector2(0, -79)
+texture = ExtResource("3_m2w4d")
+
+[node name="AnimTimer" type="Timer" parent="." index="5"]
+autostart = true
+
+[node name="TextPos" type="Marker2D" parent="." index="6"]
+position = Vector2(-2, -152)
+
+[node name="DialogCooldown" type="Timer" parent="." index="7"]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="AnimTimer" to="." method="_on_anim_timer_timeout"]

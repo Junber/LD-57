@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bg6748eqmpgng"]
+[gd_scene load_steps=16 format=3 uid="uid://bg6748eqmpgng"]
 
 [ext_resource type="Script" uid="uid://d2muhbpvk17xg" path="res://Scenes/Enemies/enemy.gd" id="1_1f0kj"]
 [ext_resource type="PackedScene" uid="uid://c0jidmseuy5n0" path="res://Scenes/Projectiles/bullet_enemy.tscn" id="2_afpow"]
 [ext_resource type="PackedScene" uid="uid://bpxofqlolfn02" path="res://Scenes/in_world_text.tscn" id="2_ubio8"]
+[ext_resource type="AudioStream" uid="uid://la2kali4mepl" path="res://Resources/Sounds/sound_enemyDeath.ogg" id="3_53ao7"]
 [ext_resource type="Texture2D" uid="uid://c6i4a7b7d2emo" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-1.png" id="4_ycxl0"]
-[ext_resource type="Script" uid="uid://bkf4rwgbx8hy4" path="res://Scenes/Enemies/health.gd" id="5_pko3b"]
+[ext_resource type="Script" uid="uid://bkf4rwgbx8hy4" path="res://Scenes/textures_bar.gd" id="5_pko3b"]
 [ext_resource type="Texture2D" uid="uid://cyejo5fsw8i2b" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-9.png" id="6_53ao7"]
 [ext_resource type="Texture2D" uid="uid://ccys04vobkv8o" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-8.png" id="7_3hxf3"]
 [ext_resource type="Texture2D" uid="uid://bfergrl7jufyy" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-7.png" id="8_xedeb"]
@@ -13,19 +14,20 @@
 [ext_resource type="Texture2D" uid="uid://b5eqn4nd15mbh" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-4.png" id="11_y6od5"]
 [ext_resource type="Texture2D" uid="uid://cylbdghrf8d60" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-3.png" id="12_4dn76"]
 [ext_resource type="Texture2D" uid="uid://ckl833dgfr78m" path="res://Resources/Graphics/UI/Healthbar/Health_Bar-2.png" id="13_ijacg"]
+[ext_resource type="AudioStream" uid="uid://dx61ceiuho18y" path="res://Resources/Sounds/sound_enemyEyeBlooddrop.ogg" id="14_pko3b"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_1f0kj")
-death_text_file = "res://Resources/Dialog/hopeless_lines.txt"
 death_text_scene = ExtResource("2_ubio8")
+death_sound = ExtResource("3_53ao7")
 movement_speed = 100.0
 bullet_scene = ExtResource("2_afpow")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.821543
+wait_time = 0.442922
 autostart = true
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
@@ -37,5 +39,8 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_ycxl0")
 script = ExtResource("5_pko3b")
 textures = Array[Texture2D]([ExtResource("6_53ao7"), ExtResource("7_3hxf3"), ExtResource("8_xedeb"), ExtResource("9_kx2d8"), ExtResource("10_lobkc"), ExtResource("11_y6od5"), ExtResource("12_4dn76"), ExtResource("13_ijacg"), ExtResource("4_ycxl0")])
+
+[node name="HitPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_pko3b")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

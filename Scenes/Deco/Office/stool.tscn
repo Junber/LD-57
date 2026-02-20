@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjhvtu4tmuco4"]
+
+[ext_resource type="PackedScene" uid="uid://b5u11klhrjmsb" path="res://Scenes/Deco/Office/chair.tscn" id="1_badru"]
+[ext_resource type="Texture2D" uid="uid://b0x4j3otwtj8a" path="res://Resources/Graphics/Objects/Office/Normal/stool.png" id="2_8uhd4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1ybk"]
+size = Vector2(118, 158.5)
+
+[node name="Stool" instance=ExtResource("1_badru")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -79)
+texture = ExtResource("2_8uhd4")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -79.75)
+shape = SubResource("RectangleShape2D_f1ybk")

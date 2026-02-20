@@ -1,0 +1,12 @@
+!ornament:demon
+
+Plainfield (over speakers):
+A message to Makoto: I am in dire need of a caffeine infusion.
+Please see to it that I do receive one, stat.
+All the interns are busy with re-aligning core strategic subroutines or whatever.
+
+!set:boss_quest_start
+
+!level:Office/office4
+
+!save

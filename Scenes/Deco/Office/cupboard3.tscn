@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbn5oobfen6v1"]
+
+[ext_resource type="PackedScene" uid="uid://b3uvkj2najo0q" path="res://Scenes/Deco/Office/tv.tscn" id="1_0ec5t"]
+[ext_resource type="Texture2D" uid="uid://cq21wb3phyn5v" path="res://Resources/Graphics/Objects/Office/Normal/cupboard2.png" id="2_gwcsm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1fqb"]
+size = Vector2(139, 115)
+
+[node name="Cupboard" instance=ExtResource("1_0ec5t")]
+collision_mask = 1
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -132)
+texture = ExtResource("2_gwcsm")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-1.5, -58.5)
+shape = SubResource("RectangleShape2D_c1fqb")

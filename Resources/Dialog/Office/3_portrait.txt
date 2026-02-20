@@ -1,0 +1,8 @@
+!ornament:none
+
+Portrait:
+John Plainfield, founder and CEO of Plainfield Consulting Inc., is a visionary thought architect whose unparalleled track record includes spearheading disruptive innovation across synergistic markets. With over two decades of experience in leveraging strategic foresight and operational excellence, John has consistently transformed ambiguity into opportunity, positioning him as a globally recognized catalyst for sustainable paradigm shifts.
+
+!set:reorientation_portrait
+
+!if:reorientation_tv;Office/4_announcement.txt

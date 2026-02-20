@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://crsr7gain10km"]
+
+[ext_resource type="Texture2D" uid="uid://43bxy14auxbh" path="res://Resources/Graphics/Objects/School/neat version/Long_Desk.png" id="1_8r0pd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21sym"]
+size = Vector2(328, 149)
+
+[node name="Desk" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, -130)
+texture = ExtResource("1_8r0pd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -76.5)
+shape = SubResource("RectangleShape2D_21sym")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcrlbfrtjeflq"]
+
+[ext_resource type="PackedScene" uid="uid://b3uvkj2najo0q" path="res://Scenes/Deco/Office/tv.tscn" id="1_gjn2i"]
+[ext_resource type="Texture2D" uid="uid://bjuknch8gyyj4" path="res://Resources/Graphics/Objects/Office/Normal/cubicleSeparator1.png" id="2_3bxev"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8r0f"]
+size = Vector2(51, 153)
+
+[node name="Separator" instance=ExtResource("1_gjn2i")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -195)
+texture = ExtResource("2_3bxev")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, -77.5)
+shape = SubResource("RectangleShape2D_m8r0f")

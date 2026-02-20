@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfboomjgrb3an"]
+
+[ext_resource type="PackedScene" uid="uid://y1pqfqu0yd78" path="res://Scenes/Deco/Office/tv2.tscn" id="1_1jhhp"]
+[ext_resource type="Texture2D" uid="uid://dci5d33at7om0" path="res://Resources/Graphics/Objects/Office/Normal/crtTVPurple.png" id="2_on6jf"]
+
+[node name="TV" instance=ExtResource("1_1jhhp")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_on6jf")

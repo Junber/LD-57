@@ -1,0 +1,89 @@
+!background_opacity:1.0
+
+!background_color:0.0;0.0
+
+!music:theme_prologue;0.0
+
+!text_speed:10000
+
+!ornament:intro
+
+!fade_text:1.0
+
+The year is 20XX. The final frontier for mankind is the human brain.
+
+Advancements in mapping the human brain and bleeding edge neural-interface technology have made traditional psycho-therapy obsolete.
+
+You are one of many warrior therapists, trained rigorously in the art of psychic warfare.
+
+You and your peers fight a dogged war on the rampant mental health crisis in the only way you know how: Violence Therapy.
+A revolutionary method of treatment that combines Exposure therapy and Hypnotherapy with copious amounts of cathartic, psychic, ULTRA VIOLENCE.
+
+Your patient, Makoto H., is classified as untreatable. Previous therapists have tried treatment.
+None of them came back with their minds intact... So we sent you.
+
+We do not know what awaits you inside their mind. Be vigilant. Be merciless.
+Remember your mindfulness exercises. 
+
+Godspeed, Psychespacer.
+
+!background_color:0.1;1.0
+
+!fade_text:0.0
+
+!text_speed:0.5
+
+!text_sound:typewriter;1.0;1.0
+
+!ornament:typewriter
+
+TIME: 12:34
+LOCATION: Secret Psychespacer Lab in REDACTED, the one next to REDACTED
+PATIENT: Makoto H., CODENAME: Ruiner
+
+STATUS: INJECTING STIMULANT. INITIATING HYPNOSIS ACCELERATORS. DEACTIVATING EMOTIONAL INHIBITORS.
+
+ORGONE LEVELS RISING...
+
+!zoom:2.0;10.0
+
+PSYCHE-LINK ESTABLISHED. COMMENCING THE MINDMELD.
+
+DEPTH: 1S.
+
+!zoom:1.0;0.0
+
+!background_color:0.9;1.0
+
+!ornament:player
+
+!text_sound:sound_text;1.0;1.0
+
+!text_speed:1.0
+
+You:
+Hello, Makoto. I am your Psychespacer. Be at ease. I am in a different league than the ones you have met before.
+
+You:
+You may feel some slight discomfort just about now. This means the medication is working as intended. I want you to relax and let the sensation wash over you.
+
+You:
+Meanwhile, I will identify and eliminate your demons. This is merely the first step towards betterment, but a necessary one.
+
+You:
+To start, I want you to think about your current situation. What motivated you to seek help?
+
+!ornament:helpless
+
+Makoto:
+It is... my workplace.
+
+!level:office/office
+
+!music:theme_guitar thing;1.5
+
+!iris_in
+
+!background_opacity:0.5
+
+!save

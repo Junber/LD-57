@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7anhvbjnibde"]
+
+[ext_resource type="PackedScene" uid="uid://c6ynlqsyydpsr" path="res://Scenes/Interactables/office/coworker.tscn" id="1_0ngci"]
+[ext_resource type="Texture2D" uid="uid://bt3m1rki8hcsx" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker01Idle0000.png" id="2_2sh2g"]
+[ext_resource type="Script" uid="uid://bxhblg5rt65au" path="res://Scenes/Interactables/office/hr.gd" id="2_wmbdc"]
+[ext_resource type="PackedScene" uid="uid://bpxofqlolfn02" path="res://Scenes/in_world_text.tscn" id="3_wmbdc"]
+[ext_resource type="Texture2D" uid="uid://bmgq6vey3sf53" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker02Idle0000.png" id="4_1kp7q"]
+[ext_resource type="Texture2D" uid="uid://c8vmoby7s5g2b" path="res://Resources/Graphics/Objects/Office/Normal/Coworker/femaleCoworker02Idle0001.png" id="5_yugi1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmbdc"]
+size = Vector2(77, 86)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ngci"]
+radius = 140.5
+height = 690.0
+
+[node name="HR" instance=ExtResource("1_0ngci")]
+script = ExtResource("2_wmbdc")
+text_scene = ExtResource("3_wmbdc")
+text_file = "res://Resources/Dialog/Office/Lines/hr.txt"
+textures = Array[Texture2D]([ExtResource("4_1kp7q"), ExtResource("5_yugi1")])
+
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(-2, -45)
+shape = SubResource("RectangleShape2D_wmbdc")
+
+[node name="InteractionRange" parent="." index="1"]
+position = Vector2(-6, -182)
+
+[node name="CollisionShape" parent="InteractionRange" index="0"]
+position = Vector2(5.5, 134)
+shape = SubResource("CapsuleShape2D_0ngci")
+
+[node name="Sprite" parent="." index="3"]
+position = Vector2(-6, -83)
+texture = ExtResource("2_2sh2g")
+
+[node name="TextPos" type="Marker2D" parent="." index="4"]
+position = Vector2(-2, -152)
+
+[node name="Timer" type="Timer" parent="." index="5"]
+wait_time = 4.0
+autostart = true
+
+[node name="Indicator" parent="." index="7"]
+z_as_relative = false
+position = Vector2(-6, -182)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

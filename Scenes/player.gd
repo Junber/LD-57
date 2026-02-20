@@ -4,7 +4,8 @@ enum SpecialAbility {
 	None, Earbud, Notepad, Dog
 }
 
-@export var bullet_scene: PackedScene
+@export var bullet1_scene: PackedScene
+@export var bullet2_scene: PackedScene
 @export var indicator_scene: PackedScene
 @export var earbud_scene: PackedScene
 @export var notepad_drawing_scene: PackedScene
@@ -28,7 +29,7 @@ enum SpecialAbility {
 @onready var health_bar: Range = $UI/Health
 @onready var dash1_bar: Range = $UI/Dash1
 @onready var dash2_bar: Range = $UI/Dash2
-@onready var ability_charge_bar: Range = $UI/AbilityCharge
+@onready var ability_charge_bar = $UI/AbilityCharge
 
 @onready var sprite: Node2D = $Sprites
 @onready var bullet_spawn_point: Node2D = $Sprites/Head/BulletSpawnPosition
@@ -53,7 +54,10 @@ func _ready() -> void:
 	health_bar.max_value = max_health
 	health_bar.value = health
 	ability_charge_bar.visible = false
-	ability_charge_bar.max_value = ability_charge_time
+	ability_charge_bar.set_max_value(ability_charge_time)
+
+func get_spawn_parent() -> Node:
+	return get_parent().current_level
 
 func current_slowdown() -> float:
 	var time := Time.get_ticks_msec()
@@ -114,8 +118,12 @@ func _process(delta: float) -> void:
 	dash2_bar.value = dash2_cooldown.time_left
 	dash1_bar.max_value = dash1_cooldown.wait_time
 	dash2_bar.max_value = dash2_cooldown.wait_time
-	ability_charge += delta
-	ability_charge_bar.value = ability_charge
+
+	if ability != SpecialAbility.None:
+		if ability_charge < ability_charge_time and ability_charge + delta >= ability_charge_time:
+			$Audio/SpecialReadyPlayer.play()
+		ability_charge += delta
+		ability_charge_bar.set_value(ability_charge)
 
 	if notepad_drawing:
 		var mouse_pos = get_global_mouse_position()
@@ -127,13 +135,17 @@ func _process(delta: float) -> void:
 func spawn_notepad_drawing(start: Vector2, end: Vector2) -> void:
 	var drawing: Node = notepad_drawing_scene.instantiate()
 	drawing.set_end_points(start, end)
-	get_parent().add_child(drawing)
+	get_spawn_parent().add_child(drawing)
 
 func on_hit_enemy() -> void:
+	if ability == SpecialAbility.None:
+		return
+	if ability_charge < ability_charge_time && ability_charge + ability_charge_per_hit >= ability_charge_time:
+		$Audio/SpecialReadyPlayer.play()
 	ability_charge += ability_charge_per_hit
 
 func shoot() -> void:
-	$ShotPlayer.play()
+	$Audio/ShotPlayer.play()
 	var direction := to_local(get_global_mouse_position() + Vector2(0, 108)).normalized()
 	spawn_bullet(direction)
 	if has_shot_upgrade:
@@ -141,10 +153,10 @@ func shoot() -> void:
 		spawn_bullet(direction.rotated(0.1))
 
 func spawn_bullet(direction: Vector2) -> void:
-	var bullet: Bullet = bullet_scene.instantiate()
+	var bullet: Bullet = (bullet2_scene if school else bullet1_scene).instantiate()
 	bullet.global_position = bullet_spawn_point.global_position
 	bullet.velocity = direction * bullet_speed
-	get_parent().add_child(bullet)
+	get_spawn_parent().add_child(bullet)
 
 func get_dash_time_mult() -> float:
 	return 0.5 if has_dash_upgrade else 1.0
@@ -158,7 +170,9 @@ func dash() -> void:
 	else:
 		return
 
-	$DashPlayer.play()
+	$Audio/DashPlayer.play()
+	$DashParticles.emitting = true
+	$DashParticles.restart()
 	dash_timer.start()
 
 func use_special_ability() -> void:
@@ -169,22 +183,22 @@ func use_special_ability() -> void:
 	if ability == SpecialAbility.Earbud:
 		var earbud: Node2D = earbud_scene.instantiate()
 		earbud.global_position = get_global_mouse_position()
-		get_parent().add_child(earbud)
+		get_spawn_parent().add_child(earbud)
 	elif ability == SpecialAbility.Notepad:
 		notepad_drawing = true
 		notepad_draw_start = get_global_mouse_position()
 	elif ability == SpecialAbility.Dog:
 		var dog: Node2D = dog_scene.instantiate()
 		dog.global_position = get_global_mouse_position()
-		get_parent().add_child(dog)
+		get_spawn_parent().add_child(dog)
 
 func on_hit(_body: Node2D) -> void:
 	if !dash_timer.is_stopped() or !iframe_timer.is_stopped():
 		return
-	#health -= 1a
-	print("OW!")
+	health -= 1
 	iframe_timer.start()
 	health_bar.value = health
+	create_tween().tween_property($Red, "color", Color.WHITE, 0.3).from(Color.RED)
 	if health <= 0:
 		get_tree().call_group(&"game", &"load_game", "auto_save")
 
@@ -193,14 +207,14 @@ func spawn_slow_indicator(enemy: Node2D) -> void:
 	indicator.enemy = enemy
 	indicator.camera = get_viewport().get_camera_2d()
 	indicator.spawn_time = Time.get_ticks_msec()
-	bullet_spawn_point.add_child(indicator)
+	$IndicatorParent.add_child(indicator)
 	slowdown_indicators.push_back(indicator)
 
 func set_ability(new_ability_name: String) -> void:
 	ability = SpecialAbility.get(new_ability_name, SpecialAbility.None)
 	ability_charge = 0
 	ability_charge_bar.visible = ability != SpecialAbility.None
-	$PowerUpPlayer.play()
+	$Audio/PowerUpPlayer.play()
 
 func get_shot_upgrade() -> void:
 	has_shot_upgrade = true
@@ -274,7 +288,7 @@ func _on_head_animation_looped() -> void:
 			head.play("idle" + animation_suffix())
 
 func step() -> void:
-	$StepPlayer.play()
+	$Audio/StepPlayer.play()
 	$StepTimer.start(randf_range(0.18, 0.23))
 
 

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ssgc6j3mao0l"]
+
+[ext_resource type="PackedScene" uid="uid://dq38fm545ricm" path="res://Scenes/Interactables/interactable.tscn" id="1_slkmw"]
+[ext_resource type="Texture2D" uid="uid://32g7o0qmj65h" path="res://Resources/Graphics/Objects/Office/Normal/crtTVRed.png" id="2_45xk3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rd4f"]
+size = Vector2(120, 110)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_slkmw"]
+radius = 73.0
+height = 362.0
+
+[node name="TV" instance=ExtResource("1_slkmw")]
+
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(1, -55)
+shape = SubResource("RectangleShape2D_8rd4f")
+
+[node name="CollisionShape" parent="InteractionRange" index="0"]
+position = Vector2(2, -51)
+shape = SubResource("CapsuleShape2D_slkmw")
+
+[node name="Sprite" parent="." index="2"]
+position = Vector2(1, -55)
+texture = ExtResource("2_45xk3")
+
+[node name="Indicator" parent="." index="3"]
+position = Vector2(-3, -138)

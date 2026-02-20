@@ -1,0 +1,10 @@
+!if:coffee_2;Office/9_coffee_machine.txt
+
+!if:coffee;Office/7_coffee_machine_repeat.txt
+
+!ornament:helpless
+
+Helpless:
+Why do I have to fetch this coffee?
+
+!set:coffee

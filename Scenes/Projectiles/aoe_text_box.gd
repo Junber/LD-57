@@ -3,6 +3,7 @@ extends Area2D
 @onready var text_box := $TextBox
 @onready var text := $Text
 @onready var collision_shape := $CollisionShape
+@export_file("*.txt") var bullet_text_file: String
 
 func set_text_from_file(file_name: String) -> void:
 	var file := FileAccess.open(file_name, FileAccess.READ)
@@ -11,6 +12,7 @@ func set_text_from_file(file_name: String) -> void:
 	text.text = lines[randi_range(0, lines.size() - 1)]
 
 func _ready() -> void:
+	set_text_from_file(bullet_text_file)
 	text.visible = false
 	var tween := create_tween()
 	tween\

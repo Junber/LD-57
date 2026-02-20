@@ -49,6 +49,7 @@ animations = [{
 size = Vector2(68, 148)
 
 [node name="Enemy" instance=ExtResource("1_u6vow")]
+death_text_file = "res://Resources/Dialog/Office/Lines/reckless.txt"
 behavior = 2
 bullet_type = 2
 bullet_scene = ExtResource("2_eqy50")

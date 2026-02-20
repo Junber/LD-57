@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjolb8fiwqphw"]
+
+[ext_resource type="PackedScene" uid="uid://q6vl5jtrx0ss" path="res://Scenes/Deco/Office/desk.tscn" id="1_br1fn"]
+[ext_resource type="Texture2D" uid="uid://bvp1slctwh133" path="res://Resources/Graphics/Objects/Office/Weird/desk-creepy00.png" id="2_w42va"]
+
+[node name="Desk" instance=ExtResource("1_br1fn")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_w42va")

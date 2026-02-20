@@ -12,6 +12,7 @@ z_index = -5
 collision_layer = 8
 monitorable = false
 script = ExtResource("1_sketh")
+bullet_text_file = "res://Resources/Dialog/Office/Lines/boss.txt"
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 1.5)

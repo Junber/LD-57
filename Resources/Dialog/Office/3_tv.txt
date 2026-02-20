@@ -1,0 +1,27 @@
+!music:theme_elevator samba;0.5
+
+!ornament:none
+
+TV:
+Welcome to the orientation. Please stand by for a reminder on our corporate creed.
+
+TV:
+At Plainfield Consulting, we leverage agile frameworks to provide a market-sensitive rundown for high-level decision making. Our consultants engage holistically across verticals to incubate scalable solutions, optimize alignment, and catalyze performance in an increasingly dynamic global marketplace.
+
+TV:
+Through a future-forward lens, Plainfield Consulting empowers stakeholders to actualize cross-functional leverage, seamlessly integrating mission-critical touchpoints with industry-standard best practices. By operationalizing innovation at scale, we generate actionable insights that transcend traditional value streams.
+
+TV:
+Our proprietary methodology synergizes thought leadership and granular execution to deliver paradigm-shifting outcomes that resonate across all productivity-domains. With a commitment to continuous ideation and client-centric agility, we remain at the forefront of end-to-end transformation.
+
+TV:
+Our high-impact human capital is more than just a team—they represent the synergistic core of the Plainfield Consulting Inc. value ecosystem. As integral stakeholders within our organizational family, they are empowered through a competitive, industry-leading total rewards framework, featuring dynamic wellness enablers such as unlimited bio-break flexibility and value-optimized access to premium caffeination solutions.
+
+TV:
+Plainfield Consulting Inc. is not your everyday consulting—it’s a mindset evolution. The business of the future delivered to you today!
+
+!set:reorientation_tv
+
+!music:theme_guitar thing;0.5
+
+!if:reorientation_portrait;Office/4_announcement.txt

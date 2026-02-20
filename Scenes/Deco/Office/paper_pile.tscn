@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dincmthkgbjck"]
+
+[ext_resource type="PackedScene" uid="uid://ddmu7dfdske5m" path="res://Scenes/Deco/Office/coffee_machine.tscn" id="1_itu8k"]
+[ext_resource type="Texture2D" uid="uid://6wj3vnmum3p2" path="res://Resources/Graphics/Objects/Office/Weird/giantPaperPile00.png" id="2_yg6kq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jisb"]
+size = Vector2(442, 637)
+
+[node name="PaperPile" instance=ExtResource("1_itu8k")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_yg6kq")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-2, -213.5)
+shape = SubResource("RectangleShape2D_4jisb")

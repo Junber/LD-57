@@ -1,0 +1,33 @@
+!if:boss_quest_start;Office/6_pc.txt
+
+!sfx:sound_textKeyboard;0.0
+
+!ornament:helpless
+
+Helpless:
+My office seems so much bigger. I didn’t notice before. Well, better get back to it. Those numbers don’t enter themselves.
+
+!ornament:hopeless
+
+Hopeless:
+...
+They don’t enter themselves, but you can’t tell me that this couldn’t be automated.
+
+Hopeless:
+I’m literally doing a machine’s job. I’m literally worth less than a machine.
+
+!ornament:reckless
+
+Reckless:
+Hm. But machines can’t drink. Hooray to human anatomy!
+No one is watching, right? Well, bottoms up. *gulp-gulp*
+
+!ornament:player
+
+You:
+Egads, their cognition is changing.
+I hope they at least remember to use their ear buds.
+
+!drink
+
+!combat:office2

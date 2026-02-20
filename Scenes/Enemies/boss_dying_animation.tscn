@@ -1,0 +1,145 @@
+[gd_scene load_steps=21 format=3 uid="uid://bepeotbobff44"]
+
+[ext_resource type="Texture2D" uid="uid://eytqfa4nsoeu" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0004.png" id="1_tddtp"]
+[ext_resource type="Texture2D" uid="uid://bqocojqcf0f70" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0005.png" id="2_0e8qi"]
+[ext_resource type="Script" uid="uid://b4loui1k8khww" path="res://Scenes/Enemies/boss_dying_animation.gd" id="3_0e8qi"]
+[ext_resource type="Texture2D" uid="uid://camyf1lfv6qs0" path="res://Resources/Graphics/particle.png" id="3_oy36k"]
+[ext_resource type="PackedScene" uid="uid://bo5wsfkydvpdm" path="res://Scenes/Projectiles/bullet_text_harmless.tscn" id="4_oy36k"]
+[ext_resource type="AudioStream" uid="uid://la2kali4mepl" path="res://Resources/Sounds/sound_enemyDeath.ogg" id="6_ncbfy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncbfy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tddtp")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_0e8qi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="Curve" id="Curve_oy36k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.166102, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ncbfy"]
+curve = SubResource("Curve_oy36k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mp23d"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 300.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_ncbfy")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 10
+
+[sub_resource type="Curve" id="Curve_mp23d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.684746, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_870rf"]
+curve = SubResource("Curve_mp23d")
+
+[sub_resource type="Gradient" id="Gradient_bbobn"]
+colors = PackedColorArray(0.51, 0.51, 0.51, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3cuyp"]
+gradient = SubResource("Gradient_bbobn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_870rf"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 9.99998
+gravity = Vector3(0, 0, 0)
+scale_max = 5.0
+color_initial_ramp = SubResource("GradientTexture1D_3cuyp")
+alpha_curve = SubResource("CurveTexture_870rf")
+
+[sub_resource type="Curve" id="Curve_rfeqr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.589831, 1), 0.0, 0.0, 0, 0, Vector2(0.871186, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4f7in"]
+curve = SubResource("Curve_rfeqr")
+
+[sub_resource type="Gradient" id="Gradient_5el53"]
+colors = PackedColorArray(0.49, 0.49, 0.49, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fl7lu"]
+gradient = SubResource("Gradient_5el53")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_akhva"]
+particle_flag_disable_z = true
+radial_velocity_min = 700.0
+radial_velocity_max = 1500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 6.0
+color_initial_ramp = SubResource("GradientTexture1D_fl7lu")
+alpha_curve = SubResource("CurveTexture_4f7in")
+
+[node name="BossDyingAnimation" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ncbfy")
+autoplay = "default"
+frame_progress = 0.0288603
+script = ExtResource("3_0e8qi")
+dialog_file_name = "res://Resources/Dialog/School/0_intro.txt"
+bullet_text_file = "res://Resources/Dialog/Office/Lines/boss_death.txt"
+bullet_scene = ExtResource("4_oy36k")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+sub_emitter = NodePath("GPUParticles2D")
+texture = ExtResource("3_oy36k")
+process_material = SubResource("ParticleProcessMaterial_mp23d")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="GPUParticles2D"]
+amount = 200
+texture = ExtResource("3_oy36k")
+process_material = SubResource("ParticleProcessMaterial_870rf")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 100
+texture = ExtResource("3_oy36k")
+lifetime = 0.5
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_akhva")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 0.076
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ncbfy")
+max_polyphony = 10
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]

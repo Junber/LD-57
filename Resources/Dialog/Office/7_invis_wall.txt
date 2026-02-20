@@ -1,0 +1,6 @@
+!if:coffee;remove.txt
+
+!ornament:helpless
+
+Helpless:
+I shouldn't let the boss see my face without his all-important coffee.

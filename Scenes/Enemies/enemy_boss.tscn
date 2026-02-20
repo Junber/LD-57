@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0bjh1ppmimuw"]
+[gd_scene load_steps=13 format=3 uid="uid://c0bjh1ppmimuw"]
 
 [ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_bwuae"]
+[ext_resource type="PackedScene" uid="uid://bepeotbobff44" path="res://Scenes/Enemies/boss_dying_animation.tscn" id="2_8h687"]
 [ext_resource type="Texture2D" uid="uid://bd64x6k268nyt" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0000.png" id="2_66mfj"]
 [ext_resource type="PackedScene" uid="uid://cj7ecgqxbk386" path="res://Scenes/Projectiles/aoe_text_box.tscn" id="2_ehi8f"]
+[ext_resource type="PackedScene" uid="uid://c530pepkxjr2g" path="res://Scenes/Projectiles/bullet_text.tscn" id="2_fqsnq"]
 [ext_resource type="Texture2D" uid="uid://k2aecwd8xjdo" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0001.png" id="3_ehi8f"]
 [ext_resource type="Texture2D" uid="uid://bkaabc56jqfog" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0002.png" id="4_fqsnq"]
 [ext_resource type="Texture2D" uid="uid://bu1huyk5f2g77" path="res://Resources/Graphics/Enemies/BossOffice/bossOpenMouth0003.png" id="5_8h687"]
@@ -67,19 +69,30 @@ animations = [{
 }]
 
 [node name="Enemy" instance=ExtResource("1_bwuae")]
+max_health = 200
+death_text_file = "!"
+bullet_text_file = "res://Resources/Dialog/Office/Lines/boss_short.txt"
+death_text_scene = ExtResource("2_8h687")
 behavior = 5
 movement_speed = 500.0
+shoot_on_spawn = true
 bullet_type = 3
-bullet_scene = ExtResource("2_ehi8f")
+bullet_scene = ExtResource("2_fqsnq")
+aoe_scene = ExtResource("2_ehi8f")
+bullet_amount = 5
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_agm62")
-frame = 10
-frame_progress = 0.444018
+autoplay = "default"
+frame = 9
+frame_progress = 0.693306
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="." index="1"]
 scale = Vector2(0.980151, 0.98314)
 polygon = PackedVector2Array(-123.45, -197.327, 4.08101, -243.099, 135.693, -186.138, 163.24, 24.4116, 54.0733, 216.653, -45.9113, 216.653, -158.139, 30.5145)
+
+[node name="Timer" parent="." index="2"]
+wait_time = 1.0
 
 [node name="HurtBox" type="Area2D" parent="." index="5"]
 collision_layer = 8

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw0y0rvkmd62w"]
+
+[ext_resource type="PackedScene" uid="uid://d0fgx4v7cw0hi" path="res://Scenes/Projectiles/bullet_player.tscn" id="1_wdg8r"]
+[ext_resource type="Texture2D" uid="uid://kapeqbihjj2n" path="res://Resources/Graphics/Player/School/playerBulletLvl02.png" id="2_yxfqb"]
+
+[sub_resource type="Gradient" id="Gradient_wdg8r"]
+colors = PackedColorArray(0.746833, 1, 0.69, 0.27451, 0.746833, 1, 0.69, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wdg8r"]
+gradient = SubResource("Gradient_wdg8r")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[node name="Bullet" instance=ExtResource("1_wdg8r")]
+
+[node name="PointLight2D" parent="." index="0"]
+texture = SubResource("GradientTexture2D_wdg8r")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_yxfqb")

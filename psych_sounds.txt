@@ -1,0 +1,42 @@
+SOUNDS
+
+Needed
+	Player getting hit
+	Player dying
+	Enemy shooting
+	Slowdown thing?
+	Using earbuds
+	Coworker saying overworld text?
+	Interact sound?
+	Enemy spawn
+	Potential Story stuff:
+		Drinking
+		Coffee machine
+		TV turning on
+
+Used
+	sound_bossLaugh1.ogg
+	sound_dash.ogg
+	sound_earbudPickup.ogg
+	sound_enemyDeath.ogg
+	sound_enemyEyeBlooddrop.ogg
+	sound_laser1.ogg
+	sound_laser2.ogg
+	sound_steps1.ogg
+	sound_steps2.ogg
+	sound_steps3.ogg
+	sound_takingNotes.ogg
+	sound_text.ogg
+	sound_textKeyboard.ogg 
+	typewriter.ogg
+
+Not for now
+	sound_slap.ogg
+	sound_stabSound.ogg
+	sound_papersRustling1.ogg
+	sound_papersRustling2.ogg
+	sound_papersRustling3.ogg
+	sound_bossLaugh2.ogg (This is actually more paper rustling)
+
+Not for ever
+	sound_takingNotes2.ogg

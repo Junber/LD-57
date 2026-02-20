@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0xeb37vrxj7j"]
+
+[ext_resource type="Texture2D" uid="uid://bcwgu4hpxafap" path="res://Resources/Graphics/Objects/School/neat version/Sideway_Desk.png" id="1_hwlct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkry4"]
+size = Vector2(176, 290)
+
+[node name="Desk" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, -226)
+texture = ExtResource("1_hwlct")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -147)
+shape = SubResource("RectangleShape2D_vkry4")

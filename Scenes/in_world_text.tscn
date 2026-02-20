@@ -20,3 +20,6 @@ label_settings = ExtResource("1_18esj")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_dnyor")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0

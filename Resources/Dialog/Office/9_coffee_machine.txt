@@ -1,0 +1,6 @@
+!ornament:helpless
+
+Helpless:
+I can't let this coffee cool down again.
+
+!combat:coffee

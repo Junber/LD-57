@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd3i7qus421oa"]
+
+[ext_resource type="PackedScene" uid="uid://b5u11klhrjmsb" path="res://Scenes/Deco/Office/chair.tscn" id="1_airvi"]
+[ext_resource type="Texture2D" uid="uid://bsgvpig7bwiim" path="res://Resources/Graphics/Objects/Office/Normal/wheelChairBackGreen.png" id="2_ykk7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc3r2"]
+size = Vector2(96, 67.5)
+
+[node name="ChairBack" instance=ExtResource("1_airvi")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -84)
+texture = ExtResource("2_ykk7c")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -34.25)
+shape = SubResource("RectangleShape2D_fc3r2")

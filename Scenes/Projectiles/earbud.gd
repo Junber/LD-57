@@ -2,6 +2,10 @@ extends Area2D
 
 var bodies_inside: Array[PhysicsBody2D] = []
 
+func _ready() -> void:
+	$Particles.emitting = true
+	$Particles2.emitting = true
+
 func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body is Bullet:
 		body.queue_free()

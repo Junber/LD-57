@@ -1,13 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://wy25smi1h4jr"]
+[gd_scene load_steps=9 format=3 uid="uid://wy25smi1h4jr"]
 
 [ext_resource type="PackedScene" uid="uid://bg6748eqmpgng" path="res://Scenes/Enemies/enemy.tscn" id="1_j18t8"]
 [ext_resource type="Texture2D" uid="uid://dsvs83dq6ule5" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-1.png" id="2_5wfiv"]
 [ext_resource type="Texture2D" uid="uid://c1ttf2mw6e5ud" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-2.png" id="3_ssnkw"]
 [ext_resource type="Texture2D" uid="uid://bk1etbqslw5g1" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-3.png" id="4_vjhj6"]
 [ext_resource type="Texture2D" uid="uid://droa2pxhsxvo5" path="res://Resources/Graphics/Enemies/HelplessSchool/Locker_Enemy-4.png" id="5_k76l8"]
+[ext_resource type="Script" uid="uid://drojgu1rmi0jo" path="res://Scenes/Enemies/animated_sprite.gd" id="6_5wfiv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ui0xs"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5wfiv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_5wfiv")
@@ -22,17 +31,36 @@ animations = [{
 "texture": ExtResource("5_k76l8")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walk",
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wfiv"]
+size = Vector2(258.22, 189.014)
+
 [node name="Enemy" instance=ExtResource("1_j18t8")]
+behavior = 4
+bullet_type = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -131)
+scale = Vector2(-0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ui0xs")
-frame = 3
-frame_progress = 0.637803
+animation = &"idle"
+script = ExtResource("6_5wfiv")
 
 [node name="Timer" parent="." index="1"]
-wait_time = 1.14099
+wait_time = 0.879638
+
+[node name="SpawnPosition" parent="." index="2"]
+position = Vector2(3, -139)
+
+[node name="Health" parent="." index="3"]
+position = Vector2(1, -230)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2(-1.50871, -150.564)
+rotation = 0.553269
+shape = SubResource("RectangleShape2D_5wfiv")
+
+[connection signal="walking" from="." to="AnimatedSprite2D" method="_on_enemy_walking"]

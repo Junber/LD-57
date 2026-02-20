@@ -1,0 +1,55 @@
+!ornament:demon
+
+Chief Human Capital Architect:
+Hello Makoto. Are you having a lovely day?
+
+Chief Human Capital Architect:
+Me, I’m doing just fantastic, thanks for looking like you might ask.
+Anyway, I will cut to the chase.
+
+Chief Human Capital Architect:
+Your work lacks enthusiasm and it shows in your bottom-line, which is 3.4% below average productivity.
+I talked with the Culture Alignment Officer and the Human Potential Analyst and we think you are due for a reorientation.
+
+Chief Human Capital Architect:
+We also ask you to kindly refrain from drinking on the job, unless you can demonstrate it benefits your performance.
+
+Chief Human Capital Architect:
+We also found this on your desk. Please dispose of it immediately.
+Fun is reserved for business trips and the paper-airplane championship scheduled for next year.
+
+!ability:earbud
+
+!ornament:player
+
+You:
+An object of power... How serendipitous. This will be essential for my Violence Therapy.
+
+!ornament:mission_control
+
+Mission Control:
+This is mission control.
+Use Right Click in combat to use Makoto's ear buds.
+They can erase demonic energy and push demons out of earshot.
+
+!ornament:reckless
+
+Reckless:
+The drinks keep me sane. If they take those away, I may not last another week.
+But this earbud... Is my lifeline. No way I let them take it away.
+
+!ornament:helpless
+
+Helpless:
+But they will notice it. They will punish me if I disobey. Fire me.
+I’m on thin ice as is. I can’t afford to lose this job. It’s the only thing I have left.
+
+!ornament:hopeless
+
+Hopeless:
+And what a thing it is. Typing numbers into spreadsheets while getting bombarded with corporate drivel.
+And now being sent to reorientation again... This may be more drivel than I can withstand.
+
+!level:office/office2
+
+!save
